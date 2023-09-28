@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Додавання дробів зі спільним знаменником",
+        "expressions": [
+            {
+                "expression": "2/22 + 5/22",
+                "integer": 0,
+                "numerator": 7,
+                "denominator": 22
+            },
+            {
+                "expression": "2/12 + 8/12",
+                "integer": 0,
+                "numerator": 10,
+                "denominator": 12
+            },
+            {
+                "expression": "8/10 + 8/10",
+                "integer": 1,
+                "numerator": 6,
+                "denominator": 10
+            }
+        ]
+    }
+]
