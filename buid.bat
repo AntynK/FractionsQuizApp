@@ -1,0 +1,1 @@
+nuitka3 main.pyw --show-progress --standalone --windows-disable-console --plugin-enable=qt-plugins --include-qt-plugins=all --include-qt-plugins=sensible,styles
