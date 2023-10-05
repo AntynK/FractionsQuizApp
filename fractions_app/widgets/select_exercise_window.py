@@ -1,8 +1,9 @@
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QLayout
 
 from ..ui.select_exercise_window import Ui_Form
-from ..exercises_group import ExercisesGroup
+from ..widgets.exercise_button import ExerciseButton
 from .exercise_window import ExerciseWindow
+from ..helper import Topic, Subtopic
 
 
 class SelectExerciseWindow(QWidget):
@@ -14,31 +15,34 @@ class SelectExerciseWindow(QWidget):
         self.hide()
 
         self.previous_state = previous_state
-        self.group = None
+        self.topic = None
         self.exercise_window = ExerciseWindow(self)
         self.ui.back_btn.pressed.connect(self.show_main_window)
 
-    def add_to_layout(self, layout):
+    def add_to_layout(self, layout: QLayout):
         layout.addWidget(self)
         layout.addWidget(self.exercise_window)
-        
-    def add_group(self, group: ExercisesGroup):
-        if self.group is None:
-            self.group = group
-            self.group.parse_file(self.show_exercise)
-            self.load_exercises()
-            self.ui.title.setText(self.group.name)
 
-    def load_exercises(self):
-        if self.group is None:
+    def add_topic(self, topic: Topic):
+        if self.topic is None:
+            self.topic = topic
+            self.load_subtopics()
+            self.ui.title.setText(self.topic.title)
+
+    def load_subtopics(self):
+        if self.topic is None:
             return
         scroll_area_layout = self.ui.scrollAreaWidgetContents.layout()
-        for exercise in self.group.children:
-            scroll_area_layout.addWidget(exercise)
+        for index, subtopic in enumerate(self.topic.subtopics):
+            scroll_area_layout.addWidget(
+                ExerciseButton(
+                    subtopic.title, self.show_exercise, self.topic.subtopics, index
+                )
+            )
 
-    def show_exercise(self, exercise: list, title:str):
+    def show_exercise(self, subtopics: list[Subtopic], index: int):
         self.hide()
-        self.exercise_window.load_exercise(exercise, title)
+        self.exercise_window.load_subtopic(subtopics, index)
         self.exercise_window.show()
 
     def show_main_window(self):

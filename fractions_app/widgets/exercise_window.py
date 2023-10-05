@@ -1,9 +1,7 @@
-import random
-
-from PyQt5.QtWidgets import QWidget, QMessageBox
+from PyQt5.QtWidgets import QWidget
 
 from ..ui.exercise_window import Ui_Form
-from ..exercise import Exercise
+from ..helper import Subtopic
 
 
 class ExerciseWindow(QWidget):
@@ -17,19 +15,20 @@ class ExerciseWindow(QWidget):
         self.previous_state = previous_state
         self.ui.check_btn.pressed.connect(self.check)
         self.ui.exit_btn.pressed.connect(self.show_select_exercise_window)
-        self.ui.try_again_btn.pressed.connect(self.reload_exercise)
+        self.ui.try_again_btn.pressed.connect(self.reload_subtopic)
 
-    def reload_exercise(self):
-        self.load_exercise(self.expressions, self.ui.title.text())
+    def reload_subtopic(self):
+        self.load_subtopic(self.subtopics, self.index)
 
-    def load_exercise(self, expressions: list[Exercise], title: str):
+    def load_subtopic(self, subtopics: list[Subtopic], index: int):
         self.clear_input_boxes()
+        self.subtopics = subtopics
+        self.current_subtopic = subtopics[index]
+        self.index = index
 
-        self.ui.title.setText(title)
-        self.expressions = expressions
-        if len(expressions) != 0:
-            self.current_expression = random.choice(expressions)
-            self.display_expression()
+        self.ui.title.setText(self.current_subtopic.title)
+        self.current_exercise = self.current_subtopic.exercises()
+        self.display_expression()
 
     def _check_value(self, widget, value):
         if widget.value() != value:
@@ -42,20 +41,28 @@ class ExerciseWindow(QWidget):
         if not all(
             (
                 self._check_value(
-                    self.ui.intenger_input, self.current_expression.integer
+                    self.ui.intenger_input, self.current_exercise.integer
                 ),
                 self._check_value(
-                    self.ui.numerator_input, self.current_expression.numerator
+                    self.ui.numerator_input, self.current_exercise.numerator
                 ),
                 self._check_value(
-                    self.ui.denominator_input, self.current_expression.denominator
+                    self.ui.denominator_input, self.current_exercise.denominator
                 ),
             )
         ):
             return
 
     def display_expression(self):
-        self.ui.expression.setText(self.current_expression.expression)
+        result = ""
+        for symbol in self.current_exercise.expression.split(" "):
+            if "/" in symbol:
+                numerator, denominator = symbol.split("/")
+                result += f"<sup>{numerator}</sup>/<sub>{denominator}</sub>"
+                continue
+            result += f" {symbol} "
+
+        self.ui.expression.setText(result)
 
     def show_select_exercise_window(self):
         self.hide()

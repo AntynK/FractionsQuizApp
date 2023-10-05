@@ -1,4 +1,3 @@
-from pathlib import Path
-
-
-EXERCISES_DIR = Path("exercises")
+NUMERATOR_RANGE = 10
+DENOMINATOR_RANGE = 20
+INTEGER_RANGE = 10

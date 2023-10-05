@@ -1,0 +1,70 @@
+class Exercise:
+    integer: int
+    expression: str
+    numerator: int
+    denominator: int
+
+class Fraction:
+    def __init__(self, numerator=0, denominator=1, integer=0, is_mixed=False, random=False):
+        self.integer = integer
+        if random:
+            self.numerator = random(NUMERATOR_RANGE)
+            self.denominator = random(DENOMINATOR_RANGE)
+            if is_mixed:
+                self.integer = random(INTEGER_RANGE)
+    
+    def __add__(self, adder):
+        if isinstance(adder, int):
+            ....
+        elif isinstance(adder, Fraction):
+            ...
+    
+    def __repr__(self):
+        integer = ""
+        if self.integer is not None:
+            integer = f"{self.integer}*"
+
+        return f"{integer}{self.numerator}/{self.denominator}"
+
+class FractionAdding:
+    def __init__(self):
+        self.title = "Додавання дробів"
+        self.exercises = {
+            "Додавання дробів зі спільним знаменником":self.first_exercise
+        }
+
+    def first_exercise(self) -> Exercise:
+        first_fraction = Fraction(random=True)
+        second_fraction = Fraction(random=True)
+
+        second_fraction.denominator = first_fraction.denominator
+
+        result = first_fraction + second_fraction
+        expression = f"{first_fraction} + {second_fraction} = ?"
+
+        return Exercise(result.integer, expression, result.numerator, result.denominator)
+
+
+exercise.add_exercise_group(FractionAdding())
+
+
+1. Додавання дробів
+    |-Додавання дробів зі спільним знаменником(a/b + c/b)
+    |-Додавання звичайних дробів(a/b + c/d)
+    |-Додавання мішаних дробів(e*a/b + f*c/d)
+
+2. Віднімання дробів
+    |-Віднімання дробів зі спільним знаменником(a/b - c/b)
+    |-Віднімання звичайних дробів(a/b - c/d)
+    |-Віднімання мішаних дробів(e*a/b - f*c/d)
+
+3. Множення дробів
+    |-Множення дробу на натуральне число(a/b * c)
+    |-Множення звичайних дробів(a/b * c/d)
+    |-Множення мішаних дробів(e*a/b * f*c/d)
+
+4. Ділення дробів
+    |-Ділення дробу на натуральне число(a/b / c)
+    |-Ділення натурального числа на дріб(c / a/b)
+    |-Ділення звичайних дробів(a/b / c/d)
+    |-Ділення мішаних дробів(e*a/b / f*c/d)
