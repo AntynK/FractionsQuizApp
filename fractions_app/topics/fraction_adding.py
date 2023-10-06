@@ -24,9 +24,4 @@ class FractionAdding(Topic):
         result = first_fraction + second_fraction
         expression = f"{first_fraction} + {second_fraction} = ?"
 
-        return Exercise(
-            expression=expression,
-            integer=result.integer,
-            numerator=result.numerator,
-            denominator=result.denominator,
-        )
+        return Exercise(expression=expression, fraction=result)

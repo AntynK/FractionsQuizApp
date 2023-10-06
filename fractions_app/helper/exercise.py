@@ -1,9 +1,8 @@
 from dataclasses import dataclass
+from .fraction import Fraction
 
 
 @dataclass
 class Exercise:
     expression: str
-    integer: int
-    numerator: int
-    denominator: int
+    fraction: Fraction
