@@ -1,35 +1,17 @@
-from PyQt5.QtWidgets import QMainWindow
+import tkinter as tk
 
-from .ui.main_window import Ui_MainWindow
-from .widgets.exercise_button import ExerciseButton
-from .widgets.select_exercise_window import SelectExerciseWindow
-from .topic_handler import TopicHandler
-from .helper import Topic
+from .windows.main_window import MainWindow
 
 
-class AppMainWindow:
+class Application(tk.Tk):
     def __init__(self) -> None:
-        self.window = QMainWindow()
+        super().__init__()
 
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self.window)
-        self.select_exercise_window = SelectExerciseWindow(self.ui.frame)
+        self.main_window = MainWindow(self)
+        self.main_window.pack()
 
-        self.select_exercise_window.add_to_layout(self.ui.verticalLayout)
-
-        self.load_exercises()
-
-    def load_exercises(self):
-        scroll_area_layout = self.ui.scrollAreaWidgetContents.layout()
-        for topic in TopicHandler().get_topics():
-            scroll_area_layout.addWidget(
-                ExerciseButton(topic.title, self.show_substopic, topic)
-            )
-
-    def show_substopic(self, topic: Topic):
-        self.ui.frame.hide()
-        self.select_exercise_window.add_topic(topic)
-        self.select_exercise_window.show()
-
-    def show(self):
-        self.window.show()
+    def start(self):
+        self.title("Програма для покращення знань з дробів")
+        self.geometry("400x300")
+        self.resizable(width=False, height=False)
+        self.mainloop()

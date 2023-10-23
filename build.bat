@@ -1,1 +1,1 @@
-nuitka3 main.pyw --show-progress --onefile --windows-disable-console --plugin-enable=qt-plugins --include-qt-plugins=sensible,styles -o FractionsQuizApp.exe
+nuitka3 main.pyw --show-progress --onefile --windows-disable-console --plugin-enable=tk-inter -o FractionsQuizApp.exe
