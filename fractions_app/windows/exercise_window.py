@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkinter.messagebox as msg_box
 
 import unicodeit
 
@@ -17,28 +18,31 @@ class ExerciseWindow(tk.Frame):
         self.exit_button = tk.Button(
             self, text="Вийти", command=self.show_select_exercise_window
         )
+
         self.exit_button.grid(row=4, column=0)
 
         self.again_button = tk.Button(self, text="Ще раз", command=self.reload_subtopic)
         self.again_button.grid(row=4, column=1)
 
-        self.next_button = tk.Button(
-            self, text="Наступне", command=self.show_next_exercise
-        )
-        self.next_button.grid(row=4, column=2)
+        self.check_button = tk.Button(self, text="Перевірити", command=self.check_input)
+        self.check_button.grid(row=4, column=2)
 
     def init_widgets(self):
-        self.subtopic_title_label = tk.Label(self, text="Title", font=("Times New Roman", 12, "bold"))
+        self.subtopic_title_label = tk.Label(
+            self, text="Title", font=("Times New Roman", 12, "bold")
+        )
         self.subtopic_title_label.grid(columnspan=3)
 
-        self.expression_label = tk.Label(self, text="Expression", font=("Times New Roman", 14))
+        self.expression_label = tk.Label(
+            self, text="Expression", font=("Times New Roman", 14)
+        )
         self.expression_label.grid(columnspan=3)
 
         self.answer_box = tk.Frame(self, borderwidth=3, relief="groove")
 
         tk.Label(self.answer_box, text="Ціле:").grid(row=0, column=0)
-        self.intager_input = tk.Spinbox(self.answer_box, from_=0, to=30, increment=1)
-        self.intager_input.grid(row=0, column=1)
+        self.intenger_input = tk.Spinbox(self.answer_box, from_=0, to=30, increment=1)
+        self.intenger_input.grid(row=0, column=1)
 
         tk.Label(self.answer_box, text="Чисельник:").grid(row=1, column=0)
         self.numerator_input = tk.Spinbox(self.answer_box, from_=0, to=30, increment=1)
@@ -73,39 +77,35 @@ class ExerciseWindow(tk.Frame):
         if self.result == self.redused_result:
             self.result = None
 
+        self.check_button.configure(text="Перевірити")
         self.subtopic_title_label.configure(text=self.current_subtopic.title)
         self.display_expression()
 
-    def _check_value(self, widget, value: int, ok_color: str):
-        if widget.value() != value:
-            widget.setStyleSheet("background-color:red;")
+    def _check_value(self, widget: tk.Spinbox, value: int, ok_color: str):
+        if int(widget.get()) != value:
+            widget.configure(bg="red")
             return False
-        widget.setStyleSheet(f"background-color: {ok_color};")
+        widget.configure(bg=ok_color)
         return True
 
     def compare_user_input_with_fraction(
-        self, fraction: Fraction, ok_color="#4a964a"
+        self, fraction: Fraction, ok_color="green"
     ) -> bool:
-        return False
-        # return all(
-        #     (
-        #         self._check_value(self.ui.intenger_input, fraction.integer, ok_color),
-        #         self._check_value(
-        #             self.ui.numerator_input, fraction.numerator, ok_color
-        #         ),
-        #         self._check_value(
-        #             self.ui.denominator_input, fraction.denominator, ok_color
-        #         ),
-        #     )
-        # )
+        return all(
+            (
+                self._check_value(self.intenger_input, fraction.integer, ok_color),
+                self._check_value(self.numerator_input, fraction.numerator, ok_color),
+                self._check_value(
+                    self.denominator_input, fraction.denominator, ok_color
+                ),
+            )
+        )
 
     def check_input(self):
         if self.result is not None:
             if self.compare_user_input_with_fraction(self.result, ok_color="orange"):
-                tk.Message(self, text="Дріб можна скоротити!")
-                # QMessageBox.information(self, "Ще не все", "Дріб можна скоротити!")
+                msg_box.showinfo(title="Помилка", message="Дріб можна скоротити!")
                 return
-
         if not self.compare_user_input_with_fraction(self.redused_result):
             return
 
@@ -113,6 +113,7 @@ class ExerciseWindow(tk.Frame):
 
     def show_next_exercise(self):
         if not self.showed:
+            self.check_button.configure(text="Наступне")
             self.showed = True
             return
 
@@ -120,12 +121,6 @@ class ExerciseWindow(tk.Frame):
             self.show_select_exercise_window()
             return
         self.load_subtopic(self.subtopics, self.index + 1)
-
-    # def show_previous_exercise(self):
-    #     if self.index <= 0:
-    #         self.show_select_exercise_window()
-    #         return
-    #     self.load_subtopic(self.subtopics, self.index - 1)
 
     def display_expression(self):
         result = ""
@@ -136,18 +131,18 @@ class ExerciseWindow(tk.Frame):
                 continue
             result += f" {symbol} "
 
-        self.expression_label.configure(text=result) 
+        self.expression_label.configure(text=result)
 
     def show_select_exercise_window(self):
         self.pack_forget()
         self.previous_state.pack()
 
     def clear_input_boxes(self):
-        ...
-        # for element in (
-        #     self.ui.numerator_input,
-        #     self.ui.intenger_input,
-        #     self.ui.denominator_input,
-        # ):
-        #     element.setValue(0)
-        #     element.setStyleSheet("background-color: none;")
+        for widget in (
+            self.numerator_input,
+            self.intenger_input,
+            self.denominator_input,
+        ):
+            widget.delete(0, tk.END)
+            widget.insert(0, "0")
+            widget.configure(bg="white")
