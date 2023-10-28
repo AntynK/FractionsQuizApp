@@ -66,6 +66,9 @@ class ExerciseWindow(tk.Frame):
 
     def load_subtopic(self, subtopics: list[Subtopic], index: int):
         self.clear_input_boxes()
+        self.intenger_input.delete(0, tk.END)
+        self.intenger_input.insert(0, "0")
+        
         self.showed = False
         self.subtopics = subtopics
         self.current_subtopic = subtopics[index]
@@ -117,7 +120,7 @@ class ExerciseWindow(tk.Frame):
             self.showed = True
             return
 
-        if len(self.subtopics) >= self.index:
+        if len(self.subtopics) <= self.index + 1:
             self.show_select_exercise_window()
             return
         self.load_subtopic(self.subtopics, self.index + 1)
@@ -125,6 +128,9 @@ class ExerciseWindow(tk.Frame):
     def display_expression(self):
         result = ""
         for symbol in self.current_exercise.expression.split(" "):
+            if "*" in symbol:
+                multiplier, symbol = symbol.split("*")
+                result += multiplier
             if "/" in symbol:
                 numerator, denominator = symbol.split("/")
                 result += unicodeit.replace(f"^{{{numerator}}}/_{{{denominator}}}")
@@ -144,5 +150,5 @@ class ExerciseWindow(tk.Frame):
             self.denominator_input,
         ):
             widget.delete(0, tk.END)
-            widget.insert(0, "0")
+            widget.insert(0, "1")
             widget.configure(bg="white")
