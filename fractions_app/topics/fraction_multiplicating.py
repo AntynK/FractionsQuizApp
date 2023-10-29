@@ -3,28 +3,21 @@ from random import randrange
 from ..helper import Fraction, Exercise, Topic, Subtopic
 
 
-class FractionAdding(Topic):
+class FractionMultiplicating(Topic):
     def __init__(self):
-        self.title = "Додавання дробів"
+        self.title = "Множення дробів"
         self.subtopics = [
-            Subtopic("Додавання дробів з спільними знаменниками", self.first_exercise),
-            Subtopic("Додавання дробів з різними знаменниками", self.second_exercise),
-            Subtopic("Додавання мішаних дробів", self.third_exercise),
+            Subtopic("Множення дробу на натуральне число", self.first_exercise),
+            Subtopic("Множення дробів з різними знаменниками", self.second_exercise),
+            Subtopic("Множення мішаних дробів", self.third_exercise),
         ]
 
     def first_exercise(self) -> Exercise:
-        first_fraction = Fraction(randrange(1, 10), randrange(20))
-        denominator = first_fraction.denominator
-        second_fraction = Fraction(randrange(1, 10), denominator)
+        fraction = Fraction(randrange(1, 10), randrange(20))
+        number = randrange(2, 10)
 
-        while (first_fraction.numerator + second_fraction.numerator) >= denominator:
-            denominator += 2
-
-        first_fraction.denominator = denominator
-        second_fraction.denominator = denominator
-
-        result = first_fraction + second_fraction
-        expression = f"{first_fraction} + {second_fraction} = ?"
+        result = fraction * number
+        expression = f"{fraction} ∙ {number} = ?"
 
         return Exercise(expression=expression, fraction=result)
 
@@ -37,12 +30,14 @@ class FractionAdding(Topic):
 
         while second_fraction.numerator >= second_fraction.denominator:
             second_fraction.denominator += 2
+        while first_fraction.numerator <= second_fraction.numerator:
+            first_fraction.numerator += 2
 
         if first_fraction.denominator == second_fraction.denominator:
             first_fraction.denominator += 1
 
-        result = first_fraction + second_fraction
-        expression = f"{first_fraction} + {second_fraction} = ?"
+        result = first_fraction * second_fraction
+        expression = f"{first_fraction} ∙ {second_fraction} = ?"
 
         return Exercise(expression=expression, fraction=result)
 
@@ -56,7 +51,10 @@ class FractionAdding(Topic):
         while second_fraction.numerator >= second_fraction.denominator:
             second_fraction.denominator += 2
 
-        result = first_fraction + second_fraction
-        expression = f"{first_fraction} + {second_fraction} = ?"
+        while first_fraction.numerator <= second_fraction.numerator:
+            first_fraction.numerator += 2
+
+        result = first_fraction * second_fraction
+        expression = f"{first_fraction} ∙ {second_fraction} = ?"
 
         return Exercise(expression=expression, fraction=result)

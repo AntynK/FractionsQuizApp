@@ -17,6 +17,10 @@ class SelectExerciseWindow(tk.Frame):
     def load_subtopics(self):
         if self.topic is None:
             return
+        
+        for widget in list(self.children.values()):
+            widget.destroy()
+
         for index, subtopic in enumerate(self.topic.subtopics):
             button = tk.Button(
                 self,
@@ -25,6 +29,8 @@ class SelectExerciseWindow(tk.Frame):
             )
             button.pack(pady=2)
 
+        tk.Button(self, text="Вийти", command=self.show_main_window).pack()
+
     def show_exercise(self, subtopics: list[Subtopic], index: int):
         self.pack_forget()
         self.exercise_window.load_subtopic(subtopics, index)
@@ -32,9 +38,9 @@ class SelectExerciseWindow(tk.Frame):
 
     def show_main_window(self):
         self.pack_forget()
-        self.previous_state.pack()
+        self.previous_state.pack(pady=20)
 
     def show(self, topic: Topic):
         self.topic = topic
         self.load_subtopics()
-        self.pack()
+        self.pack(pady=20)

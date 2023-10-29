@@ -17,7 +17,7 @@ class MainWindow(tk.Frame):
             button = tk.Button(
                 self, text=topic.title, command=partial(self.show_subtopics, topic)
             )
-            button.pack()
+            button.pack(pady=2)
 
     def show_subtopics(self, topic):
         self.pack_forget()
