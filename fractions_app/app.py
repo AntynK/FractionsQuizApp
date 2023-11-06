@@ -8,10 +8,12 @@ class Application(tk.Tk):
         super().__init__()
 
         self.main_window = MainWindow(self)
-        self.main_window.pack()
+        
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+        self.main_window.show()
 
-    def start(self):
+    def start(self) -> None:
         self.title("Програма для покращення знань з дробів")
         self.geometry("400x300")
-        self.resizable(width=False, height=False)
         self.mainloop()

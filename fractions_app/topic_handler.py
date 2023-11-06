@@ -17,14 +17,15 @@ class TopicHandler:
 
         self.__topics: list[Topic] = []
 
-    def add_topic(self, topic: Topic):
-        if not hasattr(topic, "subtopics"):
-            raise AttributeError(
-                f"Object '{type(topic)}' haven't got an attribute 'subtopics'."
-            )
-        if not hasattr(topic, "title"):
-            raise AttributeError(
-                f"Object '{type(topic)}' haven't got an attribute 'title'."
+    def add_topic(self, topic: Topic) -> None:
+        """Add topic to topics list.
+        Raises:
+            ValueError: if type of `topic` is not Topic.
+        """
+
+        if not isinstance(topic, Topic):
+            raise ValueError(
+                f"Argument 'topic' must be type {Topic}, not {type(topic)}."
             )
 
         self.__topics.append(topic)
