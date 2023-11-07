@@ -17,6 +17,9 @@ class ExerciseWindow(tk.Frame):
     def init_buttons(self):
         self.buttons_frame = tk.Frame(self)
 
+        self.buttons_frame.grid_rowconfigure(0, weight=1)
+        for column in range(3):
+            self.buttons_frame.grid_columnconfigure(column, weight=1)
         self.exit_button = tk.Button(
             self.buttons_frame, text="Вийти", command=self.show_select_exercise_window
         )
@@ -26,13 +29,13 @@ class ExerciseWindow(tk.Frame):
         self.again_button = tk.Button(
             self.buttons_frame, text="Ще раз", command=self.reload_subtopic
         )
-        self.again_button.grid(row=3, column=1, padx=3, sticky="nwse")
+        self.again_button.grid(row=3, column=1, padx=2, sticky="nwse")
 
         self.check_button = tk.Button(
             self.buttons_frame, text="Перевірити", command=self.check_input
         )
-        self.check_button.grid(row=3, column=2, padx=3, sticky="nwse")
-        self.buttons_frame.grid(row=3, column=1, padx=110, sticky="nwse")
+        self.check_button.grid(row=3, column=2, padx=2, sticky="nwse")
+        self.buttons_frame.grid(row=3, column=1, padx=113, sticky="nwe")
 
     def init_widgets(self):
         self.subtopic_title_label = tk.Label(
@@ -46,21 +49,40 @@ class ExerciseWindow(tk.Frame):
         self.expression_label.grid(row=1, column=1, sticky="nwse")
 
         self.answer_box = tk.Frame(self, borderwidth=3, relief="groove")
-        for row in range(4):
+        for row in range(3):
             self.answer_box.grid_rowconfigure(row, weight=1)
         self.answer_box.grid_columnconfigure(1, weight=1)
 
         tk.Label(self.answer_box, text="Ціле:").grid(row=0, column=0, sticky="nwse")
-        self.intenger_input = tk.Spinbox(self.answer_box, from_=0, to=30, increment=1)
+        self.intenger_input = tk.Spinbox(
+            self.answer_box,
+            from_=0,
+            to=30,
+            increment=1,
+            justify="center",
+            font=("Times New Roman", 20, "bold"),
+        )
         self.intenger_input.grid(row=0, column=1, sticky="nwse")
 
         tk.Label(self.answer_box, text="Чисельник:").grid(row=1, column=0)
-        self.numerator_input = tk.Spinbox(self.answer_box, from_=0, to=30, increment=1)
+        self.numerator_input = tk.Spinbox(
+            self.answer_box,
+            from_=0,
+            to=30,
+            increment=1,
+            justify="center",
+            font=("Times New Roman", 20, "bold"),
+        )
         self.numerator_input.grid(row=1, column=1, sticky="nwse")
 
         tk.Label(self.answer_box, text="Знаменник:").grid(row=2, column=0)
         self.denominator_input = tk.Spinbox(
-            self.answer_box, from_=1, to=30, increment=1
+            self.answer_box,
+            from_=1,
+            to=30,
+            increment=1,
+            justify="center",
+            font=("Times New Roman", 20, "bold"),
         )
         self.denominator_input.grid(row=2, column=1, sticky="nwse")
 
