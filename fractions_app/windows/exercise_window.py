@@ -67,6 +67,7 @@ class ExerciseWindow(ttk.Frame):
             to=50,
             increment=1,
             justify="center",
+            style="Intenger.TSpinbox",
         )
         self.intenger_input.grid(row=0, column=1, sticky="nwse")
 
@@ -76,6 +77,7 @@ class ExerciseWindow(ttk.Frame):
             to=50,
             increment=1,
             justify="center",
+            style="Numerator.TSpinbox",
         )
         self.numerator_input.grid(row=1, column=1, sticky="nwse")
 
@@ -85,6 +87,7 @@ class ExerciseWindow(ttk.Frame):
             to=50,
             increment=1,
             justify="center",
+            style="Denominator.TSpinbox",
         )
         self.denominator_input.grid(row=2, column=1, sticky="nwse")
 
@@ -126,10 +129,12 @@ class ExerciseWindow(ttk.Frame):
         self.display_expression()
 
     def _check_value(self, widget: ttk.Spinbox, value: int, ok_color: str):
+        style = ttk.Style()
         if int(widget.get()) != value:
-            widget.configure(background="red")
+            style.configure(widget["style"], fieldbackground="red")
             return False
-        widget.configure(background=ok_color)
+
+        style.configure(widget["style"], fieldbackground=ok_color)
         return True
 
     def compare_user_input_with_fraction(
@@ -192,4 +197,4 @@ class ExerciseWindow(ttk.Frame):
         ):
             widget.delete(0, END)
             widget.insert(0, "1")
-            widget.configure(background="white")
+            ttk.Style().configure(widget["style"], fieldbackground="white")

@@ -2,8 +2,8 @@ import time
 
 import tkinter as tk
 from tkinter.ttk import Style
-from tkinter.font import Font, BOLD
 
+from .constants import VERSION, ICON_BASE64, SPINBOX_LAYOUT
 from .windows.main_window import MainWindow
 
 
@@ -24,8 +24,12 @@ class Application(tk.Tk):
         self.main_window.show()
 
     def start(self) -> None:
-        self.title("Програма для покращення знань з дробів")
+        self.title(f"Програма для покращення знань з дробів - {VERSION}")
         self.geometry("500x450")
+        self.iconphoto(
+            False,
+            tk.PhotoImage(data=ICON_BASE64),
+        )
         self.mainloop()
 
     def resize_event(self, event=None):
@@ -41,9 +45,9 @@ class Application(tk.Tk):
             font=("Times New Roman", int(k * 1.3)),
         )
 
-        self.style.configure("Title.TLabel", font=("Times New Roman", k * 2, BOLD))
+        self.style.configure("Title.TLabel", font=("Times New Roman", k * 2, "bold"))
         self.style.configure("Expression.TLabel", font=("Times New Roman", k * 2))
-        self.style.configure(
-            "TSpinbox",
-            font=("Times New Roman", k * 2, BOLD),
-        )
+
+        for stylename in ("Intenger", "Numerator", "Denominator"):
+            self.style.layout(f"{stylename}.TSpinbox", *SPINBOX_LAYOUT)
+            self.style.configure(f"{stylename}.TSpinbox", fieldbackground="white")
