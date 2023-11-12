@@ -1,5 +1,5 @@
 from functools import partial
-from tkinter import ttk, END
+from tkinter import ttk, END, IntVar
 import tkinter.messagebox as msg_box
 
 import unicodeit
@@ -50,9 +50,15 @@ class ExerciseWindow(ttk.Frame):
         spinbox.select_clear()
         spinbox.select_range(0, END)
 
-    def spinbox_focus_out(self, event, spinbox: ttk.Spinbox):
+    def spinbox_return_presed(self, event, spinbox: ttk.Spinbox):
         spinbox.select_clear()
         self.focus()
+
+    def spinbox_check_value(self, event, spinbox: ttk.Spinbox):
+        if spinbox.get() == "":
+            spinbox.insert(0, "1")
+
+        self.spinbox_return_presed(event, spinbox)
 
     def init_spinboxes_events(self):
         for spinbox in (
@@ -61,7 +67,12 @@ class ExerciseWindow(ttk.Frame):
             self.intenger_input,
         ):
             spinbox.bind("<FocusIn>", partial(self.spinbox_focus_in, spinbox=spinbox))
-            spinbox.bind("<Return>", partial(self.spinbox_focus_out, spinbox=spinbox))
+            spinbox.bind(
+                "<FocusOut>", partial(self.spinbox_check_value, spinbox=spinbox)
+            )
+            spinbox.bind(
+                "<Return>", partial(self.spinbox_return_presed, spinbox=spinbox)
+            )
 
     def init_widgets(self):
         self.subtopic_title_label = ttk.Label(self, text="Title", style="Title.TLabel")
