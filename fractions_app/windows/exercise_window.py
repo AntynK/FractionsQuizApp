@@ -1,9 +1,11 @@
+from functools import partial
 from tkinter import ttk, END
 import tkinter.messagebox as msg_box
 
 import unicodeit
 
-from ..helper import Topic, Fraction
+from ..helper import Topic
+from ..math import Fraction
 
 
 class ExerciseWindow(ttk.Frame):
@@ -11,8 +13,15 @@ class ExerciseWindow(ttk.Frame):
         super().__init__()
 
         self.previous_state = previous_state
+        self.validate_enetered_text = (self.register(self.validate_spinbox), "%P")
 
         self.init_widgets()
+
+    def validate_spinbox(self, text: str):
+        if not text.isdigit() and len(text) != 0:
+            self.bell()
+            return False
+        return True
 
     def init_buttons(self):
         self.buttons_frame = ttk.Frame(self)
@@ -37,6 +46,23 @@ class ExerciseWindow(ttk.Frame):
         self.check_button.grid(row=3, column=2, padx=2, sticky="nwse")
         self.buttons_frame.grid(row=3, column=1, padx=113, sticky="nwe")
 
+    def spinbox_focus_in(self, event, spinbox: ttk.Spinbox):
+        spinbox.select_clear()
+        spinbox.select_range(0, END)
+
+    def spinbox_focus_out(self, event, spinbox: ttk.Spinbox):
+        spinbox.select_clear()
+        self.focus()
+
+    def init_spinboxes_events(self):
+        for spinbox in (
+            self.numerator_input,
+            self.denominator_input,
+            self.intenger_input,
+        ):
+            spinbox.bind("<FocusIn>", partial(self.spinbox_focus_in, spinbox=spinbox))
+            spinbox.bind("<Return>", partial(self.spinbox_focus_out, spinbox=spinbox))
+
     def init_widgets(self):
         self.subtopic_title_label = ttk.Label(self, text="Title", style="Title.TLabel")
         self.subtopic_title_label.grid(row=0, column=1, sticky="ns")
@@ -47,6 +73,7 @@ class ExerciseWindow(ttk.Frame):
         self.expression_label.grid(row=1, column=1, sticky="ns")
 
         self.answer_box = ttk.Frame(self, borderwidth=3, relief="groove")
+
         for row in range(3):
             self.answer_box.grid_rowconfigure(row, weight=1)
 
@@ -63,9 +90,9 @@ class ExerciseWindow(ttk.Frame):
 
         self.intenger_input = ttk.Spinbox(
             self.answer_box,
-            from_=-50,
-            to=50,
-            increment=1,
+            validate="all",
+            font=("Times New Roman", 25),
+            validatecommand=self.validate_enetered_text,
             justify="center",
             style="Intenger.TSpinbox",
         )
@@ -73,9 +100,9 @@ class ExerciseWindow(ttk.Frame):
 
         self.numerator_input = ttk.Spinbox(
             self.answer_box,
-            from_=-50,
-            to=50,
-            increment=1,
+            validate="all",
+            font=("Times New Roman", 25),
+            validatecommand=self.validate_enetered_text,
             justify="center",
             style="Numerator.TSpinbox",
         )
@@ -83,16 +110,16 @@ class ExerciseWindow(ttk.Frame):
 
         self.denominator_input = ttk.Spinbox(
             self.answer_box,
-            from_=-50,
-            to=50,
-            increment=1,
+            validate="all",
+            font=("Times New Roman", 25),
+            validatecommand=self.validate_enetered_text,
             justify="center",
             style="Denominator.TSpinbox",
         )
         self.denominator_input.grid(row=2, column=1, sticky="nwse")
 
         self.init_buttons()
-
+        self.init_spinboxes_events()
         self.answer_box.grid(row=2, column=1, sticky="nwse")
 
     def reload_subtopic(self):
@@ -155,7 +182,10 @@ class ExerciseWindow(ttk.Frame):
             if self.compare_user_input_with_fraction(self.result, ok_color="orange"):
                 msg_box.showinfo(title="Помилка", message="Дріб можна скоротити!")
                 return
+
         if not self.compare_user_input_with_fraction(self.redused_result):
+            self.check_button.configure(text="Перевірити")
+            self.showed = False
             return
 
         self.show_next_exercise()

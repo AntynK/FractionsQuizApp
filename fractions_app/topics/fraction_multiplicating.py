@@ -1,7 +1,7 @@
 from random import randrange
 
-from ..helper import Fraction, Exercise, Topic, Subtopic
-
+from ..helper import Exercise, Topic, Subtopic
+from ..math import Fraction
 
 class FractionMultiplicating(Topic):
     def __init__(self):

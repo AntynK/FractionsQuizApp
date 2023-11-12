@@ -1,6 +1,5 @@
 from dataclasses import dataclass
-from . import Fraction
-
+from ..math import Fraction
 
 @dataclass
 class Exercise:

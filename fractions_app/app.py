@@ -42,12 +42,19 @@ class Application(tk.Tk):
 
         self.style.configure(
             "TButton",
-            font=("Times New Roman", int(k * 1.3)),
+            font=("Times New Roman", round(k * 1.3)),
         )
 
+        self.style.configure("TLabel", font=("Times New Roman", round(k * 1.5)))
+
         self.style.configure("Title.TLabel", font=("Times New Roman", k * 2, "bold"))
-        self.style.configure("Expression.TLabel", font=("Times New Roman", k * 2))
+        self.style.configure(
+            "Expression.TLabel", font=("Times New Roman", round(k * 2.5))
+        )
 
         for stylename in ("Intenger", "Numerator", "Denominator"):
             self.style.layout(f"{stylename}.TSpinbox", *SPINBOX_LAYOUT)
-            self.style.configure(f"{stylename}.TSpinbox", fieldbackground="white")
+            self.style.configure(
+                f"{stylename}.TSpinbox",
+                fieldbackground="white",
+            )
