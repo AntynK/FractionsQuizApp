@@ -9,4 +9,4 @@ from .exercise import Exercise
 @dataclass
 class Subtopic:
     title: str
-    exercises: Callable[..., Exercise]
+    generate_exercise: Callable[..., Exercise]

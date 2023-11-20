@@ -1,10 +1,9 @@
+from typing import Union
 from functools import partial
-from tkinter import ttk, END, IntVar
-import tkinter.messagebox as msg_box
+from tkinter import ttk, END
+import tkinter.messagebox as messagebox
 
-import unicodeit
-
-from ..helper import Topic
+from ..helper import Topic, ResizingCanvas
 from ..math import Fraction
 
 
@@ -78,10 +77,9 @@ class ExerciseWindow(ttk.Frame):
         self.subtopic_title_label = ttk.Label(self, text="Title", style="Title.TLabel")
         self.subtopic_title_label.grid(row=0, column=1, sticky="ns")
 
-        self.expression_label = ttk.Label(
-            self, text="Expression", style="Expression.TLabel"
-        )
-        self.expression_label.grid(row=1, column=1, sticky="ns")
+        self.expression_canvas = ResizingCanvas(self)
+        self.expression_canvas.grid(row=1, column=1, sticky="nwse")
+        self.bind("<Configure>", self.display_expression)
 
         self.answer_box = ttk.Frame(self, borderwidth=3, relief="groove")
 
@@ -102,7 +100,7 @@ class ExerciseWindow(ttk.Frame):
         self.intenger_input = ttk.Spinbox(
             self.answer_box,
             validate="all",
-            font=("Times New Roman", 25),
+            font=("Times New Roman", 40),
             validatecommand=self.validate_enetered_text,
             justify="center",
             style="Intenger.TSpinbox",
@@ -112,7 +110,7 @@ class ExerciseWindow(ttk.Frame):
         self.numerator_input = ttk.Spinbox(
             self.answer_box,
             validate="all",
-            font=("Times New Roman", 25),
+            font=("Times New Roman", 40),
             validatecommand=self.validate_enetered_text,
             justify="center",
             style="Numerator.TSpinbox",
@@ -122,7 +120,7 @@ class ExerciseWindow(ttk.Frame):
         self.denominator_input = ttk.Spinbox(
             self.answer_box,
             validate="all",
-            font=("Times New Roman", 25),
+            font=("Times New Roman", 40),
             validatecommand=self.validate_enetered_text,
             justify="center",
             style="Denominator.TSpinbox",
@@ -156,8 +154,8 @@ class ExerciseWindow(ttk.Frame):
         self.current_subtopic = self.subtopics[index]
         self.index = index
 
-        self.current_exercise = self.current_subtopic.exercises()
-        self.result = self.current_exercise.fraction
+        self.current_exercise = self.current_subtopic.generate_exercise()
+        self.result = self.current_exercise.result
         self.redused_result = self.result.reduce()
         if self.result == self.redused_result:
             self.result = None
@@ -191,7 +189,12 @@ class ExerciseWindow(ttk.Frame):
     def check_input(self):
         if self.result is not None:
             if self.compare_user_input_with_fraction(self.result, ok_color="orange"):
-                msg_box.showinfo(title="Помилка", message="Дріб можна скоротити!")
+                if int(self.numerator_input.get()) >= int(self.denominator_input.get()):
+                    messagebox.showerror(
+                        title="Помилка", message="Потрібно виділити цілу частину!"
+                    )
+                    return
+                messagebox.showerror(title="Помилка", message="Дріб можна скоротити!")
                 return
 
         if not self.compare_user_input_with_fraction(self.redused_result):
@@ -203,6 +206,7 @@ class ExerciseWindow(ttk.Frame):
 
     def show_next_exercise(self):
         if not self.showed:
+            messagebox.showinfo("Чудово", "Все правильно молодець!")
             self.check_button.configure(text="Наступне")
             self.showed = True
             return
@@ -212,19 +216,48 @@ class ExerciseWindow(ttk.Frame):
             return
         self.show(self.topic, self.index + 1)
 
-    def display_expression(self):
-        result = ""
-        for symbol in self.current_exercise.expression.split(" "):
-            if "*" in symbol:
-                multiplier, symbol = symbol.split("*")
-                result += multiplier
-            if "/" in symbol:
-                numerator, denominator = symbol.split("/")
-                result += unicodeit.replace(f"^{{{numerator}}}/_{{{denominator}}}")
-                continue
-            result += f" {symbol} "
+    def display_expression(self, e=None):
+        CHARACTER_SIZE = 30
+        self.expression_canvas.delete("all")
+        x = 100
+        y = 30
+        offset = self._display_operand(self.current_exercise.operand_1, x, y)
+        x += offset + CHARACTER_SIZE
+        self._display_text(self.current_exercise.operation, x, y)
+        x += CHARACTER_SIZE
+        offset = self._display_operand(self.current_exercise.operand_2, x, y)
+        x += offset + CHARACTER_SIZE
+        self._display_text("=", x, y, bigger=True)
+        x += 10
+        self._display_text("?", x, y, bigger=True)
+        self.expression_canvas.on_resize()
 
-        self.expression_label.configure(text=result)
+    def _display_text(
+        self, text: Union[float, str], x: int, y: int, bigger: bool = True
+    ):
+        font = ("Times New Roman", 20) if bigger else ("Times New Roman", 15)
+
+        self.expression_canvas.create_text(
+            x,
+            y,
+            text=text,
+            fill="black",
+            font=font,
+        )
+
+    def _display_operand(self, operand: Union[int, Fraction], x: int, y: int):
+        if isinstance(operand, int):
+            self._display_text(operand, x, y)
+            return 0
+        x_offset = 0
+        if operand.integer != 0:
+            self._display_text(operand.integer, x, y, bigger=True)
+            x_offset = 25
+
+        self._display_text(operand.numerator, x + x_offset, y - 5)
+        self.expression_canvas.create_line(x - 20 + x_offset, y, x + 20 + x_offset, y)
+        self._display_text(operand.denominator, x + x_offset, y + 5)
+        return x_offset
 
     def show_main_window(self):
         self.grid_forget()
