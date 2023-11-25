@@ -8,6 +8,8 @@ from .windows.main_window import MainWindow
 
 
 class Application(tk.Tk):
+    """Main application class."""
+
     def __init__(self) -> None:
         super().__init__()
 
@@ -24,6 +26,8 @@ class Application(tk.Tk):
         self.main_window.show()
 
     def start(self) -> None:
+        """Initialize window and start mainloop."""
+
         self.title(f"Програма для покращення знань з дробів - {VERSION}")
         self.geometry("500x450")
         self.iconphoto(
@@ -33,6 +37,8 @@ class Application(tk.Tk):
         self.mainloop()
 
     def resize_event(self, event=None):
+        """This method change font size according to window size."""
+
         cur_time = time.time()
         if (cur_time - self.last_callback_time) < 0.1:
             return

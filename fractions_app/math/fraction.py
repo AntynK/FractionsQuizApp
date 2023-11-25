@@ -5,7 +5,9 @@ from .helper import get_highest_common_divider
 
 
 class Fraction:
-    def __init__(self, numerator=1, denominator=1, integer=0):
+    """Fraction(not float)."""
+
+    def __init__(self, numerator: int, denominator: int, integer: int = 0):
         self.numerator = abs(numerator)
         self.denominator = abs(denominator)
         self.integer = integer
@@ -37,10 +39,13 @@ class Fraction:
 
     def __sub__(self, substractor) -> Fraction:
         if isinstance(substractor, Fraction):
+            result = self.copy()
             if self.denominator != substractor.denominator:
                 factor_1, factor_2 = self.get_lowest_common_denominator(substractor)
                 fraction_1 = Fraction(
-                    self.numerator * factor_1, self.denominator * factor_1, self.integer
+                    result.numerator * factor_1,
+                    result.denominator * factor_1,
+                    result.integer,
                 )
                 fraction_2 = Fraction(
                     substractor.numerator * factor_2,
@@ -51,16 +56,16 @@ class Fraction:
                 return fraction_1 - fraction_2
 
             if (
-                self.numerator < substractor.numerator
-                and self.integer > substractor.integer
+                result.numerator < substractor.numerator
+                and result.integer > substractor.integer
             ):
-                self.numerator += self.denominator
-                self.integer -= 1
+                result.numerator += result.denominator
+                result.integer -= 1
 
             return Fraction(
-                self.numerator - substractor.numerator,
-                self.denominator,
-                self.integer - substractor.integer,
+                result.numerator - substractor.numerator,
+                result.denominator,
+                result.integer - substractor.integer,
             )
 
         return self.copy()
@@ -77,6 +82,7 @@ class Fraction:
 
         elif isinstance(mulpiplier, Fraction):
             result = self.copy()
+            mulpiplier = mulpiplier.copy()
             if result.integer != 0:
                 result.numerator += result.denominator * result.integer
                 result.integer = 0
@@ -94,6 +100,7 @@ class Fraction:
             return Fraction(self.numerator, self.denominator * divider, self.integer)
         elif isinstance(divider, Fraction):
             result = self.copy()
+            divider = divider.copy()
             if divider.integer != 0:
                 divider.numerator += divider.denominator * divider.integer
                 divider.integer = 0
@@ -105,9 +112,9 @@ class Fraction:
                 divider.denominator, divider.numerator, divider.integer
             )
         return self.copy()
-    
+
     def divide_by_number(self, number: int):
-        """number/fraction"""
+        """Divide `number` by fraction."""
 
         return Fraction(self.denominator, self.numerator) * number
 
@@ -131,6 +138,7 @@ class Fraction:
         return Fraction(self.numerator, self.denominator, self.integer)
 
     def reduce(self) -> Fraction:
+        """Create new reduced fraction."""
         common_divider = get_highest_common_divider(self.denominator, self.numerator)
         integer = 0
         reduced_numerator = self.numerator // common_divider
@@ -149,6 +157,12 @@ class Fraction:
         )
 
     def get_lowest_common_denominator(self, fraction: Fraction) -> tuple[int, int]:
+        """Get factors for fraction denominators. Multiply factor to corresponding denominator to get common denominator.
+        If fractions don't have common denominator, (1, 1) will be return.
+
+        Returns:
+            tuple[int, int]: factors, first is for self, second is for `fraction` argument.
+        """
         for factor_1 in range(1, 20):
             for factor_2 in range(1, 20):
                 if self.denominator * factor_1 == fraction.denominator * factor_2:

@@ -1,5 +1,5 @@
 import unittest
-from fractions_app.math import Fraction
+from fractions_app.math import Fraction, get_highest_common_divider
 
 
 class TestFraction(unittest.TestCase):
@@ -103,3 +103,30 @@ class TestFraction(unittest.TestCase):
 
         fraction_4 = Fraction(7, 9).reduce()
         self.assertEqual(fraction_4, Fraction(7, 9))
+
+    def test_getting_common_divider(self):
+        self.assertEqual(get_highest_common_divider(10, 9), 1)
+        self.assertEqual(get_highest_common_divider(5, 9), 1)
+        self.assertEqual(get_highest_common_divider(10, 8), 2)
+        self.assertEqual(get_highest_common_divider(15, 5), 5)
+
+    def test_fraction_immutability(self):
+        operand_1, operand_2 = Fraction(3, 7, 1), Fraction(4, 7, 2)
+
+        operand_1_copy = operand_1.copy()
+        operand_2_copy = operand_2.copy()
+
+        self.assertIsNot(operand_1_copy, operand_1)
+        self.assertIsNot(operand_2_copy, operand_2)
+        res = operand_1_copy + operand_2_copy
+        self.assertEqual(operand_1_copy, operand_1)
+        self.assertEqual(operand_2_copy, operand_2)
+        res = operand_1_copy - operand_2_copy
+        self.assertEqual(operand_1_copy, operand_1)
+        self.assertEqual(operand_2_copy, operand_2)
+        res = operand_1_copy / operand_2_copy
+        self.assertEqual(operand_1_copy, operand_1)
+        self.assertEqual(operand_2_copy, operand_2)
+        res = operand_1_copy * operand_2_copy
+        self.assertEqual(operand_1_copy, operand_1)
+        self.assertEqual(operand_2_copy, operand_2)

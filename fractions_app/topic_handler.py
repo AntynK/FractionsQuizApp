@@ -2,6 +2,8 @@ from .helper import Topic
 
 
 class TopicHandler:
+    """TopicHandler is used for storing all Topics. It is singleton."""
+
     __INSTANCE = None
     __INITIALIZED = False
 
@@ -19,6 +21,7 @@ class TopicHandler:
 
     def add_topic(self, topic: Topic) -> None:
         """Add topic to topics list.
+
         Raises:
             ValueError: if type of `topic` is not Topic.
         """
