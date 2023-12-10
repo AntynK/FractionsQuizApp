@@ -1,22 +1,24 @@
-from tkinter import ttk, Toplevel
+from tkinter import ttk, Toplevel, PhotoImage, Canvas
+
+from ..constants import CONGRATULATION_IMAGE_BASE64
 
 
 class CongratulationWindow(Toplevel):
     def __init__(self, master: ttk.Frame):
         super().__init__(master=master)
 
-        self.title("Молодець!")
+        self.title("Прикинь ти")
+        self.resizable(False, False)
 
         width, height = master.winfo_width() - 250, master.winfo_height() - 250
-        x, y = master.winfo_x() + 150, master.winfo_y() + 150
+        x, y = master.winfo_x() + 150, master.winfo_y() + 100
 
         self.geometry(f"{width}x{height}+{x}+{y}")
-        self.grid_columnconfigure(0, weight=1)
-        self.grid_rowconfigure(0, weight=1)
-
-        ttk.Label(
-            self,
-            text="Все правильно! Молодець!!!!!",
-            font=("Times New Roman", 40),
-            justify="center",
-        ).grid(column=0, row=0, sticky="ns")
+        self.img = PhotoImage(data=CONGRATULATION_IMAGE_BASE64)
+        self.canvas = Canvas(self, width=self.img.width(), height=self.img.height())
+        self.canvas.create_image(
+            self.img.width(),
+            self.img.height() // 2,
+            image=self.img,
+        )
+        self.canvas.pack(fill="both", expand=True)

@@ -54,7 +54,6 @@ class ExerciseWindow(ttk.Frame):
             self.answer_box.grid_rowconfigure(row, weight=1)
 
         self.answer_box.grid_columnconfigure(0, weight=1)
-        self.answer_box.grid_columnconfigure(1, weight=5)
 
         ttk.Label(self.answer_box, text="Ціле:").grid(row=0, column=0, sticky="nwse")
         ttk.Label(self.answer_box, text="Чисельник:").grid(
@@ -67,29 +66,29 @@ class ExerciseWindow(ttk.Frame):
         self.intenger_input = Spinbox(
             self.answer_box,
             validate="all",
-            font=("Times New Roman", 40),
+            font=("Times New Roman", 65, "bold"),
             justify="center",
             style="Intenger.TSpinbox",
         )
-        self.intenger_input.grid(row=0, column=1, sticky="nwse")
+        self.intenger_input.grid(row=0, column=2, sticky="nwse")
 
         self.numerator_input = Spinbox(
             self.answer_box,
             validate="all",
-            font=("Times New Roman", 40),
+            font=("Times New Roman", 65, "bold"),
             justify="center",
             style="Numerator.TSpinbox",
         )
-        self.numerator_input.grid(row=1, column=1, sticky="nwse")
+        self.numerator_input.grid(row=1, column=2, sticky="nwse")
 
         self.denominator_input = Spinbox(
             self.answer_box,
             validate="all",
-            font=("Times New Roman", 40),
+            font=("Times New Roman", 65, "bold"),
             justify="center",
             style="Denominator.TSpinbox",
         )
-        self.denominator_input.grid(row=2, column=1, sticky="nwse")
+        self.denominator_input.grid(row=2, column=2, sticky="nwse")
 
         self._init_buttons()
         self.answer_box.grid(row=2, column=1, sticky="nwse")
@@ -159,7 +158,6 @@ class ExerciseWindow(ttk.Frame):
         self.user_input.integer = int(self.intenger_input.get())
 
         user_answer = self._compare_user_input_with_result()
-        print(user_answer, self.user_input, self.result)
         self._update_spinboxes_bg(user_answer, "green")
 
         if self.user_input.reduce() != self.user_input:

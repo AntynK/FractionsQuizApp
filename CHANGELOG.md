@@ -1,3 +1,8 @@
+# Version 0.2.7
+In this update:
+* Chnaged congratulation window.
+* Increased size of buttons and labels fonts.
+
 # Version 0.2.6
 In this update:
 * Added congratulation window.
