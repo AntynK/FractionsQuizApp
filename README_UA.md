@@ -41,7 +41,7 @@
 
 **УВАГА: у вас має бути встановлений [інтерпритатор мови Python](https://www.python.org/downloads/release/python-397/).**
     
-1. Відкрийте сторінку [релізів](https://github.com/AntynK/FractionsQuizApp/realease/latest).
+1. Відкрийте сторінку [релізів](https://github.com/AntynK/FractionsQuizApp/releases/latest).
 2. Завантажте архів SourceCode.zip.
 3. Розпакуйте його.
 4. Запустіть файл main.pyw, двічі натиснувши по ньому або через команду:
@@ -62,7 +62,7 @@ python3 main.pyw
 <br>
 
 **УВАГА: Антивірус Windows може розпізнати .exe файл як вірус, якщо ви переживаєте можете запускати вихідний код.**
-1. Відкрийте сторінку [релізів](https://github.com/AntynK/FractionsQuizApp/realease/latest).
+1. Відкрийте сторінку [релізів](https://github.com/AntynK/FractionsQuizApp/releases/latest).
 2. Завантажте файл FractionsQuizApp.exe.
 3. Запустіть його.
 </details>

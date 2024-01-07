@@ -41,7 +41,7 @@ The program has only been tested on Windows 10. If you experience problems on ot
 
 **NOTE: You must have the [Python interpreter](https://www.python.org/downloads/release/python-397/) installed.**
     
-1. Open the [releases](https://github.com/AntynK/FractionsQuizApp/realease/latest) page.
+1. Open the [releases](https://github.com/AntynK/FractionsQuizApp/releases/latest) page.
 2. Download the SourceCode.zip archive.
 3. Unzip it.
 4. Run the main.pyw file by double-clicking on it or via the command:
@@ -62,7 +62,7 @@ python3 main.pyw
 <br>
 
 **WARNING: Windows Antivirus may recognize the .exe file as a virus. If you are worried, you can run the source code.**
-1. Open the [releases](https://github.com/AntynK/FractionsQuizApp/realease/latest) page.
+1. Open the [releases](https://github.com/AntynK/FractionsQuizApp/releases/latest) page.
 2. Download the FractionsQuizApp.exe file.
 3. Run it.
 </details>
