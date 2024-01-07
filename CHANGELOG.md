@@ -1,6 +1,11 @@
+# Version 1.0.0
+In this update:
+* Changed the exercise window(now input fields are placed like fractions).
+* Added title window.
+
 # Version 0.2.7
 In this update:
-* Chnaged congratulation window.
+* Changed congratulation window.
 * Increased size of buttons and labels fonts.
 
 # Version 0.2.6

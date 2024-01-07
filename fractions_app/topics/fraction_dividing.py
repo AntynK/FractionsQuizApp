@@ -18,7 +18,7 @@ class FractionDividing(Topic):
         self.subtopics = [
             Subtopic("Ділення дробу на натуральне число", self.first_exercise),
             Subtopic("Ділення натурального числа на дріб", self.second_exercise),
-            Subtopic("Ділення дробів з різними знаменниками", self.third_exercise),
+            Subtopic("Ділення дробів із різними знаменниками", self.third_exercise),
             Subtopic("Ділення мішаних дробів", self.fourth_exercise),
         ]
 

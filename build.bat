@@ -1,1 +1,1 @@
-nuitka3 main.pyw --show-progress --onefile --windows-disable-console --windows-icon-from-ico=icon.png --plugin-enable=tk-inter -o FractionsQuizApp.exe
+nuitka3 main.pyw --show-progress --onefile --windows-disable-console --windows-icon-from-ico=assets/icon.png --plugin-enable=tk-inter -o FractionsQuizApp.exe

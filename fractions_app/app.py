@@ -1,9 +1,7 @@
-import time
-
 import tkinter as tk
 from tkinter.ttk import Style
 
-from .constants import VERSION, ICON_BASE64, SPINBOX_LAYOUT
+from .constants import VERSION, ICON_BASE64, TITLE
 from .windows.main_window import MainWindow
 
 
@@ -12,8 +10,6 @@ class Application(tk.Tk):
 
     def __init__(self) -> None:
         super().__init__()
-
-        self.last_callback_time = time.time()
 
         self.style = Style()
 
@@ -25,24 +21,8 @@ class Application(tk.Tk):
 
         self.main_window.show()
 
-    def start(self) -> None:
-        """Initialize window and start mainloop."""
-
-        self.title(f"Програма для покращення знань з дробів - {VERSION}")
-        self.geometry("500x450")
-        self.iconphoto(
-            False,
-            tk.PhotoImage(data=ICON_BASE64),
-        )
-        self.mainloop()
-
     def resize_event(self, event=None):
         """This method change font size according to window size."""
-
-        cur_time = time.time()
-        if (cur_time - self.last_callback_time) < 0.1:
-            return
-        self.last_callback_time = cur_time
 
         k = self.winfo_width() // 100 + self.winfo_height() // 100
 
@@ -58,9 +38,13 @@ class Application(tk.Tk):
             "Expression.TLabel", font=("Times New Roman", round(k * 2.5))
         )
 
-        for stylename in ("Intenger", "Numerator", "Denominator"):
-            self.style.layout(f"{stylename}.TSpinbox", *SPINBOX_LAYOUT)
-            self.style.configure(
-                f"{stylename}.TSpinbox",
-                fieldbackground="white",
-            )
+    def start(self) -> None:
+        """Initialize window and start mainloop."""
+
+        self.title(f"{TITLE} - {VERSION}")
+        self.geometry("500x450")
+        self.iconphoto(
+            False,
+            tk.PhotoImage(data=ICON_BASE64),
+        )
+        self.mainloop()
