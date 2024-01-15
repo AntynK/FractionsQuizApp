@@ -90,7 +90,7 @@ class ExerciseWindow(ttk.Frame):
         self.buttons_frame.grid(row=2, column=1, sticky="swe", pady=10)
 
     def show_next_exercise(self):
-        if not self.check_user_input("BUTTON_PRESSED"):
+        if not self.check_user_input():
             return
 
         if not self.showed:
@@ -147,7 +147,7 @@ class ExerciseWindow(ttk.Frame):
             widget.set("1")
             widget.update_background("white")
 
-    def check_user_input(self, event=None) -> bool:
+    def check_user_input(self) -> bool:
         self.user_input.numerator = int(self.numerator_input.get())
         self.user_input.denominator = int(self.denominator_input.get())
         self.user_input.integer = int(self.intenger_input.get())
@@ -155,24 +155,22 @@ class ExerciseWindow(ttk.Frame):
         user_answer = self._compare_user_input_with_result()
         self._update_spinboxes_bg(user_answer, "green")
 
-        if self.user_input.reduce() != self.user_input:
+        if self.user_input.reduce() != self.user_input and self.user_input.numerator != 0:
             self.numerator_input.update_background("orange")
             self.denominator_input.update_background("orange")
-            if event == "BUTTON_PRESSED":
-                messagebox.showerror(
-                    title="Помилка",
-                    message="Дріб потрібно скоротити!",
-                )
+            messagebox.showerror(
+                title="Помилка",
+                message="Дріб потрібно скоротити!",
+            )
             return False
 
         if self.user_input.convert_to_proper_fraction() != self.user_input:
             self.numerator_input.update_background("orange")
             self.intenger_input.update_background("orange")
-            if event == "BUTTON_PRESSED":
-                messagebox.showerror(
-                    title="Помилка",
-                    message="Потрібно виділити цілу частину!",
-                )
+            messagebox.showerror(
+                title="Помилка",
+                message="Потрібно виділити цілу частину!",
+            )
 
             return False
 

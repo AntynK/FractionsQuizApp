@@ -41,20 +41,26 @@ class TestFraction(unittest.TestCase):
         fraction_4 = Fraction(4, 10) - Fraction(7, 9)
         self.assertEqual(fraction_4, Fraction(-34, 90))
 
-        fraction_5 = Fraction(4, 7, 2) - Fraction(2, 3, 1)
-        self.assertEqual(fraction_5, Fraction(19, 21))
+        fraction_5 = Fraction(4, 9) - Fraction(4, 9)
+        self.assertEqual(fraction_5, Fraction(0, 81))
 
-        fraction_6 = Fraction(1, 6, 3) - Fraction(3, 8, 1)
-        self.assertEqual(fraction_6, Fraction(86, 48))
+        fraction_6 = Fraction(6, 13) - Fraction(6, 13)
+        self.assertEqual(fraction_6, Fraction(0, 169))
 
-        fraction_7 = Fraction(1, 6, 1) - Fraction(2, 3, 3)
-        self.assertEqual(fraction_7, Fraction(-45, 18))
+        fraction_7 = Fraction(4, 7, 2) - Fraction(2, 3, 1)
+        self.assertEqual(fraction_7, Fraction(19, 21))
 
-        fraction_8 = Fraction(5, 6) - 8
-        self.assertEqual(fraction_8, Fraction(-43, 6))
+        fraction_8 = Fraction(1, 6, 3) - Fraction(3, 8, 1)
+        self.assertEqual(fraction_8, Fraction(86, 48))
 
-        fraction_9 = Fraction(5, 6, 2) - 4
-        self.assertEqual(fraction_9, Fraction(-7, 6))
+        fraction_9 = Fraction(1, 6, 1) - Fraction(2, 3, 3)
+        self.assertEqual(fraction_9, Fraction(-45, 18))
+
+        fraction_10 = Fraction(5, 6) - 8
+        self.assertEqual(fraction_10, Fraction(-43, 6))
+
+        fraction_11 = Fraction(5, 6, 2) - 4
+        self.assertEqual(fraction_11, Fraction(-7, 6))
 
     def test_fraction_multiplicating(self):
         fraction_1 = Fraction(3, 7) * 2
@@ -118,6 +124,12 @@ class TestFraction(unittest.TestCase):
 
         fraction_4 = Fraction(1681, 123).reduce()
         self.assertEqual(fraction_4, Fraction(41, 3))
+
+        fraction_5 = Fraction(0, 81).reduce()
+        self.assertEqual(fraction_5, Fraction(0, 0))
+
+        fraction_6 = Fraction(0, 169).reduce()
+        self.assertEqual(fraction_6, Fraction(0, 0))
 
     def test_fraction_simplifing(self):
         result = Fraction(-123, 1681).simplify()

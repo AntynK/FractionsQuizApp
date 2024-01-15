@@ -154,6 +154,9 @@ class Fraction:
             Fraction: new reduced Fraction.
         """
 
+        if self.numerator == 0:
+            return Fraction(0, 0, 0)
+
         common_divider = get_highest_common_divider(self.denominator, self.numerator)
         reduced_numerator = self.numerator // common_divider
         reduced_denominator = self.denominator // common_divider
