@@ -74,7 +74,7 @@ class ExerciseWindow(ttk.Frame):
             self.buttons_frame.grid_columnconfigure(column, weight=1)
 
         self.exit_button = ttk.Button(
-            self.buttons_frame, text="Вийти", command=self.show_main_window
+            self.buttons_frame, text="Вийти", command=self.show_topic_window
         )
         self.exit_button.grid(row=3, column=0, sticky="nwse")
 
@@ -101,11 +101,11 @@ class ExerciseWindow(ttk.Frame):
             return
 
         if len(self.subtopics) <= self.subtopic_index + 1:
-            self.show_main_window()
+            self.show_topic_window()
             return
         self.show(self.topic, self.subtopic_index + 1)
 
-    def show_main_window(self):
+    def show_topic_window(self):
         self.grid_forget()
         self.previous_state.show()
 

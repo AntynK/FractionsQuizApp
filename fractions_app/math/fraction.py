@@ -110,6 +110,15 @@ class Fraction:
 
         return self.copy()
 
+    def __lt__(self, other):
+        if isinstance(other, Fraction):
+            return self.convert_to_float() < other.convert_to_float()
+        
+        return self.convert_to_float() < other
+    
+    def convert_to_float(self) -> float:
+        return (self.numerator + self.integer * self.denominator) / self.denominator
+
     def convert_to_improper_fraction(self) -> Fraction:
         """Convert proper fraction to improper. Create new Fraction instance.
 

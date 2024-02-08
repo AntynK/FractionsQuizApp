@@ -8,7 +8,7 @@ class MainWindow(ttk.Frame):
     def __init__(self, master) -> None:
         super().__init__(master)
 
-        self.topic_window = TopicWindow()
+        self.topic_window = TopicWindow(self)
         ttk.Label(self, text=TITLE, style="Title.TLabel").grid(
             row=0, column=1, sticky="nwse"
         )

@@ -1,56 +1,56 @@
-# Program for studying fractions
-**[Українська версія](README_UA.md)**
+# Програма для вивчення дробів
+**[English version](README_ENG.md)**
 
-This program is designed to teach and improve understanding of fractions. The program contains interactive exercises that will help users improve their skills in working with fractions.
+Ця програма розроблена для навчання та вдосконалення розуміння дробів. Програма містить інтерактивні завдання, які допоможуть користувачам вдосконалити свої навички у роботі з дробами. 
 
-The program consists of 4 topics, each of which has several tasks\*:
-* Adding fractions
-     * Adding fractions with common denominators
-     * Adding fractions with different denominators
-     * Adding mixed fractions
-* Subtraction of fractions
-     * Subtraction of fractions with a common denominator
-     * Subtraction of fractions with different denominators
-     * Subtraction of mixed fractions
-* Multiplication of fractions
-     * Multiplication of a fraction by a natural number
-     * Multiplication of fractions with different denominators
-     * Multiplication of mixed fractions
-* Division of fractions
-     * Division of a fraction by a natural number
-     * Division of a natural number by a fraction
-     * Division of fractions with different denominators
-     * Division of mixed fractions
+Вона складається з 4 тем, кожна тема має декілька завдань\*:
+* Додавання дробів
+    * Додавання дробів із спільними знаменниками
+    * Додавання дробів із різними знаменниками
+    * Додавання мішаних дробів
+* Віднімання дробів
+    * Віднімання дробів із спільним знаменником
+    * Віднімання дробів із різними знаменниками
+    * Віднімання мішаних дробів
+* Множення дробів
+    * Множення дробу на натуральне число
+    * Множення дробів із різними знаменниками
+    * Множення мішаних дробів
+* Ділення дробів
+    * Ділення дробу на натуральне число
+    * Ділення натурального числа на дріб
+    * Ділення дробів із різними знаменниками
+    * Ділення мішаних дробів
 
-![Exercise Window](assets/exercise_window_ua.png)
+![Вікно завдання](assets/exercise_window_ua.png)
 
-**\*Fractions and numbers for tasks are randomly generated.**
+**\*Дроби та числа для завдань генеруються випадковим чином.**
 
-## Available languages
-* Ukrainian
+## Доступні мови
+* Українська
 
-## Available platforms
-This program is written in [Python 3.9.7](https://www.python.org/downloads/release/python-397/) using the built-in module [tkinter](https://docs.python.org/3/library/tkinter.html).
+## Доступні платформи
+Ця програма написана на мові [Python 3.9.7](https://www.python.org/downloads/release/python-397/) з використанням вбудованого модуля [tkinter](https://docs.python.org/uk/3/library/tkinter.html). 
 
-The program has only been tested on Windows 10. If you experience problems on other operating systems, please report them on the [Issues](https://github.com/AntynK/FractionsQuizApp/issues) page.
+Програма була протестована лише на Windows 10, якщо у вас виникають проблеми на інших операційних системах повідомте про це на сторінці [Issues](https://github.com/AntynK/FractionsQuizApp/issues).
 
-## How to get started
+## Як почати
 <details>
-<summary>Method 1: Download the source code</summary>
+<summary>Спосіб 1: Завантажити вихідний код</summary>
 <br>
 
-**NOTE: You must have the [Python interpreter](https://www.python.org/downloads/release/python-397/) installed.**
+**УВАГА: у вас має бути встановлений [інтерпритатор мови Python](https://www.python.org/downloads/release/python-397/).**
     
-1. Open the [releases](https://github.com/AntynK/FractionsQuizApp/releases/latest) page.
-2. Download the SourceCode.zip archive.
-3. Unzip it.
-4. Run the main.pyw file by double-clicking on it or via the command:
+1. Відкрийте сторінку [релізів](https://github.com/AntynK/FractionsQuizApp/releases/latest).
+2. Завантажте архів SourceCode.zip.
+3. Розпакуйте його.
+4. Запустіть файл main.pyw, двічі натиснувши по ньому або через команду:
 
 Windows:
 ```
 python main.pyw
 ```
-Linux and MacOS:
+Linux та MacOS:
 ```
 python3 main.pyw
 ```
@@ -58,14 +58,14 @@ python3 main.pyw
 
 
 <details>
-<summary>Method 2: Download the .exe file</summary>
+<summary>Спосіб 2: Завантажити .exe файл</summary>
 <br>
 
-**WARNING: Windows Antivirus may recognize the .exe file as a virus. If you are worried, you can run the source code.**
-1. Open the [releases](https://github.com/AntynK/FractionsQuizApp/releases/latest) page.
-2. Download the FractionsQuizApp.exe file.
-3. Run it.
+**УВАГА: Антивірус Windows може розпізнати .exe файл як вірус, якщо ви переживаєте можете запускати вихідний код.**
+1. Відкрийте сторінку [релізів](https://github.com/AntynK/FractionsQuizApp/releases/latest).
+2. Завантажте файл FractionsQuizApp.exe.
+3. Запустіть його.
 </details>
 
-## Contributors
-If you have ideas for improvement or want to contribute to the development of the project, please submit your contribution. See [CONTRIBUTING.md](CONTRIBUTING.md).
+## Контриб'ютори
+Якщо у вас є ідеї щодо покращення чи бажання долучитися до розвитку проєкту, будь ласка, подайте свій внесок. Відкрийте [CONTRIBUTING.md](CONTRIBUTING.md) для детального ознайомлення.

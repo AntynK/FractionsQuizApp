@@ -24,6 +24,7 @@ class FractionDividing(Topic):
 
     def first_exercise(self) -> Exercise:
         """This exercise cover dividing fraction by integer."""
+
         fraction = Fraction(randrange(1, 10), randrange(1, 10))
         number = randrange(2, 10)
 
@@ -35,6 +36,7 @@ class FractionDividing(Topic):
 
     def second_exercise(self) -> Exercise:
         """This exercise cover dividing integer by fraction."""
+
         fraction = Fraction(randrange(1, 10), randrange(1, 10))
         number = randrange(2, 10)
 
@@ -46,6 +48,7 @@ class FractionDividing(Topic):
 
     def third_exercise(self) -> Exercise:
         """This exercise cover dividing two fractions with different denominators."""
+
         (
             first_fraction,
             second_fraction,

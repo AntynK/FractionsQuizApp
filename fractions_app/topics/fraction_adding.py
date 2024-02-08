@@ -21,6 +21,7 @@ class FractionAdding(Topic):
 
     def first_exercise(self) -> Exercise:
         """This exercise cover adding two fractions with same denominators."""
+
         (
             first_fraction,
             second_fraction,
@@ -36,6 +37,7 @@ class FractionAdding(Topic):
 
     def second_exercise(self) -> Exercise:
         """This exercise cover adding two fractions with different denominators."""
+
         (
             first_fraction,
             second_fraction,
@@ -52,6 +54,7 @@ class FractionAdding(Topic):
 
     def third_exercise(self) -> Exercise:
         """This exercise cover adding two mixed fractions."""
+
         first_fraction, second_fraction = generate_mixed_fractions()
 
         result = first_fraction + second_fraction

@@ -23,6 +23,7 @@ class FractionMultiplication(Topic):
 
     def first_exercise(self) -> Exercise:
         """This exercise cover multiplication fraction by integer."""
+
         fraction = Fraction(randrange(1, 10), randrange(1, 10))
         number = randrange(2, 10)
 
@@ -34,6 +35,7 @@ class FractionMultiplication(Topic):
 
     def second_exercise(self) -> Exercise:
         """This exercise cover multiplication two fractions with different denominators."""
+
         (
             first_fraction,
             second_fraction,
@@ -50,6 +52,7 @@ class FractionMultiplication(Topic):
 
     def third_exercise(self) -> Exercise:
         """This exercise cover multiplication two mixed fractions."""
+
         first_fraction, second_fraction = generate_mixed_fractions()
         result = first_fraction * second_fraction
 

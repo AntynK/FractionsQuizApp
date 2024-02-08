@@ -8,26 +8,34 @@ from ..helper import Topic
 
 
 class TopicWindow(ttk.Frame):
-    def __init__(self) -> None:
+    def __init__(self, previous_state) -> None:
         super().__init__()
 
+        self.previous_state = previous_state
         self.exercise_window = ExerciseWindow(self)
+        self.topic_frame = ttk.Frame(self)
+        self.topic_frame.grid(row=0, column=0, rowspan=4, sticky="nwse")
 
         self.subtopic_frame = ttk.Frame(self, borderwidth=3, relief="groove")
-
         self.subtopic_frame.grid(
             row=0, column=1, rowspan=4, pady=5, padx=5, sticky="nwse"
         )
-        self._load_topics()
 
     def _load_topics(self):
-        for row, topic in enumerate(TopicHandler().get_topics()):
+        for widget in list(self.topic_frame.children.values()):
+            widget.destroy()
+
+        ttk.Button(self.topic_frame, text="Назад", command=self.show_main_window).grid(
+            row=0, column=0
+        )
+
+        for row, topic in enumerate(TopicHandler().get_topics(), 1):
             button = ttk.Button(
-                self,
+                self.topic_frame,
                 text=topic.title,
                 command=partial(self._show_subtopics, topic),
             )
-            self.grid_rowconfigure(row, weight=1)
+            self.topic_frame.grid_rowconfigure(row, weight=1)
             button.grid(row=row, column=0, pady=5, padx=15, sticky="nwse")
 
     def _show_subtopics(self, topic: Topic):
@@ -50,7 +58,12 @@ class TopicWindow(ttk.Frame):
 
     def show(self):
         self.grid(row=0, column=0, sticky="nwse")
-        for column in range(2):
-            self.grid_columnconfigure(column, weight=1)
+        for index in range(2):
+            self.grid_rowconfigure(index, weight=1)
+            self.grid_columnconfigure(index, weight=index)
 
-        self.grid_columnconfigure(1, weight=5)
+        self._load_topics()
+
+    def show_main_window(self):
+        self.grid_forget()
+        self.previous_state.show()

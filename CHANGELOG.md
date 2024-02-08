@@ -1,3 +1,8 @@
+# Version 1.0.2
+In this update:
+* Changed README.md files, now Ukrainian version is main, and English is secondary(because this app is mainly designed for Ukrainian schools).
+* Removed negative fractions in fraction subtraction topic, because the program is designed for pupils in 5th grade.
+
 # Version 1.0.1
 In this update:
 * Fixed the congratulation window image.

@@ -182,3 +182,32 @@ class TestFraction(unittest.TestCase):
         self.assertEqual(operand_1_copy, operand_1)
         operand_1_copy.simplify()
         self.assertEqual(operand_1_copy, operand_1)
+
+    def test_fraction_converting(self):
+        fraction_1 = Fraction(1, 2).convert_to_float()
+        self.assertAlmostEqual(fraction_1, 0.5)
+        fraction_2 = Fraction(3, 6).convert_to_float()
+        self.assertAlmostEqual(fraction_2, 0.5)
+
+        fraction_3 = Fraction(8, 5).convert_to_float()
+        self.assertAlmostEqual(fraction_3, 1.6)
+        fraction_4 = Fraction(18, 8).convert_to_float()
+        self.assertAlmostEqual(fraction_4, 2.25)
+
+        fraction_5 = Fraction(3, 8, 1).convert_to_float()
+        self.assertAlmostEqual(fraction_5, 1.375)
+        fraction_6 = Fraction(3, 5, 4).convert_to_float()
+        self.assertAlmostEqual(fraction_6, 4.6)
+
+    def test_fraction_logic_operators(self):
+        fraction_1 = Fraction(9, 12)
+        fraction_2 = Fraction(7, 12)
+        self.assertFalse(fraction_1 < fraction_2)
+
+        fraction_3 = Fraction(1, 2)
+        fraction_4 = Fraction(8, 9)
+        self.assertFalse(fraction_3 > fraction_4)
+
+        fraction_5 = Fraction(7, 9, 1)
+        fraction_6 = Fraction(6, 7)
+        self.assertFalse(fraction_5 < fraction_6)
