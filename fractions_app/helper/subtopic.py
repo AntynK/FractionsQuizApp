@@ -3,7 +3,7 @@ from typing import Callable
 from dataclasses import dataclass
 
 
-from .exercise import Exercise
+from fractions_app.helper.exercise import Exercise
 
 
 @dataclass

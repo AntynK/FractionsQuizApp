@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from .subtopic import Subtopic
+from fractions_app.helper.subtopic import Subtopic
 
 
 @dataclass

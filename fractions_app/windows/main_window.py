@@ -1,7 +1,7 @@
 from tkinter import ttk
 
-from ..constants import TITLE, VERSION
-from .topic_window import TopicWindow
+from fractions_app.constants import PROGRAM_TITLE, VERSION, AUTHOR
+from fractions_app.windows.topic_window import TopicWindow
 
 
 class MainWindow(ttk.Frame):
@@ -9,14 +9,14 @@ class MainWindow(ttk.Frame):
         super().__init__(master)
 
         self.topic_window = TopicWindow(self)
-        ttk.Label(self, text=TITLE, style="Title.TLabel").grid(
+        ttk.Label(self, text=PROGRAM_TITLE, style="Title.TLabel").grid(
             row=0, column=1, sticky="nwse"
         )
         ttk.Button(self, text="Розпочати", command=self.show_topic_window).grid(
             row=1, column=1, sticky="nwse"
         )
 
-        ttk.Label(self, text=f"Версія: {VERSION}\n\n©Карандашов Андрій").grid(
+        ttk.Label(self, text=f"Версія: {VERSION}\n\n©{AUTHOR}").grid(
             row=2, column=1, sticky="nwse"
         )
 

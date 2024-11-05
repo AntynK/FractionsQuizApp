@@ -1,13 +1,13 @@
 from random import randrange
 
-from ..helper import (
+from fractions_app.helper import (
     Exercise,
     Topic,
     Subtopic,
     generate_proper_fractions_with_different_denominators,
     generate_mixed_fractions,
 )
-from ..math import Fraction
+from fractions_app.math import Fraction
 
 
 class FractionMultiplication(Topic):

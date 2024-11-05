@@ -1,5 +1,5 @@
-from ..math import Fraction
-from ..helper import (
+from fractions_app.math import Fraction
+from fractions_app.helper import (
     Exercise,
     Topic,
     Subtopic,

@@ -1,6 +1,6 @@
 from typing import Union
 from dataclasses import dataclass
-from ..math import Fraction
+from fractions_app.math import Fraction
 
 
 @dataclass

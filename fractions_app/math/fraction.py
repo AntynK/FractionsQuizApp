@@ -1,13 +1,37 @@
 from __future__ import annotations
 from typing import Union
 
-from .helper import get_highest_common_divider
+
+def get_highest_common_divider(num_1: int, num_2: int) -> int:
+    """Returns `1` if `num_1` and `num_2` don't have common divider. Otherwise retruns common divider."""
+
+    for factor in range(100, 0, -1):
+        if num_1 % factor != 0:
+            continue
+        if num_2 % factor != 0:
+            continue
+        return factor
+    return 1
 
 
 class Fraction:
     """Instance of Fraction class. Fraction object is immutable."""
 
     def __init__(self, numerator: int, denominator: int, integer: int = 0):
+        if not isinstance(numerator, int):
+            raise ValueError(
+                f"Numerator must be type int, not type: '{type(numerator)}'"
+            )
+        if not isinstance(denominator, int):
+            raise ValueError(
+                f"Denominator must be type int, not type: '{type(denominator)}'"
+            )
+        if not isinstance(integer, int):
+            raise ValueError(f"Integer must be type int, not type: '{type(integer)}'")
+
+        if denominator <= 0:
+            raise ValueError("Denominator cannot be zero or negative.")
+
         self.numerator = numerator
         self.denominator = denominator
         self.integer = integer
@@ -25,8 +49,8 @@ class Fraction:
             return Fraction(self.numerator, self.denominator, self.integer + adder)
 
         elif isinstance(adder, Fraction):
-            result = self.convert_to_improper_fraction()
-            adder = adder.convert_to_improper_fraction()
+            result = self.to_improper_fraction()
+            adder = adder.to_improper_fraction()
 
             result.numerator = (result.numerator * adder.denominator) + (
                 adder.numerator * result.denominator
@@ -50,8 +74,8 @@ class Fraction:
             subtractor = Fraction(subtractor, 1)
             return self - subtractor
         elif isinstance(subtractor, Fraction):
-            result = self.convert_to_improper_fraction()
-            subtractor = subtractor.convert_to_improper_fraction()
+            result = self.to_improper_fraction()
+            subtractor = subtractor.to_improper_fraction()
 
             result.numerator = (result.numerator * subtractor.denominator) - (
                 subtractor.numerator * result.denominator
@@ -80,8 +104,8 @@ class Fraction:
             return result
 
         elif isinstance(mulpiplier, Fraction):
-            result = self.convert_to_improper_fraction()
-            mulpiplier = mulpiplier.convert_to_improper_fraction()
+            result = self.to_improper_fraction()
+            mulpiplier = mulpiplier.to_improper_fraction()
 
             result.numerator = result.numerator * mulpiplier.numerator
             result.denominator = result.denominator * mulpiplier.denominator
@@ -101,8 +125,8 @@ class Fraction:
         if isinstance(divider, int):
             return Fraction(self.numerator, self.denominator * divider, self.integer)
         elif isinstance(divider, Fraction):
-            result = self.convert_to_improper_fraction()
-            divider = divider.convert_to_improper_fraction()
+            result = self.to_improper_fraction()
+            divider = divider.to_improper_fraction()
 
             result.numerator = result.numerator * divider.denominator
             result.denominator = result.denominator * divider.numerator
@@ -112,14 +136,14 @@ class Fraction:
 
     def __lt__(self, other):
         if isinstance(other, Fraction):
-            return self.convert_to_float() < other.convert_to_float()
-        
-        return self.convert_to_float() < other
-    
-    def convert_to_float(self) -> float:
+            return self.to_float() < other.to_float()
+
+        return self.to_float() < other
+
+    def to_float(self) -> float:
         return (self.numerator + self.integer * self.denominator) / self.denominator
 
-    def convert_to_improper_fraction(self) -> Fraction:
+    def to_improper_fraction(self) -> Fraction:
         """Convert proper fraction to improper. Create new Fraction instance.
 
         Returns:
@@ -164,7 +188,7 @@ class Fraction:
         """
 
         if self.numerator == 0:
-            return Fraction(0, 0, 0)
+            return Fraction(0, 1, 0)
 
         common_divider = get_highest_common_divider(self.denominator, self.numerator)
         reduced_numerator = self.numerator // common_divider
@@ -176,7 +200,7 @@ class Fraction:
             self.integer,
         )
 
-    def convert_to_proper_fraction(self):
+    def to_proper_fraction(self):
         """Convert improper fraction to proper. Create new Fraction instance.
 
         Returns:
@@ -189,13 +213,18 @@ class Fraction:
             and result.numerator != 1
             and result.denominator != 0
         ):
-            result.integer, result.numerator = divmod(
-                result.numerator, result.denominator
-            )
+            result.integer = int(result.numerator / result.denominator)
+            if result.integer < 0:
+                result.numerator *= -1
+
+            result.numerator -= result.denominator * abs(result.integer)
+            if result.numerator == 0:
+                result.numerator = 1
+
         return result
 
     def simplify(self):
-        return self.reduce().convert_to_proper_fraction()
+        return self.reduce().to_proper_fraction()
 
     def get_lowest_common_denominator(self, fraction: Fraction) -> tuple[int, int]:
         """Get factors for fraction denominators. Multiply factor to corresponding denominator to get common denominator.

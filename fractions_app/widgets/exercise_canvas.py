@@ -2,9 +2,9 @@ from tkinter import Canvas
 from typing import Union
 
 
-from ..helper import Exercise
-from ..math import Fraction
-from .spinbox import Spinbox
+from fractions_app.helper import Exercise
+from fractions_app.math import Fraction
+from fractions_app.widgets.spinbox import Spinbox
 
 
 # https://stackoverflow.com/questions/22835289/how-to-get-tkinter-canvas-to-dynamically-resize-to-window-width

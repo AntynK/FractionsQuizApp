@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter.ttk import Style
 
-from .constants import VERSION, ICON_BASE64, TITLE
-from .windows.main_window import MainWindow
+from fractions_app.constants import VERSION, ICON_BASE64, PROGRAM_TITLE, BASE_WIDTH, BASE_HEIGHT
+from fractions_app.windows.main_window import MainWindow
 
 
 class Application(tk.Tk):
@@ -41,8 +41,8 @@ class Application(tk.Tk):
     def start(self) -> None:
         """Initialize window and start mainloop."""
 
-        self.title(f"{TITLE} - {VERSION}")
-        self.geometry("500x450")
+        self.title(f"{PROGRAM_TITLE} - {VERSION}")
+        self.geometry(f"{BASE_WIDTH}x{BASE_HEIGHT}")
         self.iconphoto(
             False,
             tk.PhotoImage(data=ICON_BASE64),

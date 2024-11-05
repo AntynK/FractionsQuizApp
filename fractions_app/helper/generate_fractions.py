@@ -1,6 +1,6 @@
 from random import randrange
 
-from ..math import Fraction
+from fractions_app.math import Fraction
 
 
 def generate_proper_fractions_with_same_denominator() -> tuple[Fraction, Fraction]:

@@ -155,7 +155,15 @@ class ExerciseWindow(ttk.Frame):
         user_answer = self._compare_user_input_with_result()
         self._update_spinboxes_bg(user_answer, "green")
 
-        if self.user_input.reduce() != self.user_input and self.user_input.numerator != 0:
+        if self.user_input.simplify() != self.result:
+            self.check_button.configure(text="Перевірити")
+            self.showed = False
+            return False
+
+        if (
+            self.user_input.reduce() != self.user_input
+            and self.user_input.numerator != 0
+        ):
             self.numerator_input.update_background("orange")
             self.denominator_input.update_background("orange")
             messagebox.showerror(
@@ -164,7 +172,7 @@ class ExerciseWindow(ttk.Frame):
             )
             return False
 
-        if self.user_input.convert_to_proper_fraction() != self.user_input:
+        if self.user_input.to_proper_fraction() != self.user_input:
             self.numerator_input.update_background("orange")
             self.intenger_input.update_background("orange")
             messagebox.showerror(
@@ -174,10 +182,6 @@ class ExerciseWindow(ttk.Frame):
 
             return False
 
-        if self.user_input != self.result:
-            self.check_button.configure(text="Перевірити")
-            self.showed = False
-            return False
         return True
 
     def _compare_user_input_with_result(self) -> tuple[bool, bool, bool]:

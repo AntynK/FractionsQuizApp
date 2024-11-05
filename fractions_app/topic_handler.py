@@ -1,4 +1,4 @@
-from .helper import Topic
+from fractions_app.helper import Topic
 
 
 class TopicHandler:

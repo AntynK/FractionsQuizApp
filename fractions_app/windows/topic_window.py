@@ -2,9 +2,9 @@ from functools import partial
 
 from tkinter import ttk
 
-from .exercise_window import ExerciseWindow
-from ..topic_handler import TopicHandler
-from ..helper import Topic
+from fractions_app.windows.exercise_window import ExerciseWindow
+from fractions_app.topic_handler import TopicHandler
+from fractions_app.helper import Topic
 
 
 class TopicWindow(ttk.Frame):

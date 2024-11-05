@@ -1,4 +1,4 @@
-from ..helper import (
+from fractions_app.helper import (
     Exercise,
     Topic,
     Subtopic,

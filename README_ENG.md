@@ -1,5 +1,8 @@
 # Program for studying fractions
 **[Українська версія](README.md)**
+> [!NOTE]
+> Цей документ має переклад [українською](README_ENG.md).
+
 
 This program is designed to teach and improve understanding of fractions. The program contains interactive exercises that will help users improve their skills in working with fractions.
 
@@ -24,7 +27,8 @@ The program consists of 4 topics, each of which has several tasks\*:
 
 ![Exercise Window](assets/exercise_window_ua.png)
 
-**\*Fractions and numbers for tasks are randomly generated.**
+> [!NOTE]
+> Fractions and numbers for tasks are randomly generated.
 
 ## Available languages
 * Ukrainian
@@ -39,7 +43,8 @@ The program has only been tested on Windows 10. If you experience problems on ot
 <summary>Method 1: Download the source code</summary>
 <br>
 
-**NOTE: You must have the [Python interpreter](https://www.python.org/downloads/release/python-397/) installed.**
+> [!IMPORTANT]
+> You must have the [Python interpreter](https://www.python.org/downloads/release/python-397/) installed.
     
 1. Open the [releases](https://github.com/AntynK/FractionsQuizApp/releases/latest) page.
 2. Download the SourceCode.zip archive.
@@ -54,6 +59,10 @@ Linux and MacOS:
 ```
 python3 main.pyw
 ```
+
+> [!IMPORTANT]
+> Some Linux distributions do not include `tkinter` package. If you receive `ImportError` try to install `python-tk` package via package manager for example `apt`.
+
 </details>
 
 
@@ -61,7 +70,9 @@ python3 main.pyw
 <summary>Method 2: Download the .exe file</summary>
 <br>
 
-**WARNING: Windows Antivirus may recognize the .exe file as a virus. If you are worried, you can run the source code.**
+> [!WARNING]
+> Windows Antivirus may recognize the .exe file as a potential malware. If you are worried, you could try to run the source code.
+
 1. Open the [releases](https://github.com/AntynK/FractionsQuizApp/releases/latest) page.
 2. Download the FractionsQuizApp.exe file.
 3. Run it.

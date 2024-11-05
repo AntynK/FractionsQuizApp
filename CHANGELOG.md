@@ -1,32 +1,65 @@
-# Version 1.0.2
-In this update:
-* Changed README.md files, now Ukrainian version is main, and English is secondary(because this app is mainly designed for Ukrainian schools).
-* Removed negative fractions in fraction subtraction topic, because the program is designed for pupils in 5th grade.
+# Журнал змін  
 
-# Version 1.0.1
-In this update:
-* Fixed the congratulation window image.
-* Fixed problem when result of operation is zero, now when result of operation is **0** user should pass fraction **0 <sup>0</sup>/<sub>0</sub>**.
 
-# Version 1.0.0
-In this update:
-* Changed the exercise window(now input fields are placed like fractions).
-* Added title window.
+## [1.1.0] - 2024-11-00
+### Додано
+* Файл [`CHANGELOG_ENG.md`](./CHANGELOG_ENG.md).
+* При створенні екземпляр класу `Fraction` відбувається перевірка типів та значення знаменника, щоби він був більшим за нуль. Якщо неправильний тип аргументів, у знаменнику нуль або від'ємне число, то тоді генерується виняток `ValueError`
+* Кнопка "Спробувати ще" за замовчуванням неактивна, якщо користувач правильно порахував, тоді вона стає активною.
 
-# Version 0.2.7
-In this update:
-* Changed congratulation window.
-* Increased size of buttons and labels fonts.
+### Змінено
+* Стиль журналу змін.
+* Тести.
+* Текст деяких кнопок.
+* Якщо при виділенні цілої частинин, дріб виноситься повністю до прикладу <sup>4</sup>/<sub>4</sub>, тоді потрібно записати 1<sup>0</sup>/<sub>4</sub>.
 
-# Version 0.2.6
-In this update:
-* Added congratulation window.
-* Fixed issues with fraction operations.
-* Added capability of entering negative numbers.
+### Виправлено
+* Помилки у файлах README.
+* Помилки при скороченні дробів з нульовим чисельником, тепер після скорочення повертається дріб з 0 в чисельнику.
+* Помилки при виділенні цілої частини, коли чисельник націло скорочувався на знаменник(до прикладу <sup>2</sup>/<sub>4</sub>), тепер у таких випадках чисельник завжди буде дорівнювати 1.
 
-# Version: 0.2.5
-In this update:
-* Added [CHANGELOG.md](CHANGELOG.md)
-* Fixed issues with fraction appearence.
-* Fixed issues with fraction calculation.
-* Removed requirements.txt, because project don't use any external libraries.
+## [1.0.2] - 2024-02-08
+### Змінено
+* Основною мовою тепер є українська, тому файл `README.md` було перекладено українською, оскільки ця програма розробляється для українських шкіл, англійська мова все ще доступна у файлі [`README_ENG.md`](./README_ENG.md).
+* Видалено від'ємні дроби у темі віднімання дробів, бо програма розрахована на учнів 5-го класів, які ще не вивчають від'ємні дроби.
+
+
+## [1.0.1] - 2024-01-15
+### Виправлено
+* Зображення у вікні привітання.
+* Проблему коли результат операції був нуль, тепер коли результат операції  **0** користувач має ввести **0 <sup>0</sup>/<sub>0</sub>**.
+
+
+## [1.0.0] - 2024-01-07
+### Додано
+* Головне вікно програми.
+
+### Змінено
+* Тепер поля введеня розміщено у вигляді дробу.
+
+
+## [0.2.7] - 2023-12-10
+### Змінено
+* Вікно привітання.
+* Збільшено розмір кнопок і шрифт тексту.
+
+
+## [0.2.6] - 2023-12-03
+### Додано 
+* Вікно привітання.
+* Можливість вводити від'ємні числа.
+
+### Виправлено
+* Проблеми з обчисленням дробів.
+
+
+## [0.2.5] - 2023-11-25
+### Додано
+* Файл [`CHANGELOG.md`](CHANGELOG.md).
+
+### Змінено
+* Видалено файл `requirements.txt`, бо у програми зникли залежності.
+
+### Виправлено
+* Проблеми з відображенням дробів.
+* Проблеми з обчисленням дробів.
