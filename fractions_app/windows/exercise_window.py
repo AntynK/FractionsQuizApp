@@ -1,3 +1,4 @@
+from __future__ import annotations
 from tkinter import ttk
 import tkinter.messagebox as messagebox
 

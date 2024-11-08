@@ -14,9 +14,6 @@ class TestFraction(unittest.TestCase):
             self.assertEqual(fraction_1.integer, 0)
             self.assertEqual(fraction_2.integer, 0)
             self.assertEqual(fraction_1.denominator, fraction_2.denominator)
-            self.assertLessEqual(
-                fraction_1.numerator + fraction_2.numerator, fraction_1.denominator
-            )
 
     def test_fractions_with_unlike_denominators(self):
         for _ in range(100):

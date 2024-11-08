@@ -40,8 +40,8 @@ class Spinbox(tk.Spinbox):
 
     def _spinbox_return_pressed(self, event):
         self.selection_clear()
-        if master := self.master.master:
-            master.focus()
+        if self.master.master:
+            self.master.master.focus()
 
     def _validate_spinbox_text(self, text: str) -> bool:
         if not text.isdigit() and text:

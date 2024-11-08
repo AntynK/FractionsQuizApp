@@ -1,19 +1,25 @@
 # Changelog  
 
+## [1.1.1] - 2024-11-08
+### Changed
+* Improved compatability with older versions of Python, now minimal required version is 3.7.
 
-## [1.1.0] - 2024-11-07
+### Fixed
+* Typos in README and CHANGELOG files.
+
+
+## [1.1.0] - 2024-11-08
 ### Added
 * File `CHANGELOG_ENG.md`.
-* При створенні екземпляр класу `Fraction` відбувається перевірка типів та значення знаменника, щоби він був більшим за нуль. Якщо неправильний тип аргументів, у знаменнику нуль або від'ємне число, то тоді генерується виняток `ValueError`
-* Кнопка "Спробувати ще" за замовчуванням неактивна, якщо користувач правильно порахував, тоді вона стає активною.
+* Type and value check `ValueError`
+* Button "Спробувати ще"(Try again) by default is inactive, if user enters right answer button becomes active.
 
 ### Changed
 * Style of changelog.
 * Tests.
 * Text for some buttons.
-* Якщо при виділенні цілої частинин, дріб виноситься повністю до прикладу <sup>4</sup>/<sub>4</sub>, тоді потрібно записати 1<sup>0</sup>/<sub>4</sub>.
 * Congratulation window image.
-* Program title from "Програма для покращення знань з дробів" to "Тренажер для вивчення звичайних дробів".
+* Program title from "Програма для покращення знань з дробів"(A program to improve knowledge of fractions) to "Тренажер для вивчення звичайних дробів"(An interactive tool for learning fractions).
 
 ### Fixed
 * Typos in README files.
