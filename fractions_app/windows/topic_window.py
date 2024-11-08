@@ -22,10 +22,10 @@ class TopicWindow(ttk.Frame):
         )
 
     def _load_topics(self):
-        for widget in list(self.topic_frame.children.values()):
+        for row, widget in enumerate(list(self.topic_frame.children.values())):
             widget.destroy()
 
-        ttk.Button(self.topic_frame, text="Назад", command=self.show_main_window).grid(
+        ttk.Button(self.topic_frame, text="Вийти", command=self.show_main_window).grid(
             row=0, column=0
         )
 
@@ -39,8 +39,9 @@ class TopicWindow(ttk.Frame):
             button.grid(row=row, column=0, pady=5, padx=15, sticky="nwse")
 
     def _show_subtopics(self, topic: Topic):
-        for widget in list(self.subtopic_frame.children.values()):
+        for row, widget in enumerate(list(self.subtopic_frame.children.values())):
             widget.destroy()
+            self.subtopic_frame.grid_rowconfigure(row, weight=0)
 
         self.subtopic_frame.grid_columnconfigure(0, weight=1)
         for row, subtopic in enumerate(topic.subtopics):

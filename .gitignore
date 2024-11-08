@@ -25,6 +25,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+*.exe
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -64,6 +65,7 @@ db.sqlite3-journal
 # Nuitka
 main.build/
 main.dist/
+main.onefile-build/
 
 # Flask stuff:
 instance/

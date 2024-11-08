@@ -37,7 +37,7 @@ class TestFraction(unittest.TestCase):
         self.assertEqual(fraction, Fraction(9, 4))
 
         fraction = Fraction(0, 3, 1).reduce()
-        self.assertEqual(fraction, Fraction(0, 1))
+        self.assertEqual(fraction, Fraction(0, 1, 1))
 
         fraction = Fraction(2, 2, 2).reduce()
         self.assertEqual(fraction, Fraction(1, 1, 2))
@@ -66,7 +66,7 @@ class TestFraction(unittest.TestCase):
         self.assertEqual(fraction, Fraction(1, 6))
 
         fraction = Fraction(6, 1).to_proper_fraction()
-        self.assertEqual(fraction, Fraction(1, 1, 6))
+        self.assertEqual(fraction, Fraction(0, 1, 6))
 
         fraction = Fraction(60, 8).to_proper_fraction()
         self.assertEqual(fraction, Fraction(4, 8, 7))

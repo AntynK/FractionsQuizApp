@@ -7,8 +7,6 @@ from fractions_app.math import Fraction
 from fractions_app.widgets.spinbox import Spinbox
 
 
-# https://stackoverflow.com/questions/22835289/how-to-get-tkinter-canvas-to-dynamically-resize-to-window-width
-
 CHARACTER_SIZE = 40
 # TODO Somehow reduce number of magic values
 

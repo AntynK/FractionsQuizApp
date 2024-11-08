@@ -4,10 +4,10 @@ from fractions_app.helper import (
     Exercise,
     Topic,
     Subtopic,
-    generate_proper_fractions_with_different_denominators,
+    generate_proper_fractions_with_unlike_denominators,
     generate_mixed_fractions,
+    generate_proper_fraction,
 )
-from fractions_app.math import Fraction
 
 
 class FractionMultiplication(Topic):
@@ -24,7 +24,7 @@ class FractionMultiplication(Topic):
     def first_exercise(self) -> Exercise:
         """This exercise cover multiplication fraction by integer."""
 
-        fraction = Fraction(randrange(1, 10), randrange(1, 10))
+        fraction = generate_proper_fraction()
         number = randrange(2, 10)
 
         result = fraction * number
@@ -34,12 +34,12 @@ class FractionMultiplication(Topic):
         )
 
     def second_exercise(self) -> Exercise:
-        """This exercise cover multiplication two fractions with different denominators."""
+        """This exercise cover multiplication two fractions with unlike denominators."""
 
         (
             first_fraction,
             second_fraction,
-        ) = generate_proper_fractions_with_different_denominators()
+        ) = generate_proper_fractions_with_unlike_denominators()
 
         result = first_fraction * second_fraction
 

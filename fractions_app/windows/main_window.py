@@ -9,7 +9,7 @@ class MainWindow(ttk.Frame):
         super().__init__(master)
 
         self.topic_window = TopicWindow(self)
-        ttk.Label(self, text=PROGRAM_TITLE, style="Title.TLabel").grid(
+        ttk.Label(self, text=PROGRAM_TITLE, style="Title.TLabel", justify="center").grid(
             row=0, column=1, sticky="nwse"
         )
         ttk.Button(self, text="Розпочати", command=self.show_topic_window).grid(

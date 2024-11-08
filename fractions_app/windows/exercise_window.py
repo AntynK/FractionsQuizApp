@@ -1,10 +1,11 @@
 from tkinter import ttk
 import tkinter.messagebox as messagebox
 
-from ..helper import Topic
-from ..widgets import Spinbox, ExerciseCanvas
-from ..math import Fraction
-from .congratulation_window import CongratulationWindow
+from fractions_app.helper import Topic
+from fractions_app.widgets import Spinbox, ExerciseCanvas
+from fractions_app.math import Fraction
+from fractions_app.windows.congratulation_window import CongratulationWindow
+from fractions_app.constants import WARNING
 
 
 class ExerciseWindow(ttk.Frame):
@@ -12,7 +13,7 @@ class ExerciseWindow(ttk.Frame):
         super().__init__()
 
         self.previous_state = previous_state
-        self.user_input = Fraction(0, 1)
+        self.user_input = Fraction(1, 1)
 
         self._init_widgets()
         self._init_answer_box()
@@ -31,37 +32,14 @@ class ExerciseWindow(ttk.Frame):
 
     def _init_answer_box(self):
         self.intenger_input = Spinbox(
-            self.exercise_canvas,
-            validate="all",
-            font=("Times New Roman", 100, "bold"),
-            justify="center",
-            width=2,
-            to=200,
-            from_=-200,
-            increment=1,
+            self.exercise_canvas, font=("Times New Roman", 100, "bold"), width=2
         )
 
         self.numerator_input = Spinbox(
             self.exercise_canvas,
-            validate="all",
-            font=("Times New Roman", 50, "bold"),
-            justify="center",
-            width=3,
-            to=200,
-            from_=-200,
-            increment=1,
         )
 
-        self.denominator_input = Spinbox(
-            self.exercise_canvas,
-            validate="all",
-            font=("Times New Roman", 50, "bold"),
-            justify="center",
-            width=3,
-            to=200,
-            from_=-200,
-            increment=1,
-        )
+        self.denominator_input = Spinbox(self.exercise_canvas, from_=1)
         self.exercise_canvas.add_user_input(
             self.intenger_input, self.numerator_input, self.denominator_input
         )
@@ -74,20 +52,31 @@ class ExerciseWindow(ttk.Frame):
             self.buttons_frame.grid_columnconfigure(column, weight=1)
 
         self.exit_button = ttk.Button(
-            self.buttons_frame, text="Вийти", command=self.show_topic_window
+            self.buttons_frame, text="Назад", command=self.show_topic_window
         )
         self.exit_button.grid(row=3, column=0, sticky="nwse")
 
-        self.again_button = ttk.Button(
-            self.buttons_frame, text="Ще раз", command=self.reload_subtopic
+        self.try_again_button = ttk.Button(
+            self.buttons_frame,
+            text="Спробувати ще",
+            command=self.reload_subtopic,
+            state="disabled",
         )
-        self.again_button.grid(row=3, column=1, padx=2, sticky="nwse")
+        self.try_again_button.grid(row=3, column=1, padx=2, sticky="nwse")
 
         self.check_button = ttk.Button(
             self.buttons_frame, text="Перевірити", command=self.show_next_exercise
         )
         self.check_button.grid(row=3, column=2, padx=2, sticky="nwse")
-        self.buttons_frame.grid(row=2, column=1, sticky="swe", pady=10)
+        self.buttons_frame.grid(row=3, column=1, sticky="swe", pady=10)
+
+        ttk.Label(
+            self,
+            text=WARNING,
+            style="Notice.TLabel",
+            foreground="blue",
+            anchor="center",
+        ).grid(row=2, column=1, sticky="nwse")
 
     def show_next_exercise(self):
         if not self.check_user_input():
@@ -96,7 +85,8 @@ class ExerciseWindow(ttk.Frame):
         if not self.showed:
             CongratulationWindow(self)
 
-            self.check_button.configure(text="Наступне")
+            self.check_button.configure(text="Далі")
+            self.try_again_button.configure(state="normal")
             self.showed = True
             return
 
@@ -131,6 +121,8 @@ class ExerciseWindow(ttk.Frame):
         self.subtopic_title_label.configure(text=self.current_subtopic.title)
         self.exercise_canvas.display_exercise(self.current_exercise)
 
+        self.try_again_button.configure(state="disabled")
+
     def _configure_grid(self):
         self.grid(row=0, column=0, sticky="nwse")
         for row in range(3):
@@ -157,6 +149,7 @@ class ExerciseWindow(ttk.Frame):
 
         if self.user_input.simplify() != self.result:
             self.check_button.configure(text="Перевірити")
+            self.try_again_button.configure(state="disabled")
             self.showed = False
             return False
 

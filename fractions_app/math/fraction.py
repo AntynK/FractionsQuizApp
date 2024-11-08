@@ -140,27 +140,6 @@ class Fraction:
 
         return self.to_float() < other
 
-    def to_float(self) -> float:
-        return (self.numerator + self.integer * self.denominator) / self.denominator
-
-    def to_improper_fraction(self) -> Fraction:
-        """Convert proper fraction to improper. Create new Fraction instance.
-
-        Returns:
-            Fraction: new improper Fraction.
-        """
-
-        result = Fraction(self.numerator, self.denominator, self.integer)
-        result.numerator += result.denominator * result.integer
-        result.integer = 0
-
-        return result
-
-    def divide_by_number(self, number: int):
-        """Divide `number` by `self`."""
-
-        return Fraction(self.denominator, self.numerator) * number
-
     def __repr__(self):
         integer = "" if self.integer == 0 else f"{self.integer}*"
 
@@ -177,8 +156,11 @@ class Fraction:
             )
         )
 
-    def copy(self) -> Fraction:
-        return Fraction(self.numerator, self.denominator, self.integer)
+    def to_float(self) -> float:
+        return (self.numerator + self.integer * self.denominator) / self.denominator
+
+    def simplify(self):
+        return self.reduce().to_proper_fraction()
 
     def reduce(self) -> Fraction:
         """Reduce fraction. Create new Fraction instance.
@@ -186,9 +168,6 @@ class Fraction:
         Returns:
             Fraction: new reduced Fraction.
         """
-
-        if self.numerator == 0:
-            return Fraction(0, 1, 0)
 
         common_divider = get_highest_common_divider(self.denominator, self.numerator)
         reduced_numerator = self.numerator // common_divider
@@ -218,13 +197,29 @@ class Fraction:
                 result.numerator *= -1
 
             result.numerator -= result.denominator * abs(result.integer)
-            if result.numerator == 0:
-                result.numerator = 1
 
         return result
 
-    def simplify(self):
-        return self.reduce().to_proper_fraction()
+    def to_improper_fraction(self) -> Fraction:
+        """Convert proper fraction to improper. Create new Fraction instance.
+
+        Returns:
+            Fraction: new improper Fraction.
+        """
+
+        result = Fraction(self.numerator, self.denominator, self.integer)
+        result.numerator += result.denominator * result.integer
+        result.integer = 0
+
+        return result
+
+    def divide_by_number(self, number: int):
+        """Divide `number` by `self`."""
+
+        return Fraction(self.denominator, self.numerator) * number
+
+    def copy(self) -> Fraction:
+        return Fraction(self.numerator, self.denominator, self.integer)
 
     def get_lowest_common_denominator(self, fraction: Fraction) -> tuple[int, int]:
         """Get factors for fraction denominators. Multiply factor to corresponding denominator to get common denominator.

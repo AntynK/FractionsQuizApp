@@ -10,15 +10,16 @@ class CongratulationWindow(Toplevel):
         self.title(CONGRATULATION_TITLE)
         self.resizable(False, False)
 
-        width, height = master.winfo_width() - 250, master.winfo_height() - 180
-        x, y = master.winfo_x() + 150, master.winfo_y() + 100
-
+        width, height = round(master.winfo_width() / 2), round(master.winfo_height() / 1.5)
+        x, y = round(master.winfo_width() // 3.5), round(master.winfo_height() / 4)
+        
         self.geometry(f"{width}x{height}+{x}+{y}")
         self.img = PhotoImage(data=CONGRATULATION_IMAGE_BASE64)
-        self.canvas = Canvas(self, width=self.img.width(), height=self.img.height())
+
+        self.canvas = Canvas(self, width=width, height=height)
         self.canvas.create_image(
-            self.img.width(),
-            self.img.height() // 2 + 20,
+            self.img.width() // 1.5,
+            self.img.height() // 2,
             image=self.img,
         )
         self.canvas.pack(fill="both", expand=True)

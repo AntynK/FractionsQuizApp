@@ -1,7 +1,13 @@
 import tkinter as tk
 from tkinter.ttk import Style
 
-from fractions_app.constants import VERSION, ICON_BASE64, PROGRAM_TITLE, BASE_WIDTH, BASE_HEIGHT
+from fractions_app.constants import (
+    VERSION,
+    ICON_BASE64,
+    PROGRAM_TITLE,
+    BASE_WIDTH,
+    BASE_HEIGHT,
+)
 from fractions_app.windows.main_window import MainWindow
 
 
@@ -31,6 +37,7 @@ class Application(tk.Tk):
             font=("Times New Roman", round(k * 1.3), "bold"),
         )
 
+        self.style.configure("Notice.TLabel", font=("Times New Roman", k, "bold"))
         self.style.configure("TLabel", font=("Times New Roman", round(k * 1.5), "bold"))
 
         self.style.configure("Title.TLabel", font=("Times New Roman", k * 2, "bold"))
@@ -44,7 +51,7 @@ class Application(tk.Tk):
         self.title(f"{PROGRAM_TITLE} - {VERSION}")
         self.geometry(f"{BASE_WIDTH}x{BASE_HEIGHT}")
         self.iconphoto(
-            False,
+            True,
             tk.PhotoImage(data=ICON_BASE64),
         )
         self.mainloop()

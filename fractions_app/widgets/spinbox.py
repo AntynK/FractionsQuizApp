@@ -2,8 +2,19 @@ import tkinter as tk
 
 
 class Spinbox(tk.Spinbox):
-    def __init__(self, master, *args, **kwargs) -> None:
-        super().__init__(master, *args, **kwargs)
+    def __init__(
+        self, master, width=3, font=("Times New Roman", 50, "bold"), from_=0
+    ) -> None:
+        super().__init__(
+            master,
+            validate="all",
+            font=font,
+            justify="center",
+            width=width,
+            to=200,
+            from_=from_,
+            increment=1,
+        )
 
         self.bind("<FocusIn>", self._spinbox_focus_in)
         self.bind("<FocusOut>", self._spinbox_check_value)
@@ -19,8 +30,6 @@ class Spinbox(tk.Spinbox):
         if not self.get():
             self.insert(0, "1")
         spinbox_text = self.get()
-        if spinbox_text == "-":
-            spinbox_text = "-1"
 
         self.set(str(int(spinbox_text)))
         self._spinbox_return_pressed(event)
@@ -35,9 +44,6 @@ class Spinbox(tk.Spinbox):
             master.focus()
 
     def _validate_spinbox_text(self, text: str) -> bool:
-        if text and text[0] == "-":
-            text = text[1:]
-
         if not text.isdigit() and text:
             self.bell()
             return False

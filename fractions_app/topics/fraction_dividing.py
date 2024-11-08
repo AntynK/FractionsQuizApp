@@ -4,10 +4,10 @@ from fractions_app.helper import (
     Exercise,
     Topic,
     Subtopic,
-    generate_proper_fractions_with_different_denominators,
+    generate_proper_fractions_with_unlike_denominators,
     generate_mixed_fractions,
+    generate_proper_fraction,
 )
-from fractions_app.math import Fraction
 
 
 class FractionDividing(Topic):
@@ -25,7 +25,7 @@ class FractionDividing(Topic):
     def first_exercise(self) -> Exercise:
         """This exercise cover dividing fraction by integer."""
 
-        fraction = Fraction(randrange(1, 10), randrange(1, 10))
+        fraction = generate_proper_fraction()
         number = randrange(2, 10)
 
         result = fraction / number
@@ -37,7 +37,7 @@ class FractionDividing(Topic):
     def second_exercise(self) -> Exercise:
         """This exercise cover dividing integer by fraction."""
 
-        fraction = Fraction(randrange(1, 10), randrange(1, 10))
+        fraction = generate_proper_fraction()
         number = randrange(2, 10)
 
         result = fraction.divide_by_number(number)
@@ -47,12 +47,12 @@ class FractionDividing(Topic):
         )
 
     def third_exercise(self) -> Exercise:
-        """This exercise cover dividing two fractions with different denominators."""
+        """This exercise cover dividing two fractions with unlike denominators."""
 
         (
             first_fraction,
             second_fraction,
-        ) = generate_proper_fractions_with_different_denominators()
+        ) = generate_proper_fractions_with_unlike_denominators()
 
         result = first_fraction / second_fraction
 
