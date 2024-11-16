@@ -1,4 +1,3 @@
-from __future__ import annotations
 from tkinter import ttk
 import tkinter.messagebox as messagebox
 
@@ -6,7 +5,7 @@ from fractions_app.helper import Topic
 from fractions_app.widgets import Spinbox, ExerciseCanvas
 from fractions_app.math import Fraction
 from fractions_app.windows.congratulation_window import CongratulationWindow
-from fractions_app.constants import WARNING
+from fractions_app.constants import WARNING, REDUCE_MESSAGE, CONVERT_TO_PROPER_FRACTION_MESSAGE
 
 
 class ExerciseWindow(ttk.Frame):
@@ -107,9 +106,8 @@ class ExerciseWindow(ttk.Frame):
         self._configure_grid()
 
         self._clear_input_boxes()
-        self.intenger_input.set("0")
+        self.denominator_input.set("1")
 
-        self.showed = False
         self.topic = topic
         self.subtopics = topic.subtopics
         self.current_subtopic = self.subtopics[subtopic_index]
@@ -118,11 +116,10 @@ class ExerciseWindow(ttk.Frame):
         self.current_exercise = self.current_subtopic.generate_exercise()
         self.result = self.current_exercise.result.simplify()
 
-        self.check_button.configure(text="Перевірити")
         self.subtopic_title_label.configure(text=self.current_subtopic.title)
         self.exercise_canvas.display_exercise(self.current_exercise)
 
-        self.try_again_button.configure(state="disabled")
+        self._reset_buttons()
 
     def _configure_grid(self):
         self.grid(row=0, column=0, sticky="nwse")
@@ -137,7 +134,7 @@ class ExerciseWindow(ttk.Frame):
             self.intenger_input,
             self.denominator_input,
         ):
-            widget.set("1")
+            widget.set("0")
             widget.update_background("white")
 
     def check_user_input(self) -> bool:
@@ -149,9 +146,7 @@ class ExerciseWindow(ttk.Frame):
         self._update_spinboxes_bg(user_answer, "green")
 
         if self.user_input.simplify() != self.result:
-            self.check_button.configure(text="Перевірити")
-            self.try_again_button.configure(state="disabled")
-            self.showed = False
+            self._reset_buttons()
             return False
 
         if (
@@ -161,22 +156,28 @@ class ExerciseWindow(ttk.Frame):
             self.numerator_input.update_background("orange")
             self.denominator_input.update_background("orange")
             messagebox.showerror(
-                title="Помилка",
-                message="Дріб потрібно скоротити!",
+                title="Помилка. Дріб потрібно скоротити!",
+                message=REDUCE_MESSAGE,
             )
+            self._reset_buttons()
             return False
 
         if self.user_input.to_proper_fraction() != self.user_input:
             self.numerator_input.update_background("orange")
             self.intenger_input.update_background("orange")
             messagebox.showerror(
-                title="Помилка",
-                message="Потрібно виділити цілу частину!",
+                title="Помилка. Потрібно виділити цілу частину!",
+                message=CONVERT_TO_PROPER_FRACTION_MESSAGE,
             )
-
+            self._reset_buttons()
             return False
 
         return True
+
+    def _reset_buttons(self):
+        self.check_button.configure(text="Перевірити")
+        self.try_again_button.configure(state="disabled")
+        self.showed = False
 
     def _compare_user_input_with_result(self) -> tuple[bool, bool, bool]:
         return (

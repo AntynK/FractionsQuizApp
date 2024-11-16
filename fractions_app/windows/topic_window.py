@@ -26,7 +26,7 @@ class TopicWindow(ttk.Frame):
             widget.destroy()
 
         ttk.Button(self.topic_frame, text="Вийти", command=self.show_main_window).grid(
-            row=0, column=0
+            row=0, column=0, pady=5
         )
 
         for row, topic in enumerate(TopicHandler().get_topics(), 1):

@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from fractions_app.math import Fraction
 from fractions_app.helper import (
     Exercise,

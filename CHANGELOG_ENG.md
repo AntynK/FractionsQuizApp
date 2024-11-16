@@ -1,11 +1,12 @@
 # Changelog  
 
-## [1.1.1] - 2024-11-08
-### Changed
-* Improved compatability with older versions of Python, now minimal required version is 3.7.
-
+## [1.2.0] - 2024-11-16
 ### Fixed
-* Typos in README and CHANGELOG files.
+* Error in exersice window.
+* Minor errors.
+
+### Added
+* Instruction for building program.
 
 
 ## [1.1.0] - 2024-11-08

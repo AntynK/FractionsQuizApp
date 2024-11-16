@@ -1,4 +1,3 @@
-from __future__ import annotations
 from typing import Union
 
 
@@ -36,7 +35,7 @@ class Fraction:
         self.denominator = denominator
         self.integer = integer
 
-    def __add__(self, adder: Union[int, Fraction]) -> Fraction:
+    def __add__(self, adder: Union[int, "Fraction"]) -> "Fraction":
         """Add `adder` to `self`, result is new a Fraction.
 
         Arg:
@@ -60,7 +59,7 @@ class Fraction:
 
         return self.copy()
 
-    def __sub__(self, subtractor: Union[int, Fraction]) -> Fraction:
+    def __sub__(self, subtractor: Union[int, "Fraction"]) -> "Fraction":
         """Subtract `self` by `subtractor`, result is new a Fraction.
 
         Arg:
@@ -85,7 +84,7 @@ class Fraction:
 
         return self.copy()
 
-    def __mul__(self, mulpiplier: Union[int, Fraction]) -> Fraction:
+    def __mul__(self, mulpiplier: Union[int, "Fraction"]) -> "Fraction":
         """Multiply `self` by `adder`, result is new a Fraction.
 
         Arg:
@@ -113,7 +112,7 @@ class Fraction:
 
         return self.copy()
 
-    def __truediv__(self, divider: Union[int, Fraction]) -> Fraction:
+    def __truediv__(self, divider: Union[int, "Fraction"]) -> "Fraction":
         """Divide `self` by `divider`, result is new a Fraction.
 
         Arg:
@@ -162,7 +161,7 @@ class Fraction:
     def simplify(self):
         return self.reduce().to_proper_fraction()
 
-    def reduce(self) -> Fraction:
+    def reduce(self) -> "Fraction":
         """Reduce fraction. Create new Fraction instance.
 
         Returns:
@@ -187,11 +186,7 @@ class Fraction:
         """
 
         result = self.copy()
-        if (
-            abs(result.numerator) >= result.denominator
-            and result.numerator != 1
-            and result.denominator != 0
-        ):
+        if abs(result.numerator) >= result.denominator:
             result.integer = int(result.numerator / result.denominator)
             if result.integer < 0:
                 result.numerator *= -1
@@ -200,7 +195,7 @@ class Fraction:
 
         return result
 
-    def to_improper_fraction(self) -> Fraction:
+    def to_improper_fraction(self) -> "Fraction":
         """Convert proper fraction to improper. Create new Fraction instance.
 
         Returns:
@@ -218,10 +213,10 @@ class Fraction:
 
         return Fraction(self.denominator, self.numerator) * number
 
-    def copy(self) -> Fraction:
+    def copy(self) -> "Fraction":
         return Fraction(self.numerator, self.denominator, self.integer)
 
-    def get_lowest_common_denominator(self, fraction: Fraction) -> tuple[int, int]:
+    def get_lowest_common_denominator(self, fraction: "Fraction") -> tuple[int, int]:
         """Get factors for fraction denominators. Multiply factor to corresponding denominator to get common denominator.
         If fractions don't have common denominator, (1, 1) will be return.
 

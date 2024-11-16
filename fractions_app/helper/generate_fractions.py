@@ -1,4 +1,3 @@
-from __future__ import annotations
 from random import randrange
 
 from fractions_app.math import Fraction
@@ -8,6 +7,7 @@ def generate_proper_fraction(
     numerator_max: int = 10, denominator_max: int = 10
 ) -> Fraction:
     fraction = Fraction(randrange(1, numerator_max), randrange(1, denominator_max))
+
     while fraction.numerator >= fraction.denominator:
         fraction.denominator += 1
 
@@ -15,12 +15,11 @@ def generate_proper_fraction(
 
 
 def generate_proper_fractions_with_like_denominators() -> tuple[Fraction, Fraction]:
-    first_fraction = Fraction(randrange(1, 10), randrange(1, 10))
+    first_fraction = generate_proper_fraction()
     denominator = first_fraction.denominator
-    second_fraction = Fraction(randrange(1, 10), denominator)
+    numerator = randrange(1, denominator - 1 if denominator > 2 else denominator)
+    second_fraction = Fraction(numerator, denominator)
 
-    first_fraction.denominator = denominator
-    second_fraction.denominator = denominator
     return first_fraction, second_fraction
 
 

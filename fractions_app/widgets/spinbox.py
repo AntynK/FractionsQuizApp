@@ -22,6 +22,7 @@ class Spinbox(tk.Spinbox):
         self.bind("<Return>", self._spinbox_return_pressed)
         self.validate_entered_text = (self.register(self._validate_spinbox_text), "%P")
         self.configure(validatecommand=self.validate_entered_text)
+        self.min_value = from_
 
     def _spinbox_focus_in(self, event):
         self.selection_clear()
@@ -29,9 +30,12 @@ class Spinbox(tk.Spinbox):
     def _spinbox_check_value(self, event):
         if not self.get():
             self.insert(0, "1")
-        spinbox_text = self.get()
 
-        self.set(str(int(spinbox_text)))
+        spinbox_text = self.get()
+        if int(spinbox_text) < self.min_value:
+            spinbox_text = str(self.min_value)
+        self.set(spinbox_text)
+
         self._spinbox_return_pressed(event)
 
     def set(self, value: str):

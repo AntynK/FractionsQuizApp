@@ -38,6 +38,10 @@ This program is written in [Python 3.9.7](https://www.python.org/downloads/relea
 
 If you have found mistake or problem, please report them on the [Issues](https://github.com/AntynK/FractionsQuizApp/issues) page.
 
+> [!IMPORTANT]
+> Python 3.9 or later is required.
+
+
 ## How to get started
 
 ### Method 1: Download the source code
@@ -62,9 +66,9 @@ python3 main.pyw
 > Some Linux distributions do not include `tkinter` package. If you receive `ImportError` try to install `python-tk` package via package manager for example `apt`.
 
 
-### Method 2: Download the .exe file
+### Method 2: Download the executable file
 > [!WARNING]
-> Windows Antivirus may recognize the .exe file as a potential malware. If you are worried, you could try to run the source code.
+> Windows Antivirus may recognize the executable file as a potential malware. If you are worried, you could try to run the source code(Method 1).
 
 1. Open the [releases](https://github.com/AntynK/FractionsQuizApp/releases/latest) page.
 2. Download the FractionsQuizApp.exe file.
@@ -72,3 +76,18 @@ python3 main.pyw
 
 ## Contributors
 If you have ideas for improvement or want to contribute to the development of the project, please submit your contribution. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+### Build
+[Pyinstaller](https://pyinstaller.org/en/stable/) is used for building. 
+It can be installed using the following command:
+
+```bash 
+pip install -U pyinstaller
+```
+
+After installing it, run the following command in order to build program:
+```bash 
+pyinstaller build.spec
+```
+
+This will create a `dist` folder containing the executable file
