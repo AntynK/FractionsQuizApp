@@ -3,8 +3,6 @@
 > [!NOTE]
 > Цей документ має переклад [українською](README.md).
 
-> [!WARNING]
-> This program is no longer supported. Please use the [new version](https://github.com/AntynK/FractionTrainer).
 
 This program is designed to teach and improve understanding of fractions. The program contains interactive exercises that will help users improve their skills in working with fractions.
 

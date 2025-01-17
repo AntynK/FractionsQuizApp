@@ -22,7 +22,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name="FractionQuizApp 1.2.0",
+    name="FractionQuizApp 1.2.1",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
