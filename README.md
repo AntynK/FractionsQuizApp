@@ -1,6 +1,6 @@
 # Математичний тренажер для вивчення звичайних дробів
 > [!NOTE]
-> An [English]((README_ENG.md)) version of this document is available.
+> An [English](README_ENG.md) version of this document is available.
 
 
 Ця програма розроблена для навчання та вдосконалення розуміння дробів. Програма містить інтерактивні завдання, які допоможуть користувачам вдосконалити свої навички у роботі з дробами. 
