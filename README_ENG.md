@@ -3,6 +3,8 @@
 > [!NOTE]
 > Цей документ має переклад [українською](README.md).
 
+> [!WARNING]
+> This program is no longer supported. Please use the [new version](https://github.com/AntynK/FractionTrainer).
 
 This program is designed to teach and improve understanding of fractions. The program contains interactive exercises that will help users improve their skills in working with fractions.
 
@@ -51,15 +53,15 @@ If you have found mistake or problem, please report them on the [Issues](https:/
 1. Open the [releases](https://github.com/AntynK/FractionsQuizApp/releases/latest) page.
 2. Download the SourceCode.zip archive.
 3. Unzip it.
-4. Run the main.pyw file by double-clicking on it or via the command:
+4. Run the main.py file by double-clicking on it or via the command:
 
-Windows:
+#### Windows:
 ```bash
-python main.pyw
+python main.py
 ```
-Linux and MacOS:
+#### Linux and MacOS:
 ```bash
-python3 main.pyw
+python3 main.py
 ```
 
 > [!IMPORTANT]
@@ -77,17 +79,21 @@ python3 main.pyw
 ## Contributors
 If you have ideas for improvement or want to contribute to the development of the project, please submit your contribution. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-### Build
-[Pyinstaller](https://pyinstaller.org/en/stable/) is used for building. 
-It can be installed using the following command:
+### Building (Windows only)
+[Pyinstaller](https://pyinstaller.org/en/stable/) is used for building the program. It can be installed using the following command:
 
+#### Windows
 ```bash 
 pip install -U pyinstaller
 ```
+To build the app, use the following command:
 
-After installing it, run the following command in order to build program:
+#### Windows
 ```bash 
 pyinstaller build.spec
 ```
 
-This will create a `dist` folder containing the executable file
+After building, a `dist` folder will be created, which contains the executable file.
+
+> [!NOTE]
+> `exe_file_version` file must be in the same directory as `build.spec` file.

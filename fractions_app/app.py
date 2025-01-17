@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter.ttk import Style
 
 from fractions_app.constants import (
-    VERSION,
     ICON_BASE64,
     PROGRAM_TITLE,
     BASE_WIDTH,
@@ -48,7 +47,7 @@ class Application(tk.Tk):
     def start(self) -> None:
         """Initialize window and start mainloop."""
 
-        self.title(f"{PROGRAM_TITLE} - {VERSION}")
+        self.title(f"{PROGRAM_TITLE}")
         self.geometry(f"{BASE_WIDTH}x{BASE_HEIGHT}")
         self.iconphoto(
             True,

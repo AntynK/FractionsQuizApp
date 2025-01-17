@@ -1,7 +1,9 @@
 # Математичний тренажер для вивчення звичайних дробів
-
 > [!NOTE]
-> There is [English version](README_ENG.md) of this document.
+> An [English]((README_ENG.md)) version of this document is available.
+
+> [!WARNING]
+> Ця програма більше не підтримується.  Краще використовуйте [новішу версію](https://github.com/AntynK/FractionTrainer)
 
 Ця програма розроблена для навчання та вдосконалення розуміння дробів. Програма містить інтерактивні завдання, які допоможуть користувачам вдосконалити свої навички у роботі з дробами. 
 
@@ -50,15 +52,15 @@
 1. Відкрийте сторінку [релізів](https://github.com/AntynK/FractionsQuizApp/releases/latest).
 2. Завантажте архів `SourceCode.zip`.
 3. Розпакуйте його.
-4. Запустіть файл `main.pyw`, двічі натиснувши по ньому або через команду:
+4. Запустіть файл `main.py`, двічі натиснувши по ньому або через команду:
 
-Windows:
+#### Windows:
 ```bash 
-python main.pyw
+python main.py
 ```
-Linux та MacOS:
+#### Linux та MacOS:
 ```bash
-python3 main.pyw
+python3 main.py
 ```
 
 > [!IMPORTANT]
@@ -77,19 +79,22 @@ python3 main.pyw
 ## Контриб'ютори
 Якщо у вас є ідеї щодо покращення чи бажання долучитися до розвитку проєкту, будь ласка, подайте свій внесок. Відкрийте [CONTRIBUTING.md](CONTRIBUTING.md) для детального ознайомлення.
 
-## Збирання (Windows)
+## Збирання (лише Windows)
 Для збирання використовується [Pyinstaller](https://pyinstaller.org/en/stable/). 
 Його можна встановити за допомогою команди:
 
-
+#### Windows
 ```bash 
 pip install -U pyinstaller
 ```
 
 Після цього запустіть процес збирання командою:
 
+#### Windows
 ```bash 
 pyinstaller build.spec
 ```
 
 У результаті буде створено папку `dist`, у якій міститиметься виконуваний файл.
+> [!NOTE]
+> Файл `exe_file_version` має бути у папці разом з файлом `build.spec`.

@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ["main.pyw"],
+    ["main.py"],
     pathex=[],
     binaries=[],
     datas=[],
@@ -22,7 +22,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name="FractionQuizApp 1.2.0 DEV 001",
+    name="FractionQuizApp 1.2.0",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
