@@ -9,9 +9,9 @@ class MainWindow(ttk.Frame):
         super().__init__(master)
 
         self.topic_window = TopicWindow(self)
-        ttk.Label(self, text=PROGRAM_TITLE, style="Title.TLabel", justify="center").grid(
-            row=0, column=1, sticky="nwse"
-        )
+        ttk.Label(
+            self, text=PROGRAM_TITLE, style="Title.TLabel", justify="center"
+        ).grid(row=0, column=1, sticky="nwse")
         ttk.Button(self, text="Розпочати", command=self.show_topic_window).grid(
             row=1, column=1, sticky="nwse"
         )
@@ -20,11 +20,11 @@ class MainWindow(ttk.Frame):
             row=2, column=1, sticky="nwse"
         )
 
-    def show_topic_window(self):
+    def show_topic_window(self) -> None:
         self.grid_forget()
         self.topic_window.show()
 
-    def show(self):
+    def show(self) -> None:
         self.grid(row=0, column=0, sticky="nwse")
         for i in range(3):
             self.rowconfigure(i, weight=1)

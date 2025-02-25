@@ -3,19 +3,18 @@ import tkinter as tk
 
 class Spinbox(tk.Spinbox):
     def __init__(
-        self, master, width=3, font=("Times New Roman", 50, "bold"), from_=0
+        self, master, width: int = 3, font_size: int = 50, from_: int = 0
     ) -> None:
         super().__init__(
             master,
             validate="all",
-            font=font,
             justify="center",
             width=width,
             to=200,
             from_=from_,
             increment=1,
         )
-
+        self.update_font_size(font_size)
         self.bind("<FocusIn>", self._spinbox_focus_in)
         self.bind("<FocusOut>", self._spinbox_check_value)
 
@@ -24,10 +23,10 @@ class Spinbox(tk.Spinbox):
         self.configure(validatecommand=self.validate_entered_text)
         self.min_value = from_
 
-    def _spinbox_focus_in(self, event):
+    def _spinbox_focus_in(self, *unused) -> None:
         self.selection_clear()
 
-    def _spinbox_check_value(self, event):
+    def _spinbox_check_value(self, *unused) -> None:
         if not self.get():
             self.insert(0, "1")
 
@@ -36,13 +35,13 @@ class Spinbox(tk.Spinbox):
             spinbox_text = str(self.min_value)
         self.set(spinbox_text)
 
-        self._spinbox_return_pressed(event)
+        self._spinbox_return_pressed()
 
-    def set(self, value: str):
+    def set(self, value: str) -> None:
         self.delete(0, tk.END)
         self.insert(0, value)
 
-    def _spinbox_return_pressed(self, event):
+    def _spinbox_return_pressed(self, *unused) -> None:
         self.selection_clear()
         if self.master.master:
             self.master.master.focus()
@@ -53,5 +52,8 @@ class Spinbox(tk.Spinbox):
             return False
         return True
 
-    def update_background(self, color: str):
+    def update_background(self, color: str) -> None:
         self.configure(background=color)
+
+    def update_font_size(self, font_size: int) -> None:
+        self.configure(font=("Times New Roman", font_size, "bold"))

@@ -158,7 +158,7 @@ class Fraction:
     def to_float(self) -> float:
         return (self.numerator + self.integer * self.denominator) / self.denominator
 
-    def simplify(self):
+    def simplify(self) -> "Fraction":
         return self.reduce().to_proper_fraction()
 
     def reduce(self) -> "Fraction":
@@ -178,7 +178,7 @@ class Fraction:
             self.integer,
         )
 
-    def to_proper_fraction(self):
+    def to_proper_fraction(self) -> "Fraction":
         """Convert improper fraction to proper. Create new Fraction instance.
 
         Returns:
@@ -208,7 +208,7 @@ class Fraction:
 
         return result
 
-    def divide_by_number(self, number: int):
+    def divide_by_number(self, number: int) -> "Fraction":
         """Divide `number` by `self`."""
 
         return Fraction(self.denominator, self.numerator) * number

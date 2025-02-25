@@ -2,7 +2,6 @@ from typing import Callable
 
 from dataclasses import dataclass
 
-
 from fractions_app.helper.exercise import Exercise
 
 

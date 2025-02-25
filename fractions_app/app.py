@@ -26,7 +26,7 @@ class Application(tk.Tk):
 
         self.main_window.show()
 
-    def resize_event(self, event=None):
+    def resize_event(self, *unused) -> None:
         """This method change font size according to window size."""
 
         k = self.winfo_width() // 100 + self.winfo_height() // 100
@@ -36,12 +36,14 @@ class Application(tk.Tk):
             font=("Times New Roman", round(k * 1.3), "bold"),
         )
 
-        self.style.configure("Notice.TLabel", font=("Times New Roman", k, "bold"))
         self.style.configure("TLabel", font=("Times New Roman", round(k * 1.5), "bold"))
-
         self.style.configure("Title.TLabel", font=("Times New Roman", k * 2, "bold"))
         self.style.configure(
             "Expression.TLabel", font=("Times New Roman", round(k * 2.5))
+        )
+
+        self.style.configure(
+            "TCheckbutton", font=("Times New Roman", round(k * 1.5), "bold")
         )
 
     def start(self) -> None:

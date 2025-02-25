@@ -6,7 +6,6 @@ from fractions_app.widgets import Spinbox, ExerciseCanvas
 from fractions_app.math import Fraction
 from fractions_app.windows.congratulation_window import CongratulationWindow
 from fractions_app.constants import (
-    WARNING,
     REDUCE_MESSAGE,
     CONVERT_TO_PROPER_FRACTION_MESSAGE,
 )
@@ -31,13 +30,11 @@ class ExerciseWindow(ttk.Frame):
         self.exercise_canvas.grid(row=1, column=0, sticky="nwse", columnspan=3)
         self.bind("<Configure>", self.on_resize)
 
-    def on_resize(self, event):
+    def on_resize(self, *unused) -> None:
         self.exercise_canvas.display_exercise(self.current_exercise)
 
-    def _init_answer_box(self):
-        self.intenger_input = Spinbox(
-            self.exercise_canvas, font=("Times New Roman", 100, "bold"), width=2
-        )
+    def _init_answer_box(self) -> None:
+        self.intenger_input = Spinbox(self.exercise_canvas, font_size=100, width=2)
 
         self.numerator_input = Spinbox(self.exercise_canvas)
 
@@ -46,7 +43,7 @@ class ExerciseWindow(ttk.Frame):
             self.intenger_input, self.numerator_input, self.denominator_input
         )
 
-    def _init_buttons(self):
+    def _init_buttons(self) -> None:
         self.buttons_frame = ttk.Frame(self)
 
         self.buttons_frame.grid_rowconfigure(0, weight=1)
@@ -72,15 +69,7 @@ class ExerciseWindow(ttk.Frame):
         self.check_button.grid(row=3, column=2, padx=2, sticky="nwse")
         self.buttons_frame.grid(row=3, column=1, sticky="swe", pady=10)
 
-        ttk.Label(
-            self,
-            text=WARNING,
-            style="Notice.TLabel",
-            foreground="blue",
-            anchor="center",
-        ).grid(row=2, column=1, sticky="nwse")
-
-    def show_next_exercise(self):
+    def show_next_exercise(self) -> None:
         if not self.check_user_input():
             return
 
@@ -97,14 +86,14 @@ class ExerciseWindow(ttk.Frame):
             return
         self.show(self.topic, self.subtopic_index + 1)
 
-    def show_topic_window(self):
+    def show_topic_window(self) -> None:
         self.grid_forget()
         self.previous_state.show()
 
-    def reload_subtopic(self):
+    def reload_subtopic(self) -> None:
         self.show(self.topic, self.subtopic_index)
 
-    def show(self, topic: Topic, subtopic_index: int):
+    def show(self, topic: Topic, subtopic_index: int) -> None:
         self._configure_grid()
 
         self._clear_input_boxes()
@@ -123,14 +112,14 @@ class ExerciseWindow(ttk.Frame):
 
         self._reset_buttons()
 
-    def _configure_grid(self):
+    def _configure_grid(self) -> None:
         self.grid(row=0, column=0, sticky="nwse")
         for row in range(3):
             self.grid_rowconfigure(row, weight=1)
         for column in range(3):
             self.grid_columnconfigure(column, weight=1)
 
-    def _clear_input_boxes(self):
+    def _clear_input_boxes(self) -> None:
         for widget in (
             self.numerator_input,
             self.intenger_input,
@@ -176,7 +165,7 @@ class ExerciseWindow(ttk.Frame):
 
         return True
 
-    def _reset_buttons(self):
+    def _reset_buttons(self) -> None:
         self.check_button.configure(text="Перевірити")
         self.try_again_button.configure(state="disabled")
         self.showed = False
@@ -193,7 +182,7 @@ class ExerciseWindow(ttk.Frame):
         answers: tuple[bool, bool, bool],
         ok_color: str,
         default_color: str = "red",
-    ):
+    ) -> None:
         for widget, answer in zip(
             (
                 self.intenger_input,

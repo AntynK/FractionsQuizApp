@@ -1,5 +1,4 @@
 from functools import partial
-
 from tkinter import ttk
 
 from fractions_app.windows.exercise_window import ExerciseWindow
@@ -21,7 +20,7 @@ class TopicWindow(ttk.Frame):
             row=0, column=1, rowspan=4, pady=5, padx=5, sticky="nwse"
         )
 
-    def _load_topics(self):
+    def _load_topics(self) -> None:
         for row, widget in enumerate(list(self.topic_frame.children.values())):
             widget.destroy()
 
@@ -38,7 +37,7 @@ class TopicWindow(ttk.Frame):
             self.topic_frame.grid_rowconfigure(row, weight=1)
             button.grid(row=row, column=0, pady=5, padx=15, sticky="nwse")
 
-    def _show_subtopics(self, topic: Topic):
+    def _show_subtopics(self, topic: Topic) -> None:
         for row, widget in enumerate(list(self.subtopic_frame.children.values())):
             widget.destroy()
             self.subtopic_frame.grid_rowconfigure(row, weight=0)
@@ -53,11 +52,11 @@ class TopicWindow(ttk.Frame):
             self.subtopic_frame.grid_rowconfigure(row, weight=1)
             button.grid(row=row, column=0, pady=5, padx=15, sticky="nwse")
 
-    def show_exercise(self, topic: Topic, index: int):
+    def show_exercise(self, topic: Topic, index: int) -> None:
         self.grid_forget()
         self.exercise_window.show(topic, index)
 
-    def show(self):
+    def show(self) -> None:
         self.grid(row=0, column=0, sticky="nwse")
         for index in range(2):
             self.grid_rowconfigure(index, weight=1)
@@ -65,6 +64,6 @@ class TopicWindow(ttk.Frame):
 
         self._load_topics()
 
-    def show_main_window(self):
+    def show_main_window(self) -> None:
         self.grid_forget()
         self.previous_state.show()
