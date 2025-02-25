@@ -5,7 +5,11 @@ from fractions_app.helper import Topic
 from fractions_app.widgets import Spinbox, ExerciseCanvas
 from fractions_app.math import Fraction
 from fractions_app.windows.congratulation_window import CongratulationWindow
-from fractions_app.constants import WARNING, REDUCE_MESSAGE, CONVERT_TO_PROPER_FRACTION_MESSAGE
+from fractions_app.constants import (
+    WARNING,
+    REDUCE_MESSAGE,
+    CONVERT_TO_PROPER_FRACTION_MESSAGE,
+)
 
 
 class ExerciseWindow(ttk.Frame):
@@ -35,9 +39,7 @@ class ExerciseWindow(ttk.Frame):
             self.exercise_canvas, font=("Times New Roman", 100, "bold"), width=2
         )
 
-        self.numerator_input = Spinbox(
-            self.exercise_canvas,
-        )
+        self.numerator_input = Spinbox(self.exercise_canvas)
 
         self.denominator_input = Spinbox(self.exercise_canvas, from_=1)
         self.exercise_canvas.add_user_input(

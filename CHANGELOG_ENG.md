@@ -1,5 +1,9 @@
 # Changelog  
 
+## [1.2.2] - 2025-02-25
+### Changed
+* Reduced the amount of text in messages.
+
 ## [1.2.1] - 2025-01-17
 ### Changed
 * The app version has been removed from the window title.

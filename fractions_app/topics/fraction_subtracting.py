@@ -27,17 +27,8 @@ class FractionSubtracting(Topic):
             first_fraction,
             second_fraction,
         ) = generate_proper_fractions_with_like_denominators()
-        first_fraction, second_fraction = self.check_fractions(
-            first_fraction, second_fraction
-        )
-        result = first_fraction - second_fraction
 
-        return Exercise(
-            operand_1=first_fraction,
-            operand_2=second_fraction,
-            operation="-",
-            result=result,
-        )
+        return self._generate_exercise(first_fraction, second_fraction)
 
     def second_exercise(self) -> Exercise:
         """This exercise cover subtrating two fractions with unlike denominators."""
@@ -46,35 +37,15 @@ class FractionSubtracting(Topic):
             first_fraction,
             second_fraction,
         ) = generate_proper_fractions_with_unlike_denominators()
-        first_fraction, second_fraction = self.check_fractions(
-            first_fraction, second_fraction
-        )
 
-        result = first_fraction - second_fraction
-
-        return Exercise(
-            operand_1=first_fraction,
-            operand_2=second_fraction,
-            operation="-",
-            result=result,
-        )
+        return self._generate_exercise(first_fraction, second_fraction)
 
     def third_exercise(self) -> Exercise:
         """This exercise cover subtrating two mixed fractions."""
 
         first_fraction, second_fraction = generate_mixed_fractions()
-        first_fraction, second_fraction = self.check_fractions(
-            first_fraction, second_fraction
-        )
 
-        result = first_fraction - second_fraction
-
-        return Exercise(
-            operand_1=first_fraction,
-            operand_2=second_fraction,
-            operation="-",
-            result=result,
-        )
+        return self._generate_exercise(first_fraction, second_fraction)
 
     def check_fractions(
         self, fraction_1: Fraction, fraction_2: Fraction
@@ -87,3 +58,18 @@ class FractionSubtracting(Topic):
         if res < 0:
             return fraction_2, fraction_1
         return fraction_1, fraction_2
+
+    def _generate_exercise(
+        self,
+        operand_1: Fraction,
+        operand_2: Fraction,
+    ) -> Exercise:
+        operand_1, operand_2 = self.check_fractions(operand_1, operand_2)
+
+        result = operand_1 - operand_2
+        return Exercise(
+            operand_1=operand_1,
+            operand_2=operand_2,
+            operation="-",
+            result=result,
+        )

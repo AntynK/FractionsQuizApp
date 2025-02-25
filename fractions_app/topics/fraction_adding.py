@@ -1,3 +1,4 @@
+from fractions_app.math import Fraction
 from fractions_app.helper import (
     Exercise,
     Topic,
@@ -26,13 +27,10 @@ class FractionAdding(Topic):
             first_fraction,
             second_fraction,
         ) = generate_proper_fractions_with_like_denominators()
-        result = first_fraction + second_fraction
 
-        return Exercise(
-            operand_1=first_fraction,
-            operand_2=second_fraction,
-            operation="+",
-            result=result,
+        return self._generate_exercise(
+            first_fraction,
+            second_fraction,
         )
 
     def second_exercise(self) -> Exercise:
@@ -43,13 +41,9 @@ class FractionAdding(Topic):
             second_fraction,
         ) = generate_proper_fractions_with_unlike_denominators()
 
-        result = first_fraction + second_fraction
-
-        return Exercise(
-            operand_1=first_fraction,
-            operand_2=second_fraction,
-            operation="+",
-            result=result,
+        return self._generate_exercise(
+            first_fraction,
+            second_fraction,
         )
 
     def third_exercise(self) -> Exercise:
@@ -57,11 +51,17 @@ class FractionAdding(Topic):
 
         first_fraction, second_fraction = generate_mixed_fractions()
 
-        result = first_fraction + second_fraction
+        return self._generate_exercise(first_fraction, second_fraction)
 
+    def _generate_exercise(
+        self,
+        operand_1: Fraction,
+        operand_2: Fraction,
+    ) -> Exercise:
+        result = operand_1 + operand_2
         return Exercise(
-            operand_1=first_fraction,
-            operand_2=second_fraction,
+            operand_1=operand_1,
+            operand_2=operand_2,
             operation="+",
             result=result,
         )
