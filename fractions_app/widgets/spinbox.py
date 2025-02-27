@@ -1,9 +1,10 @@
 import tkinter as tk
+from tkinter.font import Font
 
 
 class Spinbox(tk.Spinbox):
     def __init__(
-        self, master, width: int = 3, font_size: int = 50, from_: int = 0
+        self, master, width: int = 3, from_: int = 0
     ) -> None:
         super().__init__(
             master,
@@ -14,7 +15,6 @@ class Spinbox(tk.Spinbox):
             from_=from_,
             increment=1,
         )
-        self.update_font_size(font_size)
         self.bind("<FocusIn>", self._spinbox_focus_in)
         self.bind("<FocusOut>", self._spinbox_check_value)
 
@@ -56,4 +56,6 @@ class Spinbox(tk.Spinbox):
         self.configure(background=color)
 
     def update_font_size(self, font_size: int) -> None:
-        self.configure(font=("Times New Roman", font_size, "bold"))
+        self.configure(
+            font=Font(family="Times New Roman", size=font_size, weight="bold")
+        )

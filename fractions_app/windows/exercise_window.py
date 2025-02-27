@@ -31,10 +31,10 @@ class ExerciseWindow(ttk.Frame):
         self.bind("<Configure>", self.on_resize)
 
     def on_resize(self, *unused) -> None:
-        self.exercise_canvas.display_exercise(self.current_exercise)
+        self.exercise_canvas.on_resize(self.winfo_width(), self.winfo_height())
 
     def _init_answer_box(self) -> None:
-        self.intenger_input = Spinbox(self.exercise_canvas, font_size=100, width=2)
+        self.intenger_input = Spinbox(self.exercise_canvas, width=2)
 
         self.numerator_input = Spinbox(self.exercise_canvas)
 
@@ -146,8 +146,8 @@ class ExerciseWindow(ttk.Frame):
         ):
             self.numerator_input.update_background("orange")
             self.denominator_input.update_background("orange")
-            messagebox.showerror(
-                title="Помилка. Дріб потрібно скоротити!",
+            messagebox.showinfo(
+                title="Дріб потрібно скоротити!",
                 message=REDUCE_MESSAGE,
             )
             self._reset_buttons()
@@ -156,8 +156,8 @@ class ExerciseWindow(ttk.Frame):
         if self.user_input.to_proper_fraction() != self.user_input:
             self.numerator_input.update_background("orange")
             self.intenger_input.update_background("orange")
-            messagebox.showerror(
-                title="Помилка. Потрібно виділити цілу частину!",
+            messagebox.showinfo(
+                title="Потрібно виділити цілу частину!",
                 message=CONVERT_TO_PROPER_FRACTION_MESSAGE,
             )
             self._reset_buttons()
