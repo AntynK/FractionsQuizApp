@@ -1,5 +1,13 @@
 # Changelog  
 
+## [1.3.0] - 2025-03-03
+### Changed
+* Some subtopics title.
+
+### Fixed
+* Issues with scaling on small screens.
+
+
 ## [1.2.2] - 2025-02-25
 ### Changed
 * Reduced the amount of text in messages.

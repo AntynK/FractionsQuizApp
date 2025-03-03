@@ -18,7 +18,7 @@ class ExerciseCanvas(Canvas):
         self.show_fraction = BooleanVar()
         self.show_fraction_checkbox = ttk.Checkbutton(
             parent,
-            text="Приховати дріб",
+            text="Приховати",
             onvalue=True,
             offvalue=False,
             variable=self.show_fraction,
@@ -55,7 +55,7 @@ class ExerciseCanvas(Canvas):
 
         self._display_user_input(x, y)
         self.create_window(
-            self.character_width() * 9,
+            self.character_width() * 9.8,
             self.character_height() * 5,
             window=self.show_fraction_checkbox,
         )

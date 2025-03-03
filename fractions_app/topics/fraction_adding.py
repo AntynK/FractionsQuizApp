@@ -15,9 +15,9 @@ class FractionAdding(Topic):
     def __init__(self):
         self.title = "Додавання дробів"
         self.subtopics = [
-            Subtopic("Додавання дробів зі спільним знаменником", self.first_exercise),
+            Subtopic("Додавання дробів з однаковими знаменниками", self.first_exercise),
             Subtopic("Додавання дробів із різними знаменниками", self.second_exercise),
-            Subtopic("Додавання мішаних дробів", self.third_exercise),
+            Subtopic("Додавання мішаних чисел", self.third_exercise),
         ]
 
     def first_exercise(self) -> Exercise:

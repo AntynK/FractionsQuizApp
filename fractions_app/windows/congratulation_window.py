@@ -1,4 +1,7 @@
-from tkinter import ttk, Toplevel, PhotoImage, Canvas
+from io import BytesIO
+from base64 import decodebytes
+from PIL import Image, ImageTk
+from tkinter import ttk, Toplevel, Canvas
 
 from fractions_app.constants import CONGRATULATION_IMAGE_BASE64, CONGRATULATION_TITLE
 
@@ -8,20 +11,25 @@ class CongratulationWindow(Toplevel):
         super().__init__(master)
 
         self.title(CONGRATULATION_TITLE)
-        self.resizable(False, False)
+        self.resizable(True, True)
 
-        width, height = round(master.winfo_width() / 2), round(
-            master.winfo_height() / 1.5
+        self.image = Image.open(BytesIO(decodebytes(CONGRATULATION_IMAGE_BASE64)))
+        width = round(master.winfo_width() * 0.4)
+
+        x, y = (
+            master.master.winfo_x() + round(master.winfo_width() * 0.25),
+            master.master.winfo_y() + round(master.winfo_height() * 0.15),
         )
-        x, y = round(master.winfo_width() // 3.5), round(master.winfo_height() / 4)
 
-        self.geometry(f"{width}x{height}+{x}+{y}")
-        self.img = PhotoImage(data=CONGRATULATION_IMAGE_BASE64)
-
-        self.canvas = Canvas(self, width=width, height=height)
-        self.canvas.create_image(
-            self.img.width() // 1.5,
-            self.img.height() // 2,
-            image=self.img,
-        )
+        self.geometry(f"{width}x{width}+{x}+{y}")
+        self.canvas = Canvas(self, width=width, height=width)
         self.canvas.pack(fill="both", expand=True)
+        self.bind("<Configure>", self.on_resize)
+
+    def on_resize(self, *unused) -> None:
+        width = self.winfo_width()
+
+        img = self.image.resize((width, width), Image.Resampling.LANCZOS)
+        self.photo_image = ImageTk.PhotoImage(img)
+
+        self.canvas.create_image(width // 2, width // 2, image=self.photo_image)

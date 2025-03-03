@@ -20,7 +20,7 @@ class FractionMultiplication(Topic):
         self.subtopics = [
             Subtopic("Множення дробу на натуральне число", self.first_exercise),
             Subtopic("Множення дробів із різними знаменниками", self.second_exercise),
-            Subtopic("Множення мішаних дробів", self.third_exercise),
+            Subtopic("Множення мішаних чисел", self.third_exercise),
         ]
 
     def first_exercise(self) -> Exercise:
