@@ -11,7 +11,7 @@ class CongratulationWindow(Toplevel):
         super().__init__(master)
 
         self.title(CONGRATULATION_TITLE)
-        self.resizable(True, True)
+        self.resizable(False, False)
 
         self.image = Image.open(BytesIO(decodebytes(CONGRATULATION_IMAGE_BASE64)))
         width = round(master.winfo_width() * 0.4)

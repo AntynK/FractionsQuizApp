@@ -9,4 +9,4 @@ class Exercise:
     operand_1: Union[int, Fraction]
     operand_2: Union[int, Fraction]
     operation: str
-    result: Fraction
+    answer: Fraction

@@ -63,14 +63,14 @@ class FractionDividing(Topic):
         divide_by_int: bool = False,
     ) -> Exercise:
         if divide_by_int and isinstance(operand_2, int):
-            result = operand_1.divide_by_number(operand_2)
+            answer = operand_1.divide_by_number(operand_2)
             operand_1, operand_2 = operand_2, operand_1  # type: ignore
         else:
-            result = operand_1 / operand_2
+            answer = operand_1 / operand_2
 
         return Exercise(
             operand_1=operand_1,
             operand_2=operand_2,
             operation=":",
-            result=result,
+            answer=answer.simplify(),
         )

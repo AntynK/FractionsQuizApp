@@ -1,2 +1,2 @@
-This folder is to organize files, but notice that [build.bat](../build.bat) uses the file [icon.png](icon.png) from this folder.
+This folder is to organize files, but notice that build script uses the file [icon.ico](icon.ico) from this folder.
 Program doesn't use this folder, almost all files from this folder are encoded with base64 and stored in a [constants.py](../fractions_app/constants.py) file.

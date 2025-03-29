@@ -2,7 +2,7 @@
 Please follow these steps in order to merge your work:
 
 **PEP8 is generally to be followed.**
-1. Clone repo and create new branch.
+1. Clone repo and create new branch. Please make understandable branch name(example: dev-1.1.1, patch-1.1.1)
 2. After you made changes, run tests and make sure all tests pass: 
 ```
 python -m unittest discover

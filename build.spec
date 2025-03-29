@@ -22,7 +22,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name="FractionQuizApp 1.3.0",
+    name="FractionQuizApp",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -35,6 +35,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    version='exe_file_version',
     icon=["assets\\icon.ico"],
 )

@@ -53,10 +53,10 @@ class FractionMultiplication(Topic):
         operand_1: Fraction,
         operand_2: Union[Fraction, int],
     ) -> Exercise:
-        result = operand_1 * operand_2
+        answer = operand_1 * operand_2
         return Exercise(
             operand_1=operand_1,
             operand_2=operand_2,
             operation="∙",
-            result=result,
+            answer=answer.simplify(),
         )

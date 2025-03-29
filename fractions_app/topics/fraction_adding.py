@@ -28,10 +28,7 @@ class FractionAdding(Topic):
             second_fraction,
         ) = generate_proper_fractions_with_like_denominators()
 
-        return self._generate_exercise(
-            first_fraction,
-            second_fraction,
-        )
+        return self._generate_exercise(first_fraction, second_fraction)
 
     def second_exercise(self) -> Exercise:
         """This exercise cover adding two fractions with unlike denominators."""
@@ -41,10 +38,7 @@ class FractionAdding(Topic):
             second_fraction,
         ) = generate_proper_fractions_with_unlike_denominators()
 
-        return self._generate_exercise(
-            first_fraction,
-            second_fraction,
-        )
+        return self._generate_exercise(first_fraction, second_fraction)
 
     def third_exercise(self) -> Exercise:
         """This exercise cover adding two mixed fractions."""
@@ -58,10 +52,10 @@ class FractionAdding(Topic):
         operand_1: Fraction,
         operand_2: Fraction,
     ) -> Exercise:
-        result = operand_1 + operand_2
+        answer = operand_1 + operand_2
         return Exercise(
             operand_1=operand_1,
             operand_2=operand_2,
             operation="+",
-            result=result,
+            answer=answer.simplify(),
         )

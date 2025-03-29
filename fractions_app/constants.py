@@ -1,4 +1,4 @@
-VERSION = "1.3.0"
+VERSION = "1.4.0"
 PROGRAM_TITLE = "Математичний тренажер для вивчення\n звичайних дробів"
 CONGRATULATION_TITLE = "Прикинь ти"
 AUTHOR = "Карандашов Андрій"

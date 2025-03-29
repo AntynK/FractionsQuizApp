@@ -15,7 +15,9 @@ class FractionSubtracting(Topic):
     def __init__(self):
         self.title = "Віднімання дробів"
         self.subtopics = [
-            Subtopic("Віднімання дробів з однаковими знаменниками", self.first_exercise),
+            Subtopic(
+                "Віднімання дробів з однаковими знаменниками", self.first_exercise
+            ),
             Subtopic("Віднімання дробів із різними знаменниками", self.second_exercise),
             Subtopic("Віднімання мішаних чисел", self.third_exercise),
         ]
@@ -66,10 +68,10 @@ class FractionSubtracting(Topic):
     ) -> Exercise:
         operand_1, operand_2 = self.check_fractions(operand_1, operand_2)
 
-        result = operand_1 - operand_2
+        answer = operand_1 - operand_2
         return Exercise(
             operand_1=operand_1,
             operand_2=operand_2,
             operation="-",
-            result=result,
+            answer=answer.simplify(),
         )

@@ -15,21 +15,32 @@ class ExerciseCanvas(Canvas):
     def __init__(self, parent) -> None:
         super().__init__(parent)
 
+        self._exercise = None
+        self._label_font = Font(family="Times New Roman", size=60, weight="bold")
+        self.width, self.height = BASE_WIDTH, BASE_HEIGHT
+        self._spacing = 0
+
+        self._init_checkbutton()
+        self._init_answer_box()
+
+    def _init_checkbutton(self):
         self.show_fraction = BooleanVar()
         self.show_fraction_checkbox = ttk.Checkbutton(
-            parent,
+            self.master,
             text="Приховати",
             onvalue=True,
             offvalue=False,
             variable=self.show_fraction,
             command=self._hide_fraction,
         )
-        self._exercise = None
-        self._label_font = Font(family="Times New Roman", size=60, weight="bold")
-        self.width, self.height = BASE_WIDTH, BASE_HEIGHT
-        self._spacing = 0
+
+    def _init_answer_box(self):
         self._last_numerator_value = "0"
         self._last_denominator_value = "1"
+
+        self._intenger_input = Spinbox(self, width=2)
+        self._numerator_input = Spinbox(self)
+        self._denominator_input = Spinbox(self, from_=1)
 
     def display_exercise(self, exercise: Exercise) -> None:
         """Display whole `exercise` on canvas.
@@ -55,7 +66,7 @@ class ExerciseCanvas(Canvas):
 
         self._display_user_input(x, y)
         self.create_window(
-            self.character_width() * 9.8,
+            self.character_width() * 9.6,
             self.character_height() * 5,
             window=self.show_fraction_checkbox,
         )
@@ -145,6 +156,23 @@ class ExerciseCanvas(Canvas):
     def character_height(self) -> float:
         return self.height * CHARACTER_SIZE
 
+    def clear_input_boxes(self) -> None:
+        for widget in (
+            self._numerator_input,
+            self._intenger_input,
+            self._denominator_input,
+        ):
+            widget.set("0")
+            widget.update_background("white")
+        self._denominator_input.set("1")
+
+    def color_spinboxes(self, colors: list[str]) -> None:
+        for color, spinbox in zip(
+            colors,
+            (self._numerator_input, self._denominator_input, self._intenger_input),
+        ):
+            spinbox.update_background(color)
+
     def on_resize(self, width: int, height: int) -> None:
         self.width, self.height = width, height
 
@@ -154,19 +182,15 @@ class ExerciseCanvas(Canvas):
         if self._exercise is not None:
             self.display_exercise(self._exercise)
 
+    def get_user_input(self) -> Fraction:
+        numerator = int(self._numerator_input.get())
+        denominator = int(self._denominator_input.get())
+        integer = int(self._intenger_input.get())
+        return Fraction(numerator, denominator, integer)
+
     def _update_font(self) -> None:
         k = (self.width // 100 + self.height // 100) * 5
         self._label_font.configure(size=int(k * 0.8))
         self._intenger_input.update_font_size(int(k * 0.9))
         self._denominator_input.update_font_size(int(k * 0.7))
         self._numerator_input.update_font_size(int(k * 0.7))
-
-    def add_user_input(
-        self,
-        intenger_input: Spinbox,
-        numerator_input: Spinbox,
-        denominator_input: Spinbox,
-    ) -> None:
-        self._intenger_input = intenger_input
-        self._numerator_input = numerator_input
-        self._denominator_input = denominator_input
