@@ -5,18 +5,19 @@ from fractions_app.math import Fraction
 
 
 from fractions_app.widgets.exercise_box import ExerciseBox
+from fractions_app.windows.window import Window
 
 
-class ExerciseWindow(ttk.Frame):
-    def __init__(self, previous_state) -> None:
-        super().__init__()
+class ExerciseWindow(Window):
+    ROWS = 2
+    COLUMNS = 3
 
-        self.previous_state = previous_state
+    def init(self) -> None:
         self.user_input = Fraction(1, 1)
 
         self._init_widgets()
 
-    def _init_widgets(self):
+    def _init_widgets(self) -> None:
         self.subtopic_title_label = ttk.Label(self, text="Title", style="Title.TLabel")
         self.subtopic_title_label.grid(row=0, column=1, sticky="ns")
 
@@ -43,7 +44,7 @@ class ExerciseWindow(ttk.Frame):
         self.show(self.topic, self.subtopic_index)
 
     def show(self, topic: Topic, subtopic_index: int) -> None:
-        self._configure_grid()
+        super().show()
 
         self.topic = topic
         current_subtopic = topic.subtopics[subtopic_index]
@@ -53,10 +54,3 @@ class ExerciseWindow(ttk.Frame):
 
         self.subtopic_title_label.configure(text=current_subtopic.title)
         self.exercise_box.display_exercise(self.current_exercise)
-
-    def _configure_grid(self) -> None:
-        self.grid(row=0, column=0, sticky="nwse")
-        for row in range(2):
-            self.grid_rowconfigure(row, weight=1)
-        for column in range(3):
-            self.grid_columnconfigure(column, weight=1)

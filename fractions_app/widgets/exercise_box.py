@@ -10,7 +10,7 @@ from fractions_app.math import Fraction
 from fractions_app.helper import Exercise, check_answer, AnswerStatus
 from fractions_app.widgets.exercise_canvas import ExerciseCanvas
 from fractions_app.widgets.control_buttons import ControlButtons
-from fractions_app.windows.congratulation_window import CongratulationWindow
+from fractions_app.windows.congratulation_popup import CongratulationPopup
 
 
 class ExerciseBox(ttk.Frame):
@@ -57,7 +57,7 @@ class ExerciseBox(ttk.Frame):
 
         if status is AnswerStatus.CORRECT:
             if not self.showed:
-                CongratulationWindow(self)
+                CongratulationPopup(self)
                 self.control_buttons.correct_answer()
                 self.showed = True
                 return

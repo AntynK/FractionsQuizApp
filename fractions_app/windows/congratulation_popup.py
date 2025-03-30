@@ -6,7 +6,7 @@ from tkinter import ttk, Toplevel, Canvas
 from fractions_app.constants import CONGRATULATION_IMAGE_BASE64, CONGRATULATION_TITLE
 
 
-class CongratulationWindow(Toplevel):
+class CongratulationPopup(Toplevel):
     def __init__(self, master: ttk.Frame) -> None:
         super().__init__(master)
 

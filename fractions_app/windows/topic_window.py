@@ -1,16 +1,17 @@
 from functools import partial
 from tkinter import ttk
 
+from fractions_app.windows.window import Window
 from fractions_app.windows.exercise_window import ExerciseWindow
 from fractions_app.topic_handler import TopicHandler
 from fractions_app.helper import Topic
 
 
-class TopicWindow(ttk.Frame):
-    def __init__(self, previous_state) -> None:
-        super().__init__()
+class TopicWindow(Window):
+    ROWS = 2
+    COLUMNS = 2
 
-        self.previous_state = previous_state
+    def init(self) -> None:
         self.exercise_window = ExerciseWindow(self)
         self.topic_frame = ttk.Frame(self)
         self.topic_frame.grid(row=0, column=0, rowspan=4, sticky="nwse")
@@ -57,9 +58,9 @@ class TopicWindow(ttk.Frame):
         self.exercise_window.show(topic, index)
 
     def show(self) -> None:
-        self.grid(row=0, column=0, sticky="nwse")
-        for index in range(2):
-            self.grid_rowconfigure(index, weight=1)
+        super().show()
+
+        for index in range(self.COLUMNS):
             self.grid_columnconfigure(index, weight=index)
 
         self._load_topics()

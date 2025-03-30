@@ -99,6 +99,3 @@ pyinstaller build.spec
 ```
 
 After building, a `dist` folder will be created, which contains the executable file.
-
-> [!NOTE]
-> `exe_file_version` file must be in the same directory as `build.spec` file.

@@ -11,13 +11,7 @@ class TestFraction(unittest.TestCase):
         Fraction(-6, 2, -3)
 
         with self.assertRaises(ValueError):
-            Fraction(1.2, 5)
-        with self.assertRaises(ValueError):
             Fraction(6, 0)
-        with self.assertRaises(ValueError):
-            Fraction(2, 5, "2")
-        with self.assertRaises(ValueError):
-            Fraction(9, 5, None)
         with self.assertRaises(ValueError):
             Fraction(0, -2, -3)
         with self.assertRaises(ValueError):

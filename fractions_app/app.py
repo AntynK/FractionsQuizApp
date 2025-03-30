@@ -18,7 +18,7 @@ class Application(tk.Tk):
 
         self.style = Style()
 
-        self.main_window = MainWindow(self)
+        self.main_window = MainWindow(self, master=self)  # type: ignore
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
 

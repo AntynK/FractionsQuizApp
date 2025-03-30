@@ -23,7 +23,7 @@ class ExerciseCanvas(Canvas):
         self._init_checkbutton()
         self._init_answer_box()
 
-    def _init_checkbutton(self):
+    def _init_checkbutton(self) -> None:
         self.show_fraction = BooleanVar()
         self.show_fraction_checkbox = ttk.Checkbutton(
             self.master,
@@ -34,7 +34,7 @@ class ExerciseCanvas(Canvas):
             command=self._hide_fraction,
         )
 
-    def _init_answer_box(self):
+    def _init_answer_box(self) -> None:
         self._last_numerator_value = "0"
         self._last_denominator_value = "1"
 

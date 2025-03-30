@@ -1,6 +1,5 @@
 from .exercise import Exercise
-from .subtopic import Subtopic
-from .topic import Topic
+from .topic import Topic, Subtopic
 from .generate_fractions import (
     generate_proper_fractions_with_like_denominators,
     generate_proper_fractions_with_unlike_denominators,
