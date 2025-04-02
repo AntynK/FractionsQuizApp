@@ -11,6 +11,7 @@ from fractions_app.helper import Exercise, check_answer, AnswerStatus
 from fractions_app.widgets.exercise_canvas import ExerciseCanvas
 from fractions_app.widgets.control_buttons import ControlButtons
 from fractions_app.windows.congratulation_popup import CongratulationPopup
+from fractions_app.widgets.make_grid import make_grid
 
 
 class ExerciseBox(ttk.Frame):
@@ -33,10 +34,7 @@ class ExerciseBox(ttk.Frame):
         on_exit_btn_pressed: Callable,
         on_try_again_btn_pressed: Optional[Callable],
     ) -> None:
-        for row in range(2):
-            self.grid_rowconfigure(row, weight=1)
-        for column in range(1):
-            self.grid_columnconfigure(column, weight=1)
+        make_grid(self, 2, 1)
 
         self.exercise_canvas = ExerciseCanvas(self)
         self.control_buttons = ControlButtons(
@@ -47,7 +45,7 @@ class ExerciseBox(ttk.Frame):
         )
 
         self.exercise_canvas.grid(row=0, column=0, sticky="nwse")
-        self.control_buttons.grid(row=1, column=0, sticky="swe", pady=10)
+        self.control_buttons.grid(row=1, column=0, sticky="swe", pady=10, padx=10)
 
     def _check_user_input(self) -> None:
         user_input = self.exercise_canvas.get_user_input()

@@ -1,4 +1,6 @@
-from fractions_app.helper import Topic
+from collections import defaultdict
+
+from fractions_app.helper import Topic, Level
 
 
 class TopicHandler:
@@ -18,6 +20,7 @@ class TopicHandler:
         TopicHandler.__INITIALIZED = True
 
         self.__topics: list[Topic] = []
+        self.__subtopics_by_level = defaultdict(list)
 
     def add_topic(self, topic: Topic) -> None:
         """Add topic to topics list.
@@ -33,5 +36,11 @@ class TopicHandler:
 
         self.__topics.append(topic)
 
+        for subtopic in topic.subtopics:
+            self.__subtopics_by_level[subtopic.level].append(subtopic)
+
     def get_topics(self):
         yield from self.__topics
+
+    def get_subtopics_by_level(self, level: Level) -> list:
+        return self.__subtopics_by_level[level]

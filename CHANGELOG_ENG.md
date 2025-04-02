@@ -1,5 +1,13 @@
 # Changelog  
 
+## [1.4.0] - 2025-04-
+### Changed
+* Main windows now contains two buttons "Мішані завдання" and "Завдання за темами".
+
+### Added
+* New mixed exercises, where user can specify difficulty and amount of exercises. After finishing result window appears.
+
+
 ## [1.3.0] - 2025-03-03
 ### Changed
 * Some subtopics title.

@@ -25,7 +25,7 @@ class TopicWindow(Window):
         for row, widget in enumerate(list(self.topic_frame.children.values())):
             widget.destroy()
 
-        ttk.Button(self.topic_frame, text="Вийти", command=self.show_main_window).grid(
+        ttk.Button(self.topic_frame, text="Назад", command=self.show_previous_window).grid(
             row=0, column=0, pady=5
         )
 
@@ -64,7 +64,3 @@ class TopicWindow(Window):
             self.grid_columnconfigure(index, weight=index)
 
         self._load_topics()
-
-    def show_main_window(self) -> None:
-        self.grid_forget()
-        self.previous_state.show()

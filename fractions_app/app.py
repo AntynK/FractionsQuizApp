@@ -8,6 +8,7 @@ from fractions_app.constants import (
     BASE_HEIGHT,
 )
 from fractions_app.windows.main_window import MainWindow
+from fractions_app.helper import get_font_scale
 
 
 class Application(tk.Tk):
@@ -29,7 +30,7 @@ class Application(tk.Tk):
     def resize_event(self, *unused) -> None:
         """This method change font size according to window size."""
 
-        k = self.winfo_width() // 100 + self.winfo_height() // 100
+        k = get_font_scale(self.winfo_width(), self.winfo_height())
 
         self.style.configure(
             "TButton",

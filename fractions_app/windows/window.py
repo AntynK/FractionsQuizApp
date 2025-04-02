@@ -8,7 +8,9 @@ class Window(ttk.Frame):
     ROWS = 0
     COLUMNS = 0
 
-    def __init__(self, previous_state: "Window", master: Optional["Window"] = None) -> None:
+    def __init__(
+        self, previous_state: "Window", master: Optional["Window"] = None
+    ) -> None:
         super().__init__(master)
         self.previous_state = previous_state
 
@@ -19,3 +21,7 @@ class Window(ttk.Frame):
     def show(self, *args, **kwargs) -> None:
         self.grid(row=0, column=0, sticky="nwse")
         make_grid(self, self.ROWS, self.COLUMNS)
+
+    def show_previous_window(self) -> None:
+        self.grid_forget()
+        self.previous_state.show()

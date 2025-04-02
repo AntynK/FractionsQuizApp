@@ -3,6 +3,7 @@ from fractions_app.helper import (
     Exercise,
     Topic,
     Subtopic,
+    Level,
     generate_proper_fractions_with_like_denominators,
     generate_proper_fractions_with_unlike_denominators,
     generate_mixed_fractions,
@@ -16,10 +17,16 @@ class FractionSubtracting(Topic):
         self.title = "Віднімання дробів"
         self.subtopics = [
             Subtopic(
-                "Віднімання дробів з однаковими знаменниками", self.first_exercise
+                "Віднімання дробів з однаковими знаменниками",
+                self.first_exercise,
+                Level.GRADE_5,
             ),
-            Subtopic("Віднімання дробів із різними знаменниками", self.second_exercise),
-            Subtopic("Віднімання мішаних чисел", self.third_exercise),
+            Subtopic(
+                "Віднімання дробів із різними знаменниками",
+                self.second_exercise,
+                Level.GRADE_6,
+            ),
+            Subtopic("Віднімання мішаних чисел", self.third_exercise, Level.GRADE_5),
         ]
 
     def first_exercise(self) -> Exercise:

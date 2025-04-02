@@ -2,7 +2,7 @@ from tkinter import Canvas, BooleanVar, ttk
 from tkinter.font import Font
 from typing import Union
 
-from fractions_app.helper import Exercise
+from fractions_app.helper import Exercise, get_font_scale
 from fractions_app.math import Fraction
 from fractions_app.widgets.spinbox import Spinbox
 from fractions_app.constants import BASE_WIDTH, BASE_HEIGHT
@@ -35,8 +35,8 @@ class ExerciseCanvas(Canvas):
         )
 
     def _init_answer_box(self) -> None:
-        self._last_numerator_value = "0"
-        self._last_denominator_value = "1"
+        self._last_numerator_value = 0
+        self._last_denominator_value = 1
 
         self._intenger_input = Spinbox(self, width=2)
         self._numerator_input = Spinbox(self)
@@ -66,7 +66,7 @@ class ExerciseCanvas(Canvas):
 
         self._display_user_input(x, y)
         self.create_window(
-            self.character_width() * 9.6,
+            self.character_width() * 9.7,
             self.character_height() * 5,
             window=self.show_fraction_checkbox,
         )
@@ -137,13 +137,13 @@ class ExerciseCanvas(Canvas):
             return
 
         if self.show_fraction.get():
-            self._last_numerator_value = self._numerator_input.get()
-            self._last_denominator_value = self._denominator_input.get()
-            self._numerator_input.set("0")
-            self._denominator_input.set("1")
+            self._last_numerator_value = self._numerator_input.value
+            self._last_denominator_value = self._denominator_input.value
+            self._numerator_input.value = 0
+            self._denominator_input.value = 1
         else:
-            self._numerator_input.set(self._last_numerator_value)
-            self._denominator_input.set(self._last_denominator_value)
+            self._numerator_input.value = self._last_numerator_value
+            self._denominator_input.value = self._last_denominator_value
 
         self.display_exercise(self._exercise)
 
@@ -162,9 +162,9 @@ class ExerciseCanvas(Canvas):
             self._intenger_input,
             self._denominator_input,
         ):
-            widget.set("0")
+            widget.value = 0
             widget.update_background("white")
-        self._denominator_input.set("1")
+        self._denominator_input.value = 1
 
     def color_spinboxes(self, colors: list[str]) -> None:
         for color, spinbox in zip(
@@ -189,7 +189,7 @@ class ExerciseCanvas(Canvas):
         return Fraction(numerator, denominator, integer)
 
     def _update_font(self) -> None:
-        k = (self.width // 100 + self.height // 100) * 5
+        k = get_font_scale(self.width, self.height) * 5
         self._label_font.configure(size=int(k * 0.8))
         self._intenger_input.update_font_size(int(k * 0.9))
         self._denominator_input.update_font_size(int(k * 0.7))

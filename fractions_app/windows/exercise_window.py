@@ -2,8 +2,6 @@ from tkinter import ttk
 
 from fractions_app.helper import Topic
 from fractions_app.math import Fraction
-
-
 from fractions_app.widgets.exercise_box import ExerciseBox
 from fractions_app.windows.window import Window
 
@@ -22,9 +20,12 @@ class ExerciseWindow(Window):
         self.subtopic_title_label.grid(row=0, column=1, sticky="ns")
 
         self.exercise_box = ExerciseBox(
-            self, self.show_topic_window, self.show_next_exercise, self.reload_subtopic
+            self,
+            self.show_previous_window,
+            self.show_next_exercise,
+            self.reload_subtopic,
         )
-        self.exercise_box.grid(row=1, column=0, sticky="nwse", columnspan=3, padx=10)
+        self.exercise_box.grid(row=1, column=0, sticky="nwse", columnspan=3)
         self.bind("<Configure>", self.on_resize)
 
     def on_resize(self, *unused) -> None:
@@ -32,13 +33,9 @@ class ExerciseWindow(Window):
 
     def show_next_exercise(self) -> None:
         if len(self.topic.subtopics) <= self.subtopic_index + 1:
-            self.show_topic_window()
+            self.show_previous_window()
             return
         self.show(self.topic, self.subtopic_index + 1)
-
-    def show_topic_window(self) -> None:
-        self.grid_forget()
-        self.previous_state.show()
 
     def reload_subtopic(self) -> None:
         self.show(self.topic, self.subtopic_index)

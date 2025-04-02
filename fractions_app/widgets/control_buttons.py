@@ -1,6 +1,8 @@
 from tkinter import ttk
 from typing import Callable, Optional
 
+from fractions_app.widgets.make_grid import make_grid
+
 
 class ControlButtons(ttk.Frame):
     def __init__(
@@ -12,9 +14,7 @@ class ControlButtons(ttk.Frame):
     ) -> None:
         super().__init__(master)
 
-        self.grid_rowconfigure(0, weight=1)
-        for column in range(3):
-            self.grid_columnconfigure(column, weight=1)
+        make_grid(self, 0, 3)
 
         self.exit_button = ttk.Button(self, text="Назад", command=on_exit_btn_pressed)
         self.exit_button.grid(row=0, column=0, sticky="we")

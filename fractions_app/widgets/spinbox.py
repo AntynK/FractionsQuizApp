@@ -3,15 +3,13 @@ from tkinter.font import Font
 
 
 class Spinbox(tk.Spinbox):
-    def __init__(
-        self, master, width: int = 3, from_: int = 0
-    ) -> None:
+    def __init__(self, master, width: int = 3, to: int = 200, from_: int = 0) -> None:
         super().__init__(
             master,
             validate="all",
             justify="center",
             width=width,
-            to=200,
+            to=to,
             from_=from_,
             increment=1,
         )
@@ -28,18 +26,14 @@ class Spinbox(tk.Spinbox):
 
     def _spinbox_check_value(self, *unused) -> None:
         if not self.get():
-            self.insert(0, "1")
+            self.insert(0, str(self.min_value))
 
-        spinbox_text = self.get()
-        if int(spinbox_text) < self.min_value:
-            spinbox_text = str(self.min_value)
-        self.set(spinbox_text)
+        spinbox_value = self.value
+        if spinbox_value < self.min_value:
+            spinbox_value = self.min_value
+        self.value = spinbox_value
 
         self._spinbox_return_pressed()
-
-    def set(self, value: str) -> None:
-        self.delete(0, tk.END)
-        self.insert(0, value)
 
     def _spinbox_return_pressed(self, *unused) -> None:
         self.selection_clear()
@@ -59,3 +53,12 @@ class Spinbox(tk.Spinbox):
         self.configure(
             font=Font(family="Times New Roman", size=font_size, weight="bold")
         )
+
+    @property
+    def value(self) -> int:
+        return int(super().get())
+
+    @value.setter
+    def value(self, value: int) -> None:
+        self.delete(0, tk.END)
+        self.insert(0, str(value))
