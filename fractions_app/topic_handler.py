@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from fractions_app.helper import Topic, Level
+from fractions_app.helper import Topic, Level, Subtopic
 
 
 class TopicHandler:
@@ -42,5 +42,5 @@ class TopicHandler:
     def get_topics(self):
         yield from self.__topics
 
-    def get_subtopics_by_level(self, level: Level) -> list:
+    def get_subtopics_by_level(self, level: Level) -> list[Subtopic]:
         return self.__subtopics_by_level[level]

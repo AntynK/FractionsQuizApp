@@ -2,7 +2,7 @@ from tkinter import ttk
 
 from fractions_app.helper import Topic
 from fractions_app.math import Fraction
-from fractions_app.widgets.exercise_box import ExerciseBox
+from fractions_app.widgets import ExerciseBox, ButtonTypes
 from fractions_app.windows.window import Window
 
 
@@ -21,9 +21,10 @@ class ExerciseWindow(Window):
 
         self.exercise_box = ExerciseBox(
             self,
-            self.show_previous_window,
             self.show_next_exercise,
-            self.reload_subtopic,
+            (ButtonTypes.BACK_BTN, self.show_previous_window),
+            (ButtonTypes.TRY_AGAIN_BTN, self.reload_subtopic),
+            (ButtonTypes.CHECK_BTN, None),
         )
         self.exercise_box.grid(row=1, column=0, sticky="nwse", columnspan=3)
         self.bind("<Configure>", self.on_resize)

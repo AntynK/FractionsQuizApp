@@ -1,48 +1,58 @@
+from functools import partial
 from tkinter import ttk
 from typing import Callable, Optional
+from enum import Enum
 
 from fractions_app.widgets.make_grid import make_grid
 
 
+class ButtonTypes(Enum):
+    BACK_BTN = "Назад"
+    CHECK_BTN = "Перевірити"
+    TRY_AGAIN_BTN = "Спробувати ще"
+    SKIP_BTN = "Пропустити"
+
+
+Callback = Optional[Callable]
+
+
 class ControlButtons(ttk.Frame):
-    def __init__(
-        self,
-        master,
-        on_exit_btn_pressed: Callable,
-        on_check_btn_pressed: Callable,
-        on_try_again_btn_pressed: Optional[Callable] = None,
-    ) -> None:
+    def __init__(self, master, *buttons: tuple[ButtonTypes, Callback]) -> None:
         super().__init__(master)
 
-        make_grid(self, 0, 3)
+        make_grid(self, 1, len(buttons))
+        self.buttons: dict[ButtonTypes, list] = {}
+        for index, button_data in enumerate(buttons):
+            btn_type, callback = button_data
+            text = btn_type.value
 
-        self.exit_button = ttk.Button(self, text="Назад", command=on_exit_btn_pressed)
-        self.exit_button.grid(row=0, column=0, sticky="we")
-        self.is_try_again_btn_used = False
-
-        row_shift = 0
-        if on_try_again_btn_pressed is not None:
-            self.try_again_button = ttk.Button(
-                self,
-                text="Спробувати ще",
-                state="disabled",
-                command=on_try_again_btn_pressed,
+            button = ttk.Button(
+                self, text=text, command=partial(self._on_btn_pressed, btn_type)
             )
-            self.try_again_button.grid(row=0, column=1, padx=2, sticky="we")
-            self.is_try_again_btn_used = True
-            row_shift += 1
-
-        self.check_button = ttk.Button(
-            self, text="Перевірити", command=on_check_btn_pressed
-        )
-        self.check_button.grid(row=0, column=1 + row_shift, padx=2, sticky="we")
+            button.grid(row=0, column=index, sticky="we")
+            self.buttons[btn_type] = [button, []]
+            self.add_callback(btn_type, callback)
 
     def reset_buttons(self) -> None:
-        self.check_button.configure(text="Перевірити")
-        if self.is_try_again_btn_used:
-            self.try_again_button.configure(state="disabled")
+        self.get(ButtonTypes.CHECK_BTN).configure(text="Перевірити")
+        if ButtonTypes.TRY_AGAIN_BTN in self:
+            self.get(ButtonTypes.TRY_AGAIN_BTN).configure(state="disabled")
 
     def correct_answer(self) -> None:
-        self.check_button.configure(text="Далі")
-        if self.is_try_again_btn_used:
-            self.try_again_button.configure(state="normal")
+        self.get(ButtonTypes.CHECK_BTN).configure(text="Далі")
+        if ButtonTypes.TRY_AGAIN_BTN in self:
+            self.get(ButtonTypes.TRY_AGAIN_BTN).configure(state="normal")
+
+    def _on_btn_pressed(self, btn_type: ButtonTypes) -> None:
+        for callback in self.buttons[btn_type][1]:
+            if callable(callback):
+                callback()
+
+    def add_callback(self, btn_type: ButtonTypes, callback: Callback) -> None:
+        self.buttons[btn_type][1].insert(0, callback)
+
+    def __contains__(self, key: ButtonTypes) -> bool:
+        return key in self.buttons
+
+    def get(self, btn_type: ButtonTypes) -> ttk.Button:
+        return self.buttons[btn_type][0]

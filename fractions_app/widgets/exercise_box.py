@@ -1,6 +1,6 @@
 from tkinter import ttk
-from typing import Callable, Optional
 import tkinter.messagebox as messagebox
+from typing import Callable, Optional
 
 from fractions_app.constants import (
     REDUCE_MESSAGE,
@@ -9,7 +9,7 @@ from fractions_app.constants import (
 from fractions_app.math import Fraction
 from fractions_app.helper import Exercise, check_answer, AnswerStatus
 from fractions_app.widgets.exercise_canvas import ExerciseCanvas
-from fractions_app.widgets.control_buttons import ControlButtons
+from fractions_app.widgets.control_buttons import ControlButtons, ButtonTypes
 from fractions_app.windows.congratulation_popup import CongratulationPopup
 from fractions_app.widgets.make_grid import make_grid
 
@@ -18,31 +18,21 @@ class ExerciseBox(ttk.Frame):
     def __init__(
         self,
         master,
-        on_exit_btn_pressed: Callable,
         on_correct_answer_entered: Callable,
-        on_try_again_btn_pressed: Optional[Callable] = None,
+        *buttons: tuple[ButtonTypes, Optional[Callable]]
     ) -> None:
         super().__init__(master)
 
-        self.showed = False
-        self.correct_answer = Fraction(0, 1, 0)
-        self._on_correct_answer_entered = on_correct_answer_entered
-        self._init_widgets(on_exit_btn_pressed, on_try_again_btn_pressed)
-
-    def _init_widgets(
-        self,
-        on_exit_btn_pressed: Callable,
-        on_try_again_btn_pressed: Optional[Callable],
-    ) -> None:
         make_grid(self, 2, 1)
 
+        self.showed = False
+        self.correct_answer = Fraction(0, 1, 0)
+        self.control_buttons = ControlButtons(self, *buttons)
+
+        self._on_correct_answer_entered = on_correct_answer_entered
+        self.control_buttons.add_callback(ButtonTypes.CHECK_BTN, self._check_user_input)
+
         self.exercise_canvas = ExerciseCanvas(self)
-        self.control_buttons = ControlButtons(
-            self,
-            on_exit_btn_pressed=on_exit_btn_pressed,
-            on_check_btn_pressed=self._check_user_input,
-            on_try_again_btn_pressed=on_try_again_btn_pressed,
-        )
 
         self.exercise_canvas.grid(row=0, column=0, sticky="nwse")
         self.control_buttons.grid(row=1, column=0, sticky="swe", pady=10, padx=10)
@@ -57,10 +47,8 @@ class ExerciseBox(ttk.Frame):
             if not self.showed:
                 CongratulationPopup(self)
                 self.control_buttons.correct_answer()
-                self.showed = True
-                return
-
-            self._on_correct_answer_entered()
+            self._on_correct_answer_entered(self.showed)
+            self.showed = True
 
         elif status is AnswerStatus.NEED_REDUCING:
             messagebox.showinfo(
@@ -82,6 +70,8 @@ class ExerciseBox(ttk.Frame):
         self.exercise_canvas.on_resize(width, height)
 
     def display_exercise(self, exercise: Exercise) -> None:
+        self.showed = False
+
         self.correct_answer = exercise.answer
 
         self.control_buttons.reset_buttons()

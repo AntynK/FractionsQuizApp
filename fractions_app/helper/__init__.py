@@ -1,4 +1,4 @@
-from .exercise import Exercise
+from .exercise import Exercise, ExerciseResult
 from .topic import Topic, Subtopic
 from .generate_fractions import (
     generate_proper_fractions_with_like_denominators,

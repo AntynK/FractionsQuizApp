@@ -33,7 +33,7 @@ def check_answer(
 
     elif user_input.reduce() != user_input and user_input.numerator != 0:
         answer = AnswerStatus.NEED_REDUCING
-        spinboxes_color[2] = "orange"
+        spinboxes_color[0] = "orange"
         spinboxes_color[1] = "orange"
 
     elif user_input.to_proper_fraction() != user_input:
