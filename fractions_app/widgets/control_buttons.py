@@ -11,6 +11,7 @@ class ButtonTypes(Enum):
     CHECK_BTN = "Перевірити"
     TRY_AGAIN_BTN = "Спробувати ще"
     SKIP_BTN = "Пропустити"
+    COMPLETE_BTN = "Завершити"
 
 
 Callback = Optional[Callable]

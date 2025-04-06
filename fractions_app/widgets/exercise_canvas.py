@@ -38,9 +38,9 @@ class ExerciseCanvas(Canvas):
         self._last_numerator_value = 0
         self._last_denominator_value = 1
 
-        self._intenger_input = Spinbox(self, width=2)
-        self._numerator_input = Spinbox(self)
-        self._denominator_input = Spinbox(self, from_=1)
+        self._intenger_input = Spinbox(self, width=2, font_weight=4.5)
+        self._numerator_input = Spinbox(self, font_weight=3.5)
+        self._denominator_input = Spinbox(self, from_=1, font_weight=3.5)
 
     def display_exercise(self, exercise: Exercise) -> None:
         """Display whole `exercise` on canvas.
@@ -189,8 +189,8 @@ class ExerciseCanvas(Canvas):
         return Fraction(numerator, denominator, integer)
 
     def _update_font(self) -> None:
-        k = get_font_scale(self.width, self.height) * 5
-        self._label_font.configure(size=int(k * 0.8))
-        self._intenger_input.update_font_size(int(k * 0.9))
-        self._denominator_input.update_font_size(int(k * 0.7))
-        self._numerator_input.update_font_size(int(k * 0.7))
+        scale = get_font_scale(self.width, self.height) * 5
+        self._label_font.configure(size=int(scale * 0.8))
+        self._intenger_input.on_resize(self.width, self.height)
+        self._denominator_input.on_resize(self.width, self.height)
+        self._numerator_input.on_resize(self.width, self.height)

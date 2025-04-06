@@ -1,11 +1,12 @@
 from tkinter import ttk, messagebox
-from random import choices
+from random import choices, shuffle
 
-from fractions_app.helper import Level, Subtopic, ExerciseResult
+from fractions_app.helper import Levels, Subtopic, ExerciseResult
 from fractions_app.windows.window import Window
 from fractions_app.widgets import ExerciseBox, ButtonTypes
 from fractions_app.topic_handler import TopicHandler
 from fractions_app.constants import ATTEMPS_COUNT
+from fractions_app.windows.mixed_exercise_result_window import MixedExerciseResultWindow
 
 
 class MixedExerciseWindow(Window):
@@ -13,24 +14,24 @@ class MixedExerciseWindow(Window):
     COLUMNS = 3
 
     def init(self) -> None:
+        self.result_window = MixedExerciseResultWindow(self.previous_state)
+
         self.title_label = ttk.Label(self, text="Title")
         self.title_label.grid(row=0, column=1, sticky="news")
 
         self.exercise_box = ExerciseBox(
             self,
             self._on_correct,
-            (ButtonTypes.BACK_BTN, self._on_back_pressed),
+            (ButtonTypes.COMPLETE_BTN, self._on_complete_pressed),
             (ButtonTypes.SKIP_BTN, self._on_skip_pressed),
             (ButtonTypes.CHECK_BTN, self._on_check_pressed),
         )
         self.exercise_box.grid(row=1, column=0, columnspan=3, sticky="news")
 
-        self.bind("<Configure>", self.on_resize)
-
     def on_resize(self, *unused) -> None:
         self.exercise_box.on_resize(self.winfo_width(), self.winfo_height())
 
-    def show(self, level: Level, exercise_count: int) -> None:
+    def show(self, level: Levels, exercise_count: int) -> None:
         super().show()
         self.result = ExerciseResult(exercise_count, 0, 0, 0, level)
 
@@ -44,8 +45,11 @@ class MixedExerciseWindow(Window):
         self.subtopics.extend(subtopics)
 
         self.subtopics.extend(
-            choices(subtopics, k=self.result.total_exercises_count - len(subtopics))
+            choices(
+                subtopics, k=self.result.total_exercises_count - len(self.subtopics)
+            )
         )
+        shuffle(self.subtopics)
 
     def _display_current_subtopic(self) -> None:
         self.attempts = ATTEMPS_COUNT
@@ -62,6 +66,7 @@ class MixedExerciseWindow(Window):
     def _display_next_subtopic(self) -> None:
         self.current_subtopic += 1
         if self.current_subtopic >= self.result.total_exercises_count:
+            self._show_result_window()
             return
 
         self._display_current_subtopic()
@@ -76,15 +81,14 @@ class MixedExerciseWindow(Window):
         self.result.skipped_exercises += 1
         self._display_next_subtopic()
 
-    def _on_back_pressed(self) -> None:
+    def _on_complete_pressed(self) -> None:
         response = messagebox.askyesno("Ви впевнені?", "Ви хочете завершити тест?")
         if not response:
             return
         self.result.skipped_exercises += (
-            self.result.total_exercises_count
-            - self.result.get_completed_exercise_count()
+            self.result.total_exercises_count - self.result.get_total_exercise_count()
         )
-        self.show_previous_window()
+        self._show_result_window()
 
     def _on_check_pressed(self) -> None:
         if self.attempts <= 1:
@@ -105,3 +109,7 @@ class MixedExerciseWindow(Window):
             self.result.correct_answers += 1
             return
         self._display_next_subtopic()
+
+    def _show_result_window(self) -> None:
+        self.grid_forget()
+        self.result_window.show(self.result)

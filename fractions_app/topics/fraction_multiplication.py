@@ -6,7 +6,7 @@ from fractions_app.helper import (
     Exercise,
     Topic,
     Subtopic,
-    Level,
+    Levels,
     generate_proper_fractions_with_unlike_denominators,
     generate_mixed_fractions,
     generate_proper_fraction,
@@ -20,14 +20,14 @@ class FractionMultiplication(Topic):
         self.title = "Множення дробів"
         self.subtopics = [
             Subtopic(
-                "Множення дробу на натуральне число", self.first_exercise, Level.GRADE_6
+                "Множення дробу на натуральне число", self.first_exercise, Levels.GRADE_6
             ),
             Subtopic(
                 "Множення дробів із різними знаменниками",
                 self.second_exercise,
-                Level.GRADE_6,
+                Levels.GRADE_6,
             ),
-            Subtopic("Множення мішаних чисел", self.third_exercise, Level.GRADE_6),
+            Subtopic("Множення мішаних чисел", self.third_exercise, Levels.GRADE_6),
         ]
 
     def first_exercise(self) -> Exercise:

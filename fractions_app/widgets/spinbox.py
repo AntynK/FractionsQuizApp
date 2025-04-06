@@ -1,9 +1,18 @@
 import tkinter as tk
 from tkinter.font import Font
 
+from fractions_app.helper import get_font_scale
+
 
 class Spinbox(tk.Spinbox):
-    def __init__(self, master, width: int = 3, to: int = 200, from_: int = 0) -> None:
+    def __init__(
+        self,
+        master,
+        width: int = 3,
+        to: int = 200,
+        from_: int = 0,
+        font_weight: float = 2,
+    ) -> None:
         super().__init__(
             master,
             validate="all",
@@ -20,6 +29,7 @@ class Spinbox(tk.Spinbox):
         self.validate_entered_text = (self.register(self._validate_spinbox_text), "%P")
         self.configure(validatecommand=self.validate_entered_text)
         self.min_value = from_
+        self.weight = font_weight
 
     def _spinbox_focus_in(self, *unused) -> None:
         self.selection_clear()
@@ -53,6 +63,11 @@ class Spinbox(tk.Spinbox):
         self.configure(
             font=Font(family="Times New Roman", size=font_size, weight="bold")
         )
+
+    def on_resize(self, width: int, height: int) -> None:
+        scale = get_font_scale(width, height)
+        font_size = scale * self.weight
+        self.update_font_size(int(font_size))
 
     @property
     def value(self) -> int:

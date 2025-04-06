@@ -6,7 +6,7 @@ from fractions_app.helper import (
     Exercise,
     Topic,
     Subtopic,
-    Level,
+    Levels,
     generate_proper_fractions_with_unlike_denominators,
     generate_mixed_fractions,
     generate_proper_fraction,
@@ -19,10 +19,10 @@ class FractionDividing(Topic):
     def __init__(self):
         self.title = "Ділення дробів"
         self.subtopics = [
-            Subtopic("Ділення дробу на натуральне число", self.first_exercise, Level.GRADE_6),
-            Subtopic("Ділення натурального числа на дріб", self.second_exercise, Level.GRADE_6),
-            Subtopic("Ділення дробів із різними знаменниками", self.third_exercise, Level.GRADE_6),
-            Subtopic("Ділення мішаних чисел", self.fourth_exercise, Level.GRADE_6),
+            Subtopic("Ділення дробу на натуральне число", self.first_exercise, Levels.GRADE_6),
+            Subtopic("Ділення натурального числа на дріб", self.second_exercise, Levels.GRADE_6),
+            Subtopic("Ділення дробів із різними знаменниками", self.third_exercise, Levels.GRADE_6),
+            Subtopic("Ділення мішаних чисел", self.fourth_exercise, Levels.GRADE_6),
         ]
 
     def first_exercise(self) -> Exercise:

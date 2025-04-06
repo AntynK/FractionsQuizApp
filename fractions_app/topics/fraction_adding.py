@@ -3,7 +3,7 @@ from fractions_app.helper import (
     Exercise,
     Topic,
     Subtopic,
-    Level,
+    Levels,
     generate_proper_fractions_with_unlike_denominators,
     generate_proper_fractions_with_like_denominators,
     generate_mixed_fractions,
@@ -19,14 +19,14 @@ class FractionAdding(Topic):
             Subtopic(
                 "Додавання дробів з однаковими знаменниками",
                 self.first_exercise,
-                Level.GRADE_5,
+                Levels.GRADE_5,
             ),
             Subtopic(
                 "Додавання дробів із різними знаменниками",
                 self.second_exercise,
-                Level.GRADE_6,
+                Levels.GRADE_6,
             ),
-            Subtopic("Додавання мішаних чисел", self.third_exercise, Level.GRADE_5),
+            Subtopic("Додавання мішаних чисел", self.third_exercise, Levels.GRADE_5),
         ]
 
     def first_exercise(self) -> Exercise:

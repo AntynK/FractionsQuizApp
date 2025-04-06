@@ -1,6 +1,6 @@
-from enum import Enum
+from enum import StrEnum
 
 
-class Level(Enum):
-    GRADE_5 = 0
-    GRADE_6 = 1
+class Levels(StrEnum):
+    GRADE_5 = "5 клас"
+    GRADE_6 = "6 клас"

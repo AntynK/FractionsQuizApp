@@ -6,7 +6,7 @@ from .generate_fractions import (
     generate_mixed_fractions,
     generate_proper_fraction,
 )
-from .level import Level
+from .level import Levels
 
 from .check_answer import check_answer, AnswerStatus
 from .get_font_scale import get_font_scale

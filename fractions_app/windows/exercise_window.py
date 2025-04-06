@@ -27,12 +27,13 @@ class ExerciseWindow(Window):
             (ButtonTypes.CHECK_BTN, None),
         )
         self.exercise_box.grid(row=1, column=0, sticky="nwse", columnspan=3)
-        self.bind("<Configure>", self.on_resize)
 
     def on_resize(self, *unused) -> None:
         self.exercise_box.on_resize(self.winfo_width(), self.winfo_height())
 
-    def show_next_exercise(self) -> None:
+    def show_next_exercise(self, showed: bool) -> None:
+        if not showed:
+            return
         if len(self.topic.subtopics) <= self.subtopic_index + 1:
             self.show_previous_window()
             return

@@ -13,10 +13,13 @@ class Window(ttk.Frame):
     ) -> None:
         super().__init__(master)
         self.previous_state = previous_state
+        self.bind("<Configure>", self.on_resize)
 
         self.init()
 
     def init(self) -> None: ...
+
+    def on_resize(self, *unused) -> None: ...
 
     def show(self, *args, **kwargs) -> None:
         self.grid(row=0, column=0, sticky="nwse")

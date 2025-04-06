@@ -1,8 +1,9 @@
 from typing import Union
 from dataclasses import dataclass
 
+from fractions_app.constants import MAX_GRADE
 from fractions_app.math import Fraction
-from fractions_app.helper.level import Level
+from fractions_app.helper.level import Levels
 
 
 @dataclass
@@ -19,7 +20,10 @@ class ExerciseResult:
     correct_answers: int
     skipped_exercises: int
     failed_answers: int
-    level: Level
+    level: Levels
 
-    def get_completed_exercise_count(self) -> int:
+    def get_total_exercise_count(self) -> int:
         return self.correct_answers + self.failed_answers + self.skipped_exercises
+
+    def calculate_mark(self) -> float:
+        return MAX_GRADE * self.correct_answers / self.get_total_exercise_count()
