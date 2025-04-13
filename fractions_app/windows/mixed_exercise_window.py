@@ -52,6 +52,9 @@ class MixedExerciseWindow(Window):
         shuffle(self.subtopics)
 
     def _display_current_subtopic(self) -> None:
+        self._is_correct = False
+        self._showed = False
+
         self.attempts = ATTEMPS_COUNT
         subtopic = self.subtopics[self.current_subtopic]
 
@@ -59,9 +62,6 @@ class MixedExerciseWindow(Window):
             text=f"{subtopic.title} ({self.current_subtopic+1}/{self.result.total_exercises_count})"
         )
         self.exercise_box.display_exercise(subtopic.generate_exercise())
-        self.exercise_box.control_buttons.get(ButtonTypes.CHECK_BTN).configure(
-            text=f"Перевірити ({self.attempts}/{ATTEMPS_COUNT})"
-        )
 
     def _display_next_subtopic(self) -> None:
         self.current_subtopic += 1
@@ -91,6 +91,12 @@ class MixedExerciseWindow(Window):
         self._show_result_window()
 
     def _on_check_pressed(self) -> None:
+        if self._showed:
+            self._display_next_subtopic()
+            return
+        if self._is_correct:
+            return
+
         if self.attempts <= 1:
             messagebox.showinfo(
                 "Інформація",
@@ -100,15 +106,13 @@ class MixedExerciseWindow(Window):
             self._display_next_subtopic()
             return
         self.attempts -= 1
-        self.exercise_box.control_buttons.get(ButtonTypes.CHECK_BTN).configure(
-            text=f"Перевірити ({self.attempts}/{ATTEMPS_COUNT})"
-        )
 
     def _on_correct(self, showed: bool) -> None:
+        self._is_correct = True
+        self._showed = showed
         if not showed:
             self.result.correct_answers += 1
             return
-        self._display_next_subtopic()
 
     def _show_result_window(self) -> None:
         self.grid_forget()
