@@ -5,9 +5,8 @@ from typing import Union
 from fractions_app.helper import Exercise, get_font_scale
 from fractions_app.math import Fraction
 from fractions_app.widgets.spinbox import Spinbox
-from fractions_app.constants import BASE_WIDTH, BASE_HEIGHT
+from fractions_app.constants import BASE_WIDTH, BASE_HEIGHT, CHARACTER_SIZE
 
-CHARACTER_SIZE = 0.09
 BAR_SIZE = 0.005
 
 
@@ -176,8 +175,6 @@ class ExerciseCanvas(Canvas):
     def on_resize(self, width: int, height: int) -> None:
         self.width, self.height = width, height
 
-        wscale = (self.width / 1000 + self.height / 1000) * 2
-        self.scale("all", 0, 0, wscale, wscale)
         self._update_font()
         if self._exercise is not None:
             self.display_exercise(self._exercise)
@@ -189,8 +186,8 @@ class ExerciseCanvas(Canvas):
         return Fraction(numerator, denominator, integer)
 
     def _update_font(self) -> None:
-        scale = get_font_scale(self.width, self.height) * 5
-        self._label_font.configure(size=int(scale * 0.8))
+        scale = get_font_scale(self.width, self.height)
+        self._label_font.configure(size=round(scale * 4))
         self._intenger_input.on_resize(self.width, self.height)
         self._denominator_input.on_resize(self.width, self.height)
         self._numerator_input.on_resize(self.width, self.height)
