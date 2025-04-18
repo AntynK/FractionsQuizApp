@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter.ttk import Style
 
 from fractions_app.constants import (
-    ICON_BASE64,
+    ICON_PATH,
     PROGRAM_TITLE,
     BASE_WIDTH,
     BASE_HEIGHT,
@@ -58,6 +58,6 @@ class Application(tk.Tk):
         self.geometry(f"{BASE_WIDTH}x{BASE_HEIGHT}")
         self.iconphoto(
             True,
-            tk.PhotoImage(data=ICON_BASE64),
+            tk.PhotoImage(file=ICON_PATH),
         )
         self.mainloop()

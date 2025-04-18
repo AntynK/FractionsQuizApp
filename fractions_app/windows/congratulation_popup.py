@@ -1,9 +1,7 @@
-from io import BytesIO
-from base64 import decodebytes
 from PIL import Image, ImageTk
 from tkinter import ttk, Toplevel, Canvas
 
-from fractions_app.constants import CONGRATULATION_IMAGE_BASE64, CONGRATULATION_TITLE
+from fractions_app.constants import CONGRATULATION_IMAGE_PATH, CONGRATULATION_TITLE
 
 
 class CongratulationPopup(Toplevel):
@@ -13,7 +11,7 @@ class CongratulationPopup(Toplevel):
         self.title(CONGRATULATION_TITLE)
         self.resizable(False, False)
 
-        self.image = Image.open(BytesIO(decodebytes(CONGRATULATION_IMAGE_BASE64)))
+        self.image = Image.open(CONGRATULATION_IMAGE_PATH)
         width = round(master.winfo_width() * 0.4)
 
         x, y = (

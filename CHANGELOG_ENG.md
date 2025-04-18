@@ -1,6 +1,6 @@
 # Changelog  
 
-## [1.4.0] - 2025-04-
+## [1.4.0] - 2025-04-18
 ### Changed
 * Main windows now contains two buttons "Мішані завдання" and "Завдання за темами".
 

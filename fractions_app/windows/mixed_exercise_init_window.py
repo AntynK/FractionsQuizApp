@@ -1,6 +1,7 @@
 from tkinter import ttk
+from tkinter.font import Font
 
-from fractions_app.helper import Levels
+from fractions_app.helper import Levels, get_font_scale
 from fractions_app.windows.window import Window
 from fractions_app.widgets import Spinbox
 from fractions_app.windows.mixed_exercise_window import MixedExerciseWindow
@@ -26,6 +27,7 @@ class MixedExerciseInitWindow(Window):
         self.combo.grid(row=1, column=1)
 
         ttk.Label(self, text="Кількість завдань").grid(row=2, column=0)
+
         self.exercise_count = Spinbox(self, width=4, from_=10, to=50)
         self.exercise_count.grid(row=2, column=1)
 
@@ -43,4 +45,10 @@ class MixedExerciseInitWindow(Window):
         )
 
     def on_resize(self, *unused) -> None:
-        self.exercise_count.on_resize(self.winfo_width(), self.winfo_height())
+        width, height = self.winfo_width(), self.winfo_height()
+        self.exercise_count.on_resize(width, height)
+
+        scale = get_font_scale(width, height)
+        self.combo.configure(
+            font=Font(family="Times New Roman", size=round(scale * 1.5))
+        )
